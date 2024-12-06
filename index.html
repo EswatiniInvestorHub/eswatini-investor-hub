@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Hub Eswatini</title>
+    <link rel="stylesheet" href="styles.css">
+	<script src="script.js" defer></script>
+</head>
+<script>
+    // Fetch Equities data
+    fetch('/api/equities')
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById('equities-table');
+            data.forEach(equity => {
+                const row = table.insertRow();
+                row.insertCell(0).innerText = equity.issuer;
+                row.insertCell(1).innerText = equity.price;
+                row.insertCell(2).innerText = equity.change;
+            });
+        });
+
+    // Fetch News data
+    fetch('/api/news')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('news-container');
+            data.forEach(news => {
+                const slide = document.createElement('div');
+                slide.className = 'news-slide';
+                slide.innerHTML = `
+                    <h2>${news.title}</h2>
+                    <p><strong>${news.date}</strong></p>
+                    <p>${news.content}</p>
+                    <button class="more-btn">More</button>
+                `;
+                container.appendChild(slide);
+            });
+        });
+
+    // Fetch Documents data
+    fetch('/api/documents')
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById('documents-table');
+            data.forEach(doc => {
+                const row = table.insertRow();
+                row.insertCell(0).innerText = doc.description;
+                row.insertCell(1).innerText = doc.release_date;
+                const fileCell = row.insertCell(2);
+                const link = document.createElement('a');
+                link.href = doc.file_link;
+                link.innerText = 'Click on link to download';
+                fileCell.appendChild(link);
+            });
+        });
+</script>
+<body>
+    <nav>
+    <div class="logo">
+        <img src="images/log1.WEBP" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button type="submit">Search</button>
+    </div>
+    <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="News.html">News and Updates</a></li>
+        <li class="dropdown">
+            <a href="Education.html">Education</a>
+            <div class="dropdown-content">
+                <a href="Invest.html">How to Invest</a>
+                <a href="terms.html">Investing terms</a>
+            </div>
+        </li>
+        <li><a href="FAQ.html">FAQ</a></li>
+		<li class="dropdown">
+            <a href="Investments.html">Investments</a>
+            <div class="dropdown-content">
+                <a href="Eq.html">Equities</a>
+                <a href="Bonds.html">Bonds</a>
+                <a href="Funds.html">Funds</a>
+                <a href="Estate.html">Real Estate</a>
+            </div>
+        </li>
+        <li><a href="About.html">About Us</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+    <div class="container">
+        <div class="sidebar">
+    <h2>Shares/Equities</h2>
+    <table id="equities-table">
+        <tr>
+            <th>Issuer</th>
+            <th>Price</th>
+            <th>%Change</th>
+        </tr>
+        <!-- Data will be injected here -->
+    </table>
+
+    <h2>Bonds</h2>
+    <table>
+        <tr>
+            <th>Issuer</th>
+            <th>Auction Date</th>
+            <th>Interest Rate</th>
+        </tr>
+        <tr>
+            <td>Central Bank of Eswatini</td>
+            <td>20 September 2024</td>
+            <td>10%</td>
+        </tr>
+        <tr>
+            <td>Nkonyeni Precast</td>
+            <td>18 September 2024</td>
+            <td>Prime + 1.5%</td>
+        </tr>
+    </table>
+</div>
+        <div class="main-content">
+    <div class="news-updates">
+    <button class="slider-nav prev">❮</button>
+    <h2 class="news-title">News Updates</h2>
+    <button class="slider-nav next">❯</button>
+	</div>
+
+
+    
+    <div class="news-slider">
+    <div class="news-slides-container" id="news-container">
+        <!-- News slides will be injected here -->
+    </div>
+</div>
+
+    <div class="latest-updates">
+    <h2>Latest Updates Documents</h2>
+    <table id="documents-table">
+        <tr>
+            <th>Description</th>
+            <th>Release Date</th>
+            <th>File</th>
+        </tr>
+        <!-- Data will be injected here -->
+    </table>
+</div>
+</div>
+
+
+
+
+    </div>
+ 
+
+    <!-- Copyright Section -->
+    <footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- First Footer Bar -->
+    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
+        <a href="#"><img src="images/f.png" alt="Facebook" style="margin: 0 10px;"></a>
+        <a href="#"><img src="images/e.png" alt="Email" style="margin: 0 10px;"></a>
+        <a href="#"><img src="images/x.png" alt="Twitter" style="margin: 0 10px;"></a>
+		<a href="#"><img src="images/a.png" alt="Address" style="margin: 0 10px;"></a>
+    </div>
+    
+    <!-- Second Footer Layer -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399 ;">
+        <!-- Left Section: Logo and Company Name -->
+        <div style="display: flex; align-items: center;">
+            <img src="images/log1.WEBP" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <div>
+                <h3 style="margin: 0;">Eswatini Market Insights Ally </h3>
+                <p style="margin: 0;">(EMIA)</p>
+            </div>
+        </div>
+        
+        <!-- Right Section: Menu -->
+        <div>
+            <a href="index.html" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
+            <a href="News.html" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
+            <a href="Investments.html" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
+            <a href="Education.html" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
+            <a href="FAQ.html" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <a href="About.html" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
+            <a href="Contact.html" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+        </div>
+    </div>
+    
+    <!-- Third Footer Layer -->
+    <div style="text-align: center; padding: 20px; background-color: #002266;">
+        <p>&copy; 2024 Eswatini Market Insights Ally (EMIA). All rights reserved.</p>
+    </div>
+</footer>
+
+
+</body>
+</html>

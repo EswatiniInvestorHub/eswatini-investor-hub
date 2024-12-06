@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Hub Eswatini</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+        </div>
+        <div class="header-banner">
+    <div class="scrolling-text">
+        Eswatini Investor Hub
+    </div>
+</div>
+        <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('invest') }}">Education</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('invest') }}">How to Invest</a>
+                    <a href="{{ url_for('terms') }}">Investing terms</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('investments') }}">Investments</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('equities') }}">Equities</a>
+                    <a href="{{ url_for('bonds') }}">Bonds</a>
+                    <a href="{{ url_for('funds') }}">Funds</a>
+                    <a href="{{ url_for('estate') }}">Real Estate</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+ 
+ 
+ 
+ 
+ <!-- FAQ Body Content -->
+<div class="faq-content">
+    <h1>FREQUENTLY ASKED QUESTIONS (FAQs)</h1>
+    <section class="faq-section">
+        <h2>1. How do I buy shares in Eswatini?</h2>
+        <p>Listed shares in Eswatini are purchased through local licensed stockbrokers. A stockbroker transacts on the stock exchange on your behalf. Investors can choose any licensed stockbroker in Eswatini. Regulated broker fees typically range between 1-2%.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2>2. How safe are shares and bonds as investments?</h2>
+        <p>Listed entities are approved by the Financial Services Regulatory Authority in Eswatini and the Eswatini Stock Exchange, which provides reasonable safety. These entities must meet high transparency standards to reduce the risk of failure from mismanagement. However, investors should consult financial advisors before making any investment decisions.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2>3. What is a bond?</h2>
+        <p>A bond is a fixed-income instrument. Essentially, an investor lends money to a company in exchange for interest payments, known as a coupon, over a specified period.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2>4. What are shares and how do they benefit investors?</h2>
+        <p>Shares represent ownership in a company, entitling shareholders to dividend payouts and potential capital gains. Capital gain refers to buying a share at a lower price and selling it at a higher price to make a profit.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2>5. What happens to my shares or bonds when I die?</h2>
+        <p>When a shareholder dies, their shares become part of their estate. If the shareholder has a will, the executor will distribute the shares according to the instructions. If there is no will, the distribution follows intestate laws, overseen by the Master of the High Court.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2>6. Do I get a share certificate when I buy shares?</h2>
+        <p>As per Dematerialisation Notice No. 269 of 2022, listed companies no longer issue physical share certificates. Companies that listed before the legislation must dematerialize their shares. Share trading is now executed and stored electronically through the Automated Trading System. Proof of share ownership can be obtained from authorized brokers or transfer secretaries in the form of Shareholding statements.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2>7. How do I know which shares to buy?</h2>
+        <p>Visit the Eswatini Stock Exchange website to identify listed entities of interest and their prices. Review the entity's financial statements and dividend history on their website. Consult a stockbroker for share availability and a financial advisor for proper guidance. Afterward, notify the stockbroker to assist in purchasing the shares.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2>8. What KYC document is required to participate in the stock market?</h2>
+        <p>For an individual (Resident), the following documents are required:
+        <ul>
+            <li>Certified Identity Document</li>
+            <li>Proof of Residence</li>
+            <li>Proof of Banking Details</li>
+            <li>Proof of Source of Income</li>
+        </ul>
+        </p>
+    </section>
+
+    <section class="faq-section">
+        <h2>9. What are the tax implications on listed instrument investments?</h2>
+        <p>For shares:
+        <ul>
+            <li>Dividend income is subject to 10% withholding tax for local residents and 15% for non-residents.</li>
+            <li>Shares are subject to capital gains tax upon disposal.</li>
+        </ul>
+        For bonds:
+        <ul>
+            <li>Coupon interest is subject to 10% withholding tax for local residents and 15% for non-residents.</li>
+        </ul>
+        </p>
+    </section>
+
+    <section class="educational-documents">
+    <h2>Educational Documents</h2>
+    <p>Click on the link to download:</p>
+    <table class="documents-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Title</th>
+                <th>Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Legislation</td>
+                <td><a href="link_to_document_1.pdf" target="_blank">Dematerialisation Notice No.269 of 2022</a></td>
+                <td>2022</td>
+            </tr>
+            <tr>
+                <td>How to trade in the ESE</td>
+                <td><a href="link_to_document_2.pdf" target="_blank">Trade process</a></td>
+                <td>2023</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+ 
+ 
+ 
+ 
+
+    <!-- Copyright Section -->
+    <!-- Copyright Section -->
+<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- First Footer Bar -->
+    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
+        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
+    </div>
+    
+    <!-- Second Footer Layer -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
+        <!-- Left Section: Logo and Company Name -->
+        <div style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <div>
+                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
+                <p style="margin: 0;">(EIH)</p>
+            </div>
+        </div>
+        
+        <!-- Right Section: Menu -->
+        <div>
+            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
+            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
+            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
+            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
+            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
+            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+        </div>
+    </div>
+    
+    <!-- Third Footer Layer -->
+    <div style="text-align: center; padding: 20px; background-color: #002266;">
+        <p>&copy; 2024 Eswatini Investor Hub. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+</body>
+</html>

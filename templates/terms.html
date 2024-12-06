@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Hub Eswatini</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+        </div>
+        <div class="header-banner">
+    <div class="scrolling-text">
+        Eswatini Investor Hub
+    </div>
+</div>
+        <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('invest') }}">Education</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('invest') }}">How to Invest</a>
+                    <a href="{{ url_for('terms') }}">Investing terms</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('investments') }}">Investments</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('equities') }}">Equities</a>
+                    <a href="{{ url_for('bonds') }}">Bonds</a>
+                    <a href="{{ url_for('funds') }}">Funds</a>
+                    <a href="{{ url_for('estate') }}">Real Estate</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+ 
+ 
+ 
+ 
+ <!-- Main Content Section: Investing Terms -->
+<main class="investing-terms-content">
+    <h1>Investing Terminology</h1>
+    <p class="intro">Understanding the basics is <strong>crucial</strong> to making sound investment decisions. Below are key terms that every investor should know.</p>
+
+    <section class="term">
+        <h2>1. Asset</h2>
+        <p><strong>What:</strong> Something valuable you own (resource), which can generate future economic benefits or increase in value over time.</p>
+        <p><strong>Example:</strong> A house is an asset because its value might increase over time.</p>
+    </section>
+
+    <section class="term">
+        <h2>2. Capital Gain</h2>
+        <p><strong>What:</strong> The profit made when you sell something (like a stock or house) for more than you paid for it.</p>
+        <p><strong>Example:</strong> If you buy stock for E50 and sell it for E70, you make E20 in capital gain.</p>
+    </section>
+
+    <section class="term">
+        <h2>3. Bond</h2>
+        <p><strong>What:</strong> A loan you give to a company or government that is repaid with interest.</p>
+        <p><strong>Example:</strong> Buying a government bond means lending money to the government, and they pay you interest over time.</p>
+    </section>
+
+    <section class="term">
+        <h2>4. Index Fund</h2>
+        <p><strong>What:</strong> A fund that lets you invest in multiple companies by following a stock market index.</p>
+        <p><strong>Example:</strong> Investing in an index fund means owning a small part of all the companies in that index.</p>
+    </section>
+
+    <section class="term">
+        <h2>5. Exchange-Traded Fund (ETF)</h2>
+        <p><strong>What:</strong> An ETF holds many investments (stocks or bonds) and is traded like a stock.</p>
+        <p><strong>Example:</strong> ETFs allow you to invest in a variety of assets and trade them like regular stocks.</p>
+    </section>
+
+    <section class="term">
+        <h2>6. Mutual Fund</h2>
+        <p><strong>What:</strong> A collection of investments managed by professionals, funded by money from many investors.</p>
+        <p><strong>Example:</strong> Investing in a mutual fund means your money is pooled with others to buy a range of investments.</p>
+    </section>
+
+    <section class="term">
+        <h2>7. Market Capitalization (Market Cap)</h2>
+        <p><strong>What:</strong> The total value of a company’s shares, calculated by multiplying stock price by total shares.</p>
+        <p><strong>Example:</strong> Companies like Apple have a market cap of over a trillion dollars, indicating large value.</p>
+    </section>
+
+    <section class="term">
+        <h2>8. Risk</h2>
+        <p><strong>What:</strong> The potential for losing your investment. In investing, risk often refers to the permanent loss of capital.</p>
+        <p><strong>Example:</strong> Investing E1,000 and selling for E400 means you’ve lost E600.</p>
+    </section>
+
+    <section class="term">
+        <h2>9. Return on Investment (ROI)</h2>
+        <p><strong>What:</strong> A percentage measure of the profit earned from an investment compared to the initial amount invested.</p>
+        <p><strong>Example:</strong> Investing E1,000 and earning E200 means a 20% ROI.</p>
+    </section>
+
+    <section class="term">
+        <h2>10. Compound Interest</h2>
+        <p><strong>What:</strong> Interest that accumulates on both the original investment and previously earned interest.</p>
+        <p><strong>Example:</strong> With compound interest, money grows faster the longer it's invested.</p>
+    </section>
+
+    <section class="term">
+        <h2>11. Liquidity</h2>
+        <p><strong>What:</strong> How quickly an asset can be converted into cash.</p>
+        <p><strong>Example:</strong> Stocks have high liquidity as they can be sold quickly, whereas houses take longer.</p>
+    </section>
+
+    <section class="term">
+        <h2>12. Bull Market</h2>
+        <p><strong>What:</strong> A market condition where prices of assets rise (> 20%) due to investor confidence.</p>
+        <p><strong>Example:</strong> In a bull market, investors buy stocks expecting prices to rise.</p>
+    </section>
+
+    <section class="term">
+        <h2>13. Bear Market</h2>
+        <p><strong>What:</strong> A market condition where prices of assets fall (> 20%), often due to economic downturn.</p>
+        <p><strong>Example:</strong> During a bear market, investors sell stocks to prevent further losses.</p>
+    </section>
+
+    <section class="term">
+        <h2>14. Dematerialisation</h2>
+        <p><strong>What:</strong> Converting physical certificates into electronic form, credited to your Depository account.</p>
+    </section>
+
+    <section class="term">
+        <h2>15. Initial Public Offering (IPO)</h2>
+        <p><strong>What:</strong> The first time a company sells its shares to the public.</p>
+        <p><strong>Example:</strong> Nkonyeni Pre-Cast Limited had its IPO in 2023, selling shares to the public for the first time.</p>
+    </section>
+
+    <section class="term">
+        <h2>16. Dividend Yield</h2>
+        <p><strong>What:</strong> A company’s annual dividend as a percentage of its stock price.</p>
+        <p><strong>Example:</strong> A stock priced at E50 that pays a E2 dividend has a yield of 4%.</p>
+    </section>
+
+    <section class="term">
+        <h2>17. Asset Allocation</h2>
+        <p><strong>What:</strong> Dividing your investments across various asset types to balance risk and return.</p>
+        <p><strong>Example:</strong> Allocating 60% to stocks and 40% to bonds for balanced growth and risk reduction.</p>
+    </section>
+
+    <section class="term">
+        <h2>18. Hedge Fund</h2>
+        <p><strong>What:</strong> A high-risk investment aiming to outperform traditional investments.</p>
+        <p><strong>Example:</strong> The Medallion Fund returned over 30% per year after fees.</p>
+    </section>
+
+    <section class="term">
+        <h2>19. Short Selling</h2>
+        <p><strong>What:</strong> Borrowing stock, selling it, and buying it back later at a lower price to make a profit.</p>
+        <p><strong>Example:</strong> Selling stock for E100 and repurchasing it for E80 yields a E20 profit.</p>
+    </section>
+
+    <section class="term">
+        <h2>20. Inflation</h2>
+        <p><strong>What:</strong> A general rise in prices over time, reducing the purchasing power of money.</p>
+        <p><strong>Example:</strong> At 5% inflation, an item that costs E100 today will cost E105 next year.</p>
+    </section>
+</main>
+
+ 
+ 
+ 
+
+   <!-- Copyright Section -->
+<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- First Footer Bar -->
+    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
+        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
+    </div>
+    
+    <!-- Second Footer Layer -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
+        <!-- Left Section: Logo and Company Name -->
+        <div style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <div>
+                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
+                <p style="margin: 0;">(EIH)</p>
+            </div>
+        </div>
+        
+        <!-- Right Section: Menu -->
+        <div>
+            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
+            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
+            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
+            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
+            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
+            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+        </div>
+    </div>
+    
+    <!-- Third Footer Layer -->
+    <div style="text-align: center; padding: 20px; background-color: #002266;">
+        <p>&copy; 2024 Eswatini Investor Hub. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+
+</body>
+</html>

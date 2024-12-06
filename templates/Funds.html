@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Hub Eswatini</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+        </div>
+        <div class="header-banner">
+    <div class="scrolling-text">
+        Eswatini Investor Hub
+    </div>
+</div>
+        <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('invest') }}">Education</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('invest') }}">How to Invest</a>
+                    <a href="{{ url_for('terms') }}">Investing terms</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('investments') }}">Investments</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('equities') }}">Equities</a>
+                    <a href="{{ url_for('bonds') }}">Bonds</a>
+                    <a href="{{ url_for('funds') }}">Funds</a>
+                    <a href="{{ url_for('estate') }}">Real Estate</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+ 
+ 
+ 
+ <div class="funds-page" >
+    <h1>Available Funds</h1>
+
+    <div class="funds-grid">
+        <!-- Fund 1 -->
+        <div class="fund-block">
+            <h3>ABC Equity Fund</h3>
+            <p>Type: <span class="fund-type">Equity Fund</span></p>
+            <p>Performance: <span class="performance">+12% (Last 6 months)</span></p>
+            <p>Risk: <span class="risk-level">High</span></p>
+            <button class="details-btn">View More Details</button>
+        </div>
+
+        <!-- Fund 2 -->
+        <div class="fund-block">
+            <h3>XYZ Index Fund</h3>
+            <p>Type: <span class="fund-type">Index Fund</span></p>
+            <p>Performance: <span class="performance">+8% (Last 6 months)</span></p>
+            <p>Risk: <span class="risk-level">Moderate</span></p>
+            <button class="details-btn">View More Details</button>
+        </div>
+
+        <!-- Fund 3 -->
+        <div class="fund-block">
+            <h3>123 Bond Fund</h3>
+            <p>Type: <span class="fund-type">Bond Fund</span></p>
+            <p>Performance: <span class="performance">+3% (Last 6 months)</span></p>
+            <p>Risk: <span class="risk-level">Low</span></p>
+            <button class="details-btn">View More Details</button>
+        </div>
+
+        <!-- Fund 4 -->
+        <div class="fund-block">
+            <h3>Global Growth Fund</h3>
+            <p>Type: <span class="fund-type">Growth Fund</span></p>
+            <p>Performance: <span class="performance">+15% (Last 6 months)</span></p>
+            <p>Risk: <span class="risk-level">High</span></p>
+            <button class="details-btn">View More Details</button>
+        </div>
+    </div>
+</div>
+
+ 
+ 
+ 
+ <!-- Main Content Area -->
+<main class="funds-page">
+    <!-- Hero Section -->
+    <section class="hero-section" style="background-color: white; color: #002266; padding: 40px; text-align: center;">
+        <h1>Explore Our Investment Funds</h1>
+        <p>Your gateway to secure and profitable investments.</p>
+		</br>
+        <a href="#fund-types" class="cta-button" style="background-color: #002266; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px;">Get Started</a>
+    </section>
+
+    <!-- Fund Types Section -->
+    <section id="fund-types" class="fund-types" style=" padding: 40px; ">
+        <h2 style="background-color: white;">Types of Funds</h2>
+        <div class="fund-type-grid" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+            <div class="fund-type" style="background-color: white; flex: 0 0 30%; margin-bottom: 20px; padding: 20px; border: 1px solid #004080; border-radius: 5px;">
+                <h3>Equity Funds</h3>
+                <p>Invest in stocks to benefit from capital growth and dividend income.</p>
+                <a href="{{ url_for('equities') }}" style="color: #004080;">Learn More</a>
+            </div>
+            <div class="fund-type" style="background-color: white; flex: 0 0 30%; margin-bottom: 20px; padding: 20px; border: 1px solid #004080; border-radius: 5px;">
+                <h3>Bond Funds</h3>
+                <p>Secure your investments with government and corporate bonds.</p>
+                <a href="{{ url_for('bonds') }}" style="color: #004080;">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Highlights Section -->
+    <section class="performance-highlights" style="padding: 40px; background-color: #f8f9fa;">
+        <h2>Recent Performance Highlights</h2>
+        <div class="performance-grid" style="display: flex; justify-content: space-around;">
+            <div class="highlight" style="padding: 20px; border: 1px solid #004080; border-radius: 5px; text-align: center;">
+                <h3>Equity Fund Growth</h3>
+                <p>12% Annual Growth</p>
+            </div>
+            <div class="highlight" style="padding: 20px; border: 1px solid #004080; border-radius: 5px; text-align: center;">
+                <h3>Bond Fund Stability</h3>
+                <p>4% Stable Return</p>
+            </div>
+            <div class="highlight" style="padding: 20px; border: 1px solid #004080; border-radius: 5px; text-align: center;">
+                <h3>Index Fund Diversification</h3>
+                <p>10% Market Return</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fund Comparison Section -->
+    <section class="fund-comparison" style="padding: 40px;">
+        <h2 style="background-color: white;">Fund Comparison</h2>
+		
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #004080; color: white;">
+                    <th style="padding: 10px; border: 1px solid #ccc;">Fund Type</th>
+                    <th style="padding: 10px; border: 1px solid #ccc;">Risk Level</th>
+                    <th style="padding: 10px; border: 1px solid #ccc;">Average Return</th>
+                    <th style="padding: 10px; border: 1px solid #ccc;">Minimum Investment</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: #FFFDD0;">
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ccc;">Equity Funds</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">High</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">12% - 15%</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">$1,000</td>
+                </tr>
+                <tr style="background-color: #FFFDD0;">
+                    <td style="padding: 10px; border: 1px solid #ccc;">Bond Funds</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">Low</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">4% - 6%</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">$500</td>
+                </tr>
+                <tr style="background-color: #FFFDD0; ">
+                    <td style="padding: 10px; border: 1px solid #ccc;">Index Funds</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">Medium</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">8% - 10%</td>
+                    <td style="padding: 10px; border: 1px solid #ccc;">$1,000</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section" style="padding: 40px; background-color: #004080; color: white; text-align: center;">
+        <h2 style="color: white; ">Ready to Invest?</h2>
+        <p>Join us today and start your journey towards financial freedom!</p>
+        <a href="{{ url_for('contact') }}" class="cta-button" style="background-color: #FFFDD0; color: black; padding: 15px 25px; text-decoration: none; border-radius: 5px;">Contact Us</a>
+    </section>
+</main>
+
+ 
+ 
+ 
+ 
+    <!-- Copyright Section -->
+<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- First Footer Bar -->
+    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
+        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
+    </div>
+    
+    <!-- Second Footer Layer -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
+        <!-- Left Section: Logo and Company Name -->
+        <div style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <div>
+                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
+                <p style="margin: 0;">(EIH)</p>
+            </div>
+        </div>
+        
+        <!-- Right Section: Menu -->
+        <div>
+            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
+            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
+            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
+            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
+            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
+            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+        </div>
+    </div>
+    
+    <!-- Third Footer Layer -->
+    <div style="text-align: center; padding: 20px; background-color: #002266;">
+        <p>&copy; 2024 Eswatini Investor Hub. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+</body>
+</html>

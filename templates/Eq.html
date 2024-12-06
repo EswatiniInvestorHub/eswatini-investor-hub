@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Hub Eswatini</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles3.css') }}">
+	
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        width: 80%;
+        max-width: 800px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        border-radius: 8px;
+    }
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .left-section, .right-section {
+        width: 50%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .left-section, .right-section {
+        display: flex;
+        flex-direction: column;
+    }
+    .full-width {
+        width: 100%;
+    }
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .centered-title {
+        text-align: center;
+        width: 100%;
+    }
+    .box {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        flex: 1;
+    }
+    .box h3 {
+        margin-top: 0;
+    }
+</style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+        </div>
+			<div class="header-banner">
+    <div class="scrolling-text">
+        Eswatini Investor Hub
+    </div>
+</div>
+
+
+        <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('invest') }}">Education</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('invest') }}">How to Invest</a>
+                    <a href="{{ url_for('terms') }}">Investing terms</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('investments') }}">Investments</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('equities') }}">Equities</a>
+                    <a href="{{ url_for('bonds') }}">Bonds</a>
+                    <a href="{{ url_for('funds') }}">Funds</a>
+                    <a href="{{ url_for('estate') }}">Real Estate</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+ 
+ 
+ 
+ 
+<div class="equities-dashboard">
+<div class="marquee-container">
+        <marquee class="marquee" behavior="scroll" direction="left">
+            Nedbank Eswatini: E 12.34 | Royal Swazi Sugar: E 10.50 | SWD Empowerment Limited: E 8.75 | SWAPROP: E 15.20 | Greystone: E 9.60 | SBC Limited: E 11.00 | Inala Capital Limited: E 7.45 | NPC Limited: E 13.30 | FNB Limited: E 14.80
+        </marquee>
+    </div>
+    <h1>Equities Dashboard</h1>
+    <div class="company-grid">
+    <!-- Each company block in the grid -->
+    <div class="company-block" onclick="showCompanyDetails('company1')">
+        <img src="{{ url_for('static', filename='images/logo/ned.png') }}" alt="Company A Logo" />
+        <button class="details-btn">View Details</button>
+    </div>
+    <div class="company-block" onclick="showCompanyDetails('company2')">
+        <img src="{{ url_for('static', filename='images/logo/swap.jpg') }}" alt="Company B Logo" />
+        <button class="details-btn">View Details</button>
+    </div>
+    
+    <div class="company-block" onclick="showCompanyDetails('company3')">
+        <img src="{{ url_for('static', filename='images/logo/sbc.jpg') }}" alt="Company C Logo" />
+        <button class="details-btn">View Details</button>
+    </div>
+    <div class="company-block" onclick="showCompanyDetails('company4')">
+        <img src="{{ url_for('static', filename='images/logo/res.jpg') }}" alt="Company D Logo" />
+        <button class="details-btn">View Details</button>
+    </div>
+    <div class="company-block" onclick="showCompanyDetails('company5')">
+        <img src="{{ url_for('static', filename='images/logo/npc.jpg') }}" alt="Company E Logo" />
+        <button class="details-btn">View Details</button>
+    </div>
+    <div class="company-block" onclick="showCompanyDetails('company6')">
+        <img src="{{ url_for('static', filename='images/logo/inala.jpg') }}" alt="Company F Logo" />
+        <button class="details-btn">View Details</button>
+    </div>
+    <div class="company-block" onclick="showCompanyDetails('company7')">
+        <img src="{{ url_for('static', filename='images/logo/grey.jpg') }}" alt="Company G Logo" />
+        <button class="details-btn">View Details</button>
+    </div>
+    <div class="company-block" onclick="showCompanyDetails('company8')">
+        <img src="{{ url_for('static', filename='images/logo/fnb.jpg') }}" alt="Company H Logo" />
+        <button class="details-btn">View Details</button>
+    </div>
+    <div class="company-block" onclick="showCompanyDetails('company9')">
+        <img src="{{ url_for('static', filename='images/logo/sel.jpeg') }}" alt="Company I Logo" />
+        <button class="details-btn">View Details</button>
+    </div>
+   
+   
+</div>
+
+</div>
+
+
+<!-- Modal/Section for Company Details -->
+<div id="company-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCompanyDetails()">&times;</span>
+            <div class="left-section">
+                <h2 id="company-title" class="centered-title"></h2>
+                <div class="box">
+                    <p id="company-share-price"></p>
+                    <p id="company-market-cap"></p>
+                </div>
+                <div class="box">
+                    <p id="company-stock-code"></p>
+                    <p id="company-listed-instruments"></p>
+                    <p id="company-website"></p>
+                </div>
+                <div class="box">
+                    <h3>About</h3>
+                    <p id="company-about"></p>
+                </div>
+                
+            </div>
+            <div class="right-section">
+                <div class="box">
+                    <h3>Latest News</h3>
+                    <div id="latest-news"></div>
+                </div>
+				<div class="box full-width">
+                    <h3>Share Price History</h3>
+                    <canvas id="share-price-chart"></canvas>
+                </div>
+                <div class="box">
+                    <h3>Events & Downloads</h3>
+                    <div id="events"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+ 
+ 
+ 
+
+    <!-- Copyright Section -->
+ <!-- Copyright Section -->
+<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- First Footer Bar -->
+    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
+        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
+    </div>
+    
+    <!-- Second Footer Layer -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
+        <!-- Left Section: Logo and Company Name -->
+        <div style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <div>
+                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
+                <p style="margin: 0;">(EIH)</p>
+            </div>
+        </div>
+        
+        <!-- Right Section: Menu -->
+        <div>
+            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
+            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
+            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
+            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
+            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
+            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+        </div>
+    </div>
+    
+    <!-- Third Footer Layer -->
+    <div style="text-align: center; padding: 20px; background-color: #002266;">
+        <p>&copy; 2024 Eswatini Investor Hub. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+<!--- <script src="{{ url_for('static', filename='chart.js') }}" defer></script> --->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="share-price-chart"></canvas>
+
+
+</body>
+</html>

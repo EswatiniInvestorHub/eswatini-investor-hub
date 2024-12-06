@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Hub Eswatini</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+        </div>
+        <div class="header-banner">
+    <div class="scrolling-text">
+        Eswatini Investor Hub
+    </div>
+</div>
+        <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('invest') }}">Education</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('invest') }}">How to Invest</a>
+                    <a href="{{ url_for('terms') }}">Investing terms</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+            <li class="dropdown">
+                <a href="{{ url_for('investments') }}">Investments</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('equities') }}">Equities</a>
+                    <a href="{{ url_for('bonds') }}">Bonds</a>
+                    <a href="{{ url_for('funds') }}">Funds</a>
+                    <a href="{{ url_for('estate') }}">Real Estate</a>
+                </div>
+            </li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+ 
+ 
+ 
+ 
+ 
+<!-- Main Content Section -->
+<main class="main-content" style="padding: 40px; max-width: 1200px; margin: 0 auto; font-family: Arial, sans-serif; line-height: 1.6;">
+
+
+	<div class="how-to-invest">
+    
+    <h1 class="news-title" style="text-align: center; font-size: 36px; margin-bottom: 20px; color: #003399;">How to Invest</h1>
+    
+	</div>
+    
+
+    <section style="margin-bottom: 50px;">
+        <h2 style="font-size: 28px; margin-bottom: 20px; color: #002266;">Eswatini Capital Market Structure</h2>
+        <img src="{{ url_for('static', filename='images/Pic1.jpg') }}" alt="Market Structure Image" style="width: 700px; height:auto; float: left; margin-right: 20px; border-radius: 8px;">
+        <p style="font-size: 18px; text-align: justify;">
+            A stockbroker is a financial professional who facilitates the buying and selling of securities, such as stocks, bonds, and other financial instruments, on behalf of clients. Their primary role is to connect investors with the stock market. Here are the key functions and responsibilities of a stockbroker:
+        </p>
+        <ol style="font-size: 18px; padding-left: 20px; text-align: justify;">
+            <li><strong>Executing Trades:</strong> Stockbrokers act as intermediaries between buyers and sellers in the stock market. They execute buy or sell orders for their clients, either on stock exchanges or over-the-counter markets.</li>
+            <li><strong>Compliance and Regulations:</strong> Stockbrokers must ensure that all trades and investment advice comply with financial regulations and ethical standards. They are typically licensed and regulated by financial authorities.</li>
+        </ol>
+        <p style="font-size: 18px; text-align: justify;">
+            Overall, stockbrokers play a crucial role in helping individuals and institutions navigate financial markets, make informed investment decisions, and achieve their financial goals.
+        </p>
+        <p style="text-align: center; font-style: italic; clear: both;">Figure 1: Eswatini Capital Market Structure</p>
+    </section>
+
+    <section style="margin-bottom: 50px;">
+        <h2 style="font-size: 28px; margin-bottom: 20px; color: #002266;">How to Invest: For Individuals</h2>
+        <img src="{{ url_for('static', filename='images/Pic2.jpg') }}" alt="Investing for Individuals" style="width: 700px; height:auto; float: left; margin-right: 20px; border-radius: 8px;">
+        <p style="font-size: 18px; text-align: justify;">
+            Investing for individuals involves learning about financial markets, choosing a stockbroker, and understanding the risks and rewards of different investment options.
+        </p>
+        <p style="text-align: center; font-style: italic; clear: both;">Figure 2: How to Invest for Individuals</p>
+    </section>
+
+    <section style="margin-bottom: 50px;">
+        <h2 style="font-size: 28px; margin-bottom: 20px; color: #002266;">How to Invest: For Companies</h2>
+        <img src="{{ url_for('static', filename='images/Pic3.jpg') }}" alt="Investing for Companies" style="width: 700px; height:auto; float: left; margin-right: 20px; border-radius: 8px;">
+        <p style="font-size: 18px; text-align: justify;">
+            Companies can invest in various ways to diversify their assets, enhance profitability, and ensure financial stability for long-term growth.
+        </p>
+        <p style="text-align: center; font-style: italic; clear: both;">Figure 3: How to Invest for Companies</p>
+    </section>
+
+    <section style="margin-bottom: 50px;">
+        <h2 style="font-size: 28px; margin-bottom: 20px; color: #002266;">Transfer Secretaries</h2>
+        <img src="{{ url_for('static', filename='images/Pic4.WEBP') }}" alt="Transfer Secretaries" style="width: 400px; height:auto; float: left; margin-right: 20px; border-radius: 8px;">
+        <p style="font-size: 18px; text-align: justify;">
+            Transfer Secretaries, also known as registrars, play a vital role in capital markets by acting as intermediaries between companies that issue securities and the investors who hold them. Their primary responsibilities revolve around managing the records of shareholders and ensuring the smooth administration of transactions related to securities.
+        </p>
+        <ol style="font-size: 18px; padding-left: 20px; text-align: justify;">
+            <li><strong>Maintaining Shareholder Records:</strong> Transfer secretaries maintain a register of a company’s shareholders or bondholders, tracking who owns what amount of securities at any given time.</li>
+            <li><strong>Dividend and Interest Payments:</strong> Transfer secretaries ensure timely and accurate payments of dividends or interest to shareholders and bondholders.</li>
+            <li><strong>Handling Corporate Actions:</strong> Transfer secretaries administer corporate actions like stock splits, mergers, and proxy voting.</li>
+        </ol>
+        <p style="text-align: center; font-style: italic; clear: both;">Figure 4: Transfer Secretaries' Role</p>
+    </section>
+
+</main>
+
+
+ 
+ 
+
+    <!-- Copyright Section -->
+    <!-- Copyright Section -->
+<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- First Footer Bar -->
+    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
+        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
+    </div>
+    
+    <!-- Second Footer Layer -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
+        <!-- Left Section: Logo and Company Name -->
+        <div style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <div>
+                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
+                <p style="margin: 0;">(EIH)</p>
+            </div>
+        </div>
+        
+        <!-- Right Section: Menu -->
+        <div>
+            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
+            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
+            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
+            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
+            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
+            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+        </div>
+    </div>
+    
+    <!-- Third Footer Layer -->
+    <div style="text-align: center; padding: 20px; background-color: #002266;">
+        <p>&copy; 2024 Eswatini Investor Hub. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+</body>
+</html>
