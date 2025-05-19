@@ -52,22 +52,38 @@
             });
         });
 
-        // Fetch Documents data
         fetch('/api/documents')
-        .then(response => response.json())
-        .then(data => {
-            const table = document.getElementById('documents-table');
-            data.forEach(doc => {
-                const row = table.insertRow();
-                row.insertCell(0).innerText = doc.description;
-                row.insertCell(1).innerText = doc.release_date;
-                const fileCell = row.insertCell(2);
-                const link = document.createElement('a');
-                link.href = doc.file_link;
-                link.innerText = 'Click on link to download';
-                fileCell.appendChild(link);
-            });
+  .then(response => response.json())
+  .then(data => {
+    const table = document.getElementById('documents-table');
+    data.forEach(doc => {
+      const row = table.insertRow();
+      row.insertCell(0).innerText = doc.description;
+      row.insertCell(1).innerText = doc.release_date;
+
+      const fileCell = row.insertCell(2);
+      const link = document.createElement('a');
+      link.href = doc.file_link;
+      link.innerText = 'Click to download';
+      fileCell.appendChild(link);
+    });
+  });
+
+		
+		// Fetch Bonds data and inject into table
+    fetch('/api/bonds')
+    .then(response => response.json())
+    .then(data => {
+        const table = document.getElementById('bonds-table');
+
+        data.forEach(bond => {
+            const row = table.insertRow();
+            row.insertCell(0).innerText = bond.name;
+            row.insertCell(1).innerText = bond.auction_date;
+            row.insertCell(2).innerText = bond.rate;
         });
+    })
+    .catch(error => console.error('Error fetching bonds:', error));
     </script>
 	
 <body>
@@ -83,29 +99,35 @@
 </div>
 
         <ul class="menu">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('news') }}">News and Updates</a></li>
-            <li class="dropdown">
-                <a href="{{ url_for('invest') }}">Education</a>
-                <div class="dropdown-content">
-                    <a href="{{ url_for('invest') }}">How to Invest</a>
-                    <a href="{{ url_for('terms') }}">Investing terms</a>
-                </div>
-            </li>
-            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-            <li class="dropdown">
-                <a href="{{ url_for('investments') }}">Investments</a>
-                <div class="dropdown-content">
-                    <a href="{{ url_for('equities') }}">Equities</a>
-                    <a href="{{ url_for('bonds') }}">Bonds</a>
-                    <a href="{{ url_for('funds') }}">Funds</a>
-                    <a href="{{ url_for('estate') }}">Real Estate</a>
-                </div>
-            </li>
-            <li><a href="{{ url_for('about') }}">About Us</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
-        </ul>
+    <li><a href="{{ url_for('index') }}">Home</a></li>
+    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('invest') }}">Education</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('invest') }}">How to Invest</a>
+            <a href="{{ url_for('terms') }}">Investing terms</a>
+        </div>
+    </li>
+    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('investments') }}">Investments</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('equities') }}">Equities</a>
+            <a href="{{ url_for('bonds') }}">Bonds</a>
+        </div>
+    </li>
+    <!-- Removed routes below:
+    <li><a href="{{ url_for('about') }}">About Us</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <a href="{{ url_for('funds') }}">Funds</a>
+    <a href="{{ url_for('estate') }}">Real Estate</a>
+    -->
+</ul>
+
     </nav>
+	
+	
+
 
     <div class="container">
         <div class="sidebar">
@@ -120,38 +142,40 @@
     </table>
 
     <h2>Bonds</h2>
-    <table>
-        <tr>
-            <th>Issuer</th>
-            <th>Auction Date</th>
-            <th>Interest Rate</th>
-        </tr>
-        <tr>
-            <td>Central Bank of Eswatini</td>
-            <td>20 September 2024</td>
-            <td>10%</td>
-        </tr>
-        <tr>
-            <td>Nkonyeni Precast</td>
-            <td>18 September 2024</td>
-            <td>Prime + 1.5%</td>
-        </tr>
-    </table>
+<table>
+  <tr>
+    <th>Issuer</th>
+    <th>Auction Date</th>
+    <th>Interest Rate</th>
+  </tr>
+  {% for bond in bonds %}
+  <tr>
+    <td>{{ bond.name }}</td>
+    <td>{{ bond.auction_date }}</td>
+    <td>{{ bond.rate }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+
 </div>
         <div class="main-content">
 		<div class="marquee-container">
     <div class="marquee-label">Shares/Equities</div>
     <marquee class="marquee" behavior="scroll" direction="left">
-        Nedbank Eswatini: E 12.34 | Royal Swazi Sugar: E 10.50 | SWD Empowerment Limited: E 8.75 | SWAPROP: E 15.20 | Greystone: E 9.60 | SBC Limited: E 11.00 | Inala Capital Limited: E 7.45 | NPC Limited: E 13.30 | FNB Limited: E 14.80
-    </marquee>
+  {% for company in companies %}
+    {{ company.name }}: {{ company.share_price }}{% if not loop.last %} | {% endif %}
+  {% endfor %}
+</marquee>
 </div>
 
 <div class="marquee-container">
     <div class="marquee-label">Bonds</div>
     <marquee class="marquee" behavior="scroll" direction="left">
-        Central Bank of Eswatini: Interest Rate - 10% | 
-        Nkonyeni Precast: Interest Rate - Prime + 1.5%
-    </marquee>
+    {% for bond in bonds %}
+      {{ bond.name }}: Interest Rate - {{ bond.rate }}{% if not loop.last %} | {% endif %}
+    {% endfor %}
+  </marquee>
 </div>
 
 
@@ -171,16 +195,23 @@
 </div>
 
     <div class="latest-updates">
-    <h2>Latest Updates Documents</h2>
-    <table id="documents-table">
-        <tr>
-            <th>Description</th>
-            <th>Release Date</th>
-            <th>File</th>
-        </tr>
-        <!-- Data will be injected here -->
-    </table>
+  <h2>Latest Updates Documents</h2>
+  <table>
+    <tr>
+      <th>Description</th>
+      <th>Release Date</th>
+      <th>File</th>
+    </tr>
+    {% for doc in documents %}
+    <tr>
+      <td>{{ doc.description }}</td>
+      <td>{{ doc.release_date }}</td>
+      <td><a href="{{ doc.file_link }}" target="_blank">Download</a></td>
+    </tr>
+    {% endfor %}
+  </table>
 </div>
+
 </div>
 
 
@@ -216,8 +247,10 @@
             <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
             <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
             <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <!--
             <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
             <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+			-->
         </div>
     </div>
     

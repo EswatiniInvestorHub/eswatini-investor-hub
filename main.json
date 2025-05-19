@@ -3,7 +3,7 @@
     {
       "id": "company1",
       "name": "Nedbank Limited",
-      "share_price": "E14.50",
+      "share_price": "E2.50",
       "market_cap": "E500M",
       "stock_code": "SZE000331001",
       "listed_instruments": "Shares",
@@ -28,7 +28,6 @@
         "open": "E14.50",
         "close": "E14.50",
         "data": [
-          
           {
             "date": "2024-10-31",
             "price": 14.5
@@ -1835,7 +1834,7 @@
     {
       "id": "company2",
       "name": "Swaziland Property Investment Limited",
-      "share_price": "E7.90",
+      "share_price": "E1.80",
       "market_cap": "E300M",
       "stock_code": "SZE000331002",
       "listed_instruments": "Shares",
@@ -3666,7 +3665,7 @@
     {
       "id": "company3",
       "name": "SBC Limited (SBC.sz)",
-      "share_price": "E8.90",
+      "share_price": "E3.20",
       "market_cap": "E750M",
       "stock_code": "SZE000331003",
       "listed_instruments": "Shares",
@@ -5497,7 +5496,7 @@
     {
       "id": "company4",
       "name": "Royal Eswatini Sugar Corporation Limited (RES Corporation)",
-      "share_price": "E15.20",
+      "share_price": "E2.10",
       "market_cap": "E250M",
       "stock_code": "SZE000331004",
       "listed_instruments": "Shares",
@@ -7328,7 +7327,7 @@
     {
       "id": "company5",
       "name": "NPC Limited",
-      "share_price": "E1.50",
+      "share_price": "E4.00",
       "market_cap": "E100M",
       "stock_code": "SZE000331005",
       "listed_instruments": "Shares",
@@ -7351,7 +7350,7 @@
       ],
       "price_history": {
         "open": "E1.50",
-        "close": "E1.50",
+        "close": "E0.00",
         "data": [
           {
             "date": "2024-10-31",
@@ -9159,7 +9158,7 @@
     {
       "id": "company6",
       "name": "Inala Capital Limited (Inala)",
-      "share_price": "E1.40",
+      "share_price": "E0.80",
       "market_cap": "E50M",
       "stock_code": "SZE000331006",
       "listed_instruments": "Shares",
@@ -10990,7 +10989,7 @@
     {
       "id": "company7",
       "name": "Greystone Partners Limited",
-      "share_price": "E3.20",
+      "share_price": "E5.50",
       "market_cap": "E120M",
       "stock_code": "SZE000331007",
       "listed_instruments": "Shares",
@@ -12821,7 +12820,7 @@
     {
       "id": "company8",
       "name": "First National Bank",
-      "share_price": "E14.83",
+      "share_price": "E3.75",
       "market_cap": "E400M",
       "stock_code": "SZE000331008",
       "listed_instruments": "Shares",
@@ -12844,7 +12843,7 @@
       ],
       "price_history": {
         "open": "E14.83",
-        "close": "E14.83",
+        "close": "E0.00",
         "data": [
           {
             "date": "2024-10-31",
@@ -14652,7 +14651,7 @@
     {
       "id": "company9",
       "name": "Swaziland Empowerment Limited (SEL.sz)",
-      "share_price": "E38.00",
+      "share_price": "E1.30",
       "market_cap": "E90M",
       "stock_code": "SZE000331009",
       "listed_instruments": "Shares",

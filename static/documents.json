@@ -1,12 +1,12 @@
 [
-    {
-        "description": "RES - Declaration of Interim Dividend no 65",
-        "release_date": "20 September 2024",
-        "file_link": "#"
-    },
-    {
-        "description": "SBC Limited Dividend declaration",
-        "release_date": "18 September 2024",
-        "file_link": "#"
-    }
+  {
+    "description": "RES - Declaration of Interim Dividend no 65",
+    "release_date": "20 September 2024",
+    "file_link": "/static/documents/RES_Declaration.pdf"
+  },
+  {
+    "description": "SBC Limited Dividend declaration",
+    "release_date": "18 September 2024",
+    "file_link": "/static/documents/q1-report.pdf"
+  }
 ]

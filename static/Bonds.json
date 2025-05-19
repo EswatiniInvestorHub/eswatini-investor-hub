@@ -1,0 +1,14 @@
+[
+  {
+    "id": "bond1",
+    "name": "Central Bank of Eswatini",
+    "rate": "11%",
+    "auction_date": "20 September 2024"
+  },
+  {
+    "id": "bond2",
+    "name": "Nkonyeni Precast",
+    "rate": "Prime + 1.5%",
+    "auction_date": "18 September 2024"
+  }
+]

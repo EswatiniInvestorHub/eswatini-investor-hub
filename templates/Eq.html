@@ -7,62 +7,101 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles3.css') }}">
 	
+	
+	
+{% set price = {} %}
+{% for c in companies %}
+  {% set _ = price.update({ c.id: c.share_price }) %}
+{% endfor %}
+
 <style>
-    .modal {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        width: 80%;
-        max-width: 800px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        z-index: 1000;
-        border-radius: 8px;
-    }
-    .modal-content {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border-radius: 8px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.left-section,
+.right-section {
+    flex: 1 1 45%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.centered-title {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    flex: 1;
+}
+
+.box h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+/* Make chart bigger */
+#share-price-chart {
+    width: 100% !important;
+    height: 500px !important;
+}
+
+.chart-box {
+    flex: 1 1 100%;
+}
+
+/* Responsive for small screens */
+@media (max-width: 768px) {
     .left-section, .right-section {
-        width: 50%;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-    .left-section, .right-section {
-        display: flex;
-        flex-direction: column;
-    }
-    .full-width {
         width: 100%;
+        flex: 1 1 100%;
     }
-    .close {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        font-size: 20px;
-        cursor: pointer;
-    }
-    .centered-title {
-        text-align: center;
-        width: 100%;
-    }
-    .box {
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        flex: 1;
-    }
-    .box h3 {
-        margin-top: 0;
-    }
+}
 </style>
+
+
 </head>
 <body>
     <nav>
@@ -77,28 +116,31 @@
 
 
         <ul class="menu">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('news') }}">News and Updates</a></li>
-            <li class="dropdown">
-                <a href="{{ url_for('invest') }}">Education</a>
-                <div class="dropdown-content">
-                    <a href="{{ url_for('invest') }}">How to Invest</a>
-                    <a href="{{ url_for('terms') }}">Investing terms</a>
-                </div>
-            </li>
-            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-            <li class="dropdown">
-                <a href="{{ url_for('investments') }}">Investments</a>
-                <div class="dropdown-content">
-                    <a href="{{ url_for('equities') }}">Equities</a>
-                    <a href="{{ url_for('bonds') }}">Bonds</a>
-                    <a href="{{ url_for('funds') }}">Funds</a>
-                    <a href="{{ url_for('estate') }}">Real Estate</a>
-                </div>
-            </li>
-            <li><a href="{{ url_for('about') }}">About Us</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
-        </ul>
+    <li><a href="{{ url_for('index') }}">Home</a></li>
+    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('invest') }}">Education</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('invest') }}">How to Invest</a>
+            <a href="{{ url_for('terms') }}">Investing terms</a>
+        </div>
+    </li>
+    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('investments') }}">Investments</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('equities') }}">Equities</a>
+            <a href="{{ url_for('bonds') }}">Bonds</a>
+        </div>
+    </li>
+    <!-- Removed routes below:
+    <li><a href="{{ url_for('about') }}">About Us</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <a href="{{ url_for('funds') }}">Funds</a>
+    <a href="{{ url_for('estate') }}">Real Estate</a>
+    -->
+</ul>
+
     </nav>
  
  
@@ -107,93 +149,116 @@
 <div class="equities-dashboard">
 <div class="marquee-container">
         <marquee class="marquee" behavior="scroll" direction="left">
-            Nedbank Eswatini: E 12.34 | Royal Swazi Sugar: E 10.50 | SWD Empowerment Limited: E 8.75 | SWAPROP: E 15.20 | Greystone: E 9.60 | SBC Limited: E 11.00 | Inala Capital Limited: E 7.45 | NPC Limited: E 13.30 | FNB Limited: E 14.80
-        </marquee>
+  {% for company in companies %}
+    {{ company.name }}: {{ company.share_price }}{% if not loop.last %} | {% endif %}
+  {% endfor %}
+</marquee>
     </div>
     <h1>Equities Dashboard</h1>
-    <div class="company-grid">
-    <!-- Each company block in the grid -->
-    <div class="company-block" onclick="showCompanyDetails('company1')">
-        <img src="{{ url_for('static', filename='images/logo/ned.png') }}" alt="Company A Logo" />
-        <button class="details-btn">View Details</button>
-    </div>
-    <div class="company-block" onclick="showCompanyDetails('company2')">
-        <img src="{{ url_for('static', filename='images/logo/swap.jpg') }}" alt="Company B Logo" />
-        <button class="details-btn">View Details</button>
-    </div>
-    
-    <div class="company-block" onclick="showCompanyDetails('company3')">
-        <img src="{{ url_for('static', filename='images/logo/sbc.jpg') }}" alt="Company C Logo" />
-        <button class="details-btn">View Details</button>
-    </div>
-    <div class="company-block" onclick="showCompanyDetails('company4')">
-        <img src="{{ url_for('static', filename='images/logo/res.jpg') }}" alt="Company D Logo" />
-        <button class="details-btn">View Details</button>
-    </div>
-    <div class="company-block" onclick="showCompanyDetails('company5')">
-        <img src="{{ url_for('static', filename='images/logo/npc.jpg') }}" alt="Company E Logo" />
-        <button class="details-btn">View Details</button>
-    </div>
-    <div class="company-block" onclick="showCompanyDetails('company6')">
-        <img src="{{ url_for('static', filename='images/logo/inala.jpg') }}" alt="Company F Logo" />
-        <button class="details-btn">View Details</button>
-    </div>
-    <div class="company-block" onclick="showCompanyDetails('company7')">
-        <img src="{{ url_for('static', filename='images/logo/grey.jpg') }}" alt="Company G Logo" />
-        <button class="details-btn">View Details</button>
-    </div>
-    <div class="company-block" onclick="showCompanyDetails('company8')">
-        <img src="{{ url_for('static', filename='images/logo/fnb.jpg') }}" alt="Company H Logo" />
-        <button class="details-btn">View Details</button>
-    </div>
-    <div class="company-block" onclick="showCompanyDetails('company9')">
-        <img src="{{ url_for('static', filename='images/logo/sel.jpeg') }}" alt="Company I Logo" />
-        <button class="details-btn">View Details</button>
-    </div>
-   
-   
+<div class="company-grid">
+
+  <div class="company-block" onclick="showCompanyDetails('company1')">
+      <img src="{{ url_for('static', filename='images/logo/ned.png') }}" alt="Nedbank Logo" />
+      <div class="price-tag">Share Price: {{ price['company1'] }}</div>
+      <button class="details-btn">View Details</button>
+  </div>
+
+  <div class="company-block" onclick="showCompanyDetails('company2')">
+      <img src="{{ url_for('static', filename='images/logo/swap.jpg') }}" alt="SWAPROP Logo" />
+      <div class="price-tag">Share Price: {{ price['company2'] }}</div>
+      <button class="details-btn">View Details</button>
+  </div>
+
+  <div class="company-block" onclick="showCompanyDetails('company3')">
+      <img src="{{ url_for('static', filename='images/logo/sbc.jpg') }}" alt="SBC Logo" />
+      <div class="price-tag">Share Price: {{ price['company3'] }}</div>
+      <button class="details-btn">View Details</button>
+  </div>
+
+  <div class="company-block" onclick="showCompanyDetails('company4')">
+      <img src="{{ url_for('static', filename='images/logo/res.jpg') }}" alt="RES Logo" />
+      <div class="price-tag">Share Price: {{ price['company4'] }}</div>
+      <button class="details-btn">View Details</button>
+  </div>
+
+  <div class="company-block" onclick="showCompanyDetails('company5')">
+      <img src="{{ url_for('static', filename='images/logo/npc.jpg') }}" alt="NPC Logo" />
+      <div class="price-tag">Share Price: {{ price['company5'] }}</div>
+      <button class="details-btn">View Details</button>
+  </div>
+
+  <div class="company-block" onclick="showCompanyDetails('company6')">
+      <img src="{{ url_for('static', filename='images/logo/inala.jpg') }}" alt="Inala Logo" />
+      <div class="price-tag">Share Price: {{ price['company6'] }}</div>
+      <button class="details-btn">View Details</button>
+  </div>
+
+  <div class="company-block" onclick="showCompanyDetails('company7')">
+      <img src="{{ url_for('static', filename='images/logo/grey.jpg') }}" alt="Greystone Logo" />
+      <div class="price-tag">Share Price: {{ price['company7'] }}</div>
+      <button class="details-btn">View Details</button>
+  </div>
+
+  <div class="company-block" onclick="showCompanyDetails('company8')">
+      <img src="{{ url_for('static', filename='images/logo/fnb.jpg') }}" alt="FNB Logo" />
+      <div class="price-tag">Share Price: {{ price['company8'] }}</div>
+      <button class="details-btn">View Details</button>
+  </div>
+
+  <div class="company-block" onclick="showCompanyDetails('company9')">
+      <img src="{{ url_for('static', filename='images/logo/sel.jpeg') }}" alt="SEL Logo" />
+      <div class="price-tag">Share Price: {{ price['company9'] }}</div>
+      <button class="details-btn">View Details</button>
+  </div>
+
 </div>
+
 
 </div>
 
 
 <!-- Modal/Section for Company Details -->
 <div id="company-details-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCompanyDetails()">&times;</span>
-            <div class="left-section">
-                <h2 id="company-title" class="centered-title"></h2>
-                <div class="box">
-                    <p id="company-share-price"></p>
-                    <p id="company-market-cap"></p>
-                </div>
-                <div class="box">
-                    <p id="company-stock-code"></p>
-                    <p id="company-listed-instruments"></p>
-                    <p id="company-website"></p>
-                </div>
-                <div class="box">
-                    <h3>About</h3>
-                    <p id="company-about"></p>
-                </div>
-                
+    <div class="modal-content">
+        <span class="close" onclick="closeCompanyDetails()">&times;</span>
+
+        <h2 id="company-title" class="centered-title"></h2>
+
+        <div class="left-section">
+            <div class="box">
+                <p id="company-share-price"></p>
+                <p id="company-market-cap"></p>
             </div>
-            <div class="right-section">
-                <div class="box">
-                    <h3>Latest News</h3>
-                    <div id="latest-news"></div>
-                </div>
-				<div class="box full-width">
-                    <h3>Share Price History</h3>
-                    <canvas id="share-price-chart"></canvas>
-                </div>
-                <div class="box">
-                    <h3>Events & Downloads</h3>
-                    <div id="events"></div>
-                </div>
+            <div class="box">
+                <p id="company-stock-code"></p>
+                <p id="company-listed-instruments"></p>
+                <p id="company-website"></p>
+            </div>
+            <div class="box">
+                <h3>About</h3>
+                <p id="company-about"></p>
             </div>
         </div>
+
+        <div class="right-section">
+            <div class="box">
+                <h3>Latest News</h3>
+                <div id="latest-news"></div>
+            </div>
+            <div class="box">
+                <h3>Events & Downloads</h3>
+                <div id="events"></div>
+            </div>
+        </div>
+
+        <!-- Full-width Share Price Chart -->
+        <div class="box chart-box full-width">
+            <h3>Share Price History</h3>
+            <canvas id="share-price-chart"></canvas>
+        </div>
     </div>
+</div>
+
 
 
 
@@ -231,8 +296,10 @@
             <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
             <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
             <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <!--
             <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
             <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+			-->
         </div>
     </div>
     

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    h1, h2 {
+      color: #343a40;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .bond-ticker {
+      background-color: #e9ecef;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+
+    .bond-item {
+      display: inline-block;
+      margin-right: 40px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    hr {
+      margin: 30px 0;
+    }
+
+    form.inline-form {
+      display: inline;
+    }
+
+    .document-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .document-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Admin Control Panel</h1>
+
+  <!-- Bonds Display -->
+  <div class="section">
+    <h2>Bond Market Overview</h2>
+    <div class="bond-ticker">
+      <span class="bond-item">Ensure the information entered is correct before submitting.</span>
+      <span class="bond-item">Double-check all fields to avoid errors and maintain accurate system records.</span>
+    </div>
+  </div>
+
+  <!-- Update Share Price -->
+  <div class="section">
+    <h2>Update Share Price</h2>
+    <form action="{{ url_for('update_price') }}" method="post">
+      <label>Select Company</label>
+      <select name="company_id" required>
+        {% for company in companies %}
+          <option value="{{ company.id }}">{{ company.name }}</option>
+        {% endfor %}
+      </select>
+      <label>New Share Price</label>
+      <input type="number" step="0.01" name="price" required>
+      <button type="submit">Update Price</button>
+    </form>
+  </div>
+
+  <!-- Add News -->
+  <div class="section">
+    <h2>Add News Item</h2>
+    <form action="{{ url_for('add_news') }}" method="post">
+      <label>Select Company</label>
+      <select name="company_id" required>
+        {% for company in companies %}
+          <option value="{{ company.id }}">{{ company.name }}</option>
+        {% endfor %}
+      </select>
+      <label>Title</label>
+      <input type="text" name="title" required>
+      <label>Content</label>
+      <textarea name="content" rows="4" required></textarea>
+      <label>Link</label>
+      <input type="url" name="link" required>
+      <button type="submit">Add News</button>
+    </form>
+  </div>
+
+  <!-- Delete News -->
+  <div class="section">
+    <h2>Delete News Item</h2>
+    <form action="{{ url_for('delete_news') }}" method="post">
+      <label>News ID</label>
+      <input type="text" name="news_id" required>
+      <button type="submit">Delete News</button>
+    </form>
+  </div>
+
+  <!-- Delete User -->
+  <div class="section">
+    <h2>Delete User</h2>
+    <form action="{{ url_for('delete_user') }}" method="post">
+      <label>User ID</label>
+      <input type="text" name="user_id" required>
+      <button type="submit">Delete User</button>
+    </form>
+  </div>
+
+  <!-- Manage External Bonds -->
+  <div class="section">
+    <h2>Manage External Bonds</h2>
+    <form action="{{ url_for('add_external_bond') }}" method="post">
+      <label>Bond Name</label>
+      <input type="text" name="name" required>
+      <label>Interest Rate</label>
+      <input type="text" name="rate" required>
+      <label>Auction Date</label>
+      <input type="text" name="auction_date" placeholder="e.g. 20 September 2024" required>
+      <button type="submit">Add Bond</button>
+    </form>
+
+    <h3>Existing Bonds</h3>
+    <ul>
+      {% for bond in bonds %}
+        <li>
+          {{ bond.name }} - {{ bond.rate }}
+          <form action="{{ url_for('delete_external_bond') }}" method="post" class="inline-form">
+            <input type="hidden" name="bond_id" value="{{ bond.id }}">
+            <button type="submit" onclick="return confirm('Delete bond {{ bond.name }}?')">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Document Upload -->
+  <div class="section">
+    <h2>Manage Documents</h2>
+    <form action="{{ url_for('upload_document') }}" method="post" enctype="multipart/form-data">
+      <label>Description</label>
+      <input type="text" name="description" required>
+      <label>Release Date</label>
+      <input type="date" name="release_date" required>
+      <label>Select File</label>
+      <input type="file" name="file" accept=".pdf" required>
+      <button type="submit">Upload</button>
+    </form>
+
+    <hr>
+
+    <h2>Uploaded Documents</h2>
+    {% if documents %}
+      <ul>
+        {% for doc in documents %}
+          <li>
+            <strong>{{ doc.description }}</strong> ({{ doc.release_date }}) –
+            <a class="document-link" href="{{ doc.file_link }}" target="_blank">Download</a>
+            <form action="{{ url_for('delete_document') }}" method="post" class="inline-form">
+              <input type="hidden" name="file_link" value="{{ doc.file_link }}">
+              <button type="submit" onclick="return confirm('Delete this document?')">Delete</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No documents found.</p>
+    {% endif %}
+  </div>
+
+</body>
+</html>

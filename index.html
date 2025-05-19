@@ -4,25 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investor Hub Eswatini</title>
-    <link rel="stylesheet" href="styles.css">
-	<script src="script.js" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	
 </head>
 <script>
-    // Fetch Equities data
-    fetch('/api/equities')
-        .then(response => response.json())
-        .then(data => {
-            const table = document.getElementById('equities-table');
-            data.forEach(equity => {
-                const row = table.insertRow();
-                row.insertCell(0).innerText = equity.issuer;
-                row.insertCell(1).innerText = equity.price;
-                row.insertCell(2).innerText = equity.change;
-            });
-        });
+        // Fetch Equities data
+        
+fetch('/api/equities')
+.then(response => response.json())
+.then(data => {
+    const table = document.getElementById('equities-table');
+    data.forEach(equity => {
+        const row = table.insertRow();
+        row.insertCell(0).innerText = equity.issuer;
+        row.insertCell(1).innerText = equity.price;
 
-    // Fetch News data
-    fetch('/api/news')
+        const changeCell = row.insertCell(2);
+        changeCell.innerText = equity.change;
+
+        const changeValue = parseFloat(equity.change.replace('%', '').trim());
+        if (changeValue < 0) {
+            changeCell.style.color = 'red';
+        } else if (changeValue > 0) {
+            changeCell.style.color = 'green';
+        } else {
+            changeCell.style.color = 'black';
+        }
+    });
+});
+
+
+        // Fetch News data
+        fetch('/api/news')
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('news-container');
@@ -33,14 +46,14 @@
                     <h2>${news.title}</h2>
                     <p><strong>${news.date}</strong></p>
                     <p>${news.content}</p>
-                    <button class="more-btn">More</button>
+                    <button class="more-btn" onclick="window.location.href='news'">More</button>
                 `;
                 container.appendChild(slide);
             });
         });
 
-    // Fetch Documents data
-    fetch('/api/documents')
+        // Fetch Documents data
+        fetch('/api/documents')
         .then(response => response.json())
         .then(data => {
             const table = document.getElementById('documents-table');
@@ -55,40 +68,63 @@
                 fileCell.appendChild(link);
             });
         });
-</script>
+		
+		
+		// Fetch Bonds data and inject into table
+    fetch('/api/bonds')
+    .then(response => response.json())
+    .then(data => {
+        const table = document.getElementById('bonds-table');
+
+        data.forEach(bond => {
+            const row = table.insertRow();
+            row.insertCell(0).innerText = bond.name;
+            row.insertCell(1).innerText = bond.auction_date;
+            row.insertCell(2).innerText = bond.rate;
+        });
+    })
+    .catch(error => console.error('Error fetching bonds:', error));
+    </script>
+	
 <body>
     <nav>
-    <div class="logo">
-        <img src="images/log1.WEBP" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+        
+		</div>
+		<div class="header-banner">
+    <div class="scrolling-text">
+        Eswatini Investor Hub
     </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Search...">
-        <button type="submit">Search</button>
-    </div>
-    <ul class="menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="News.html">News and Updates</a></li>
-        <li class="dropdown">
-            <a href="Education.html">Education</a>
-            <div class="dropdown-content">
-                <a href="Invest.html">How to Invest</a>
-                <a href="terms.html">Investing terms</a>
-            </div>
-        </li>
-        <li><a href="FAQ.html">FAQ</a></li>
-		<li class="dropdown">
-            <a href="Investments.html">Investments</a>
-            <div class="dropdown-content">
-                <a href="Eq.html">Equities</a>
-                <a href="Bonds.html">Bonds</a>
-                <a href="Funds.html">Funds</a>
-                <a href="Estate.html">Real Estate</a>
-            </div>
-        </li>
-        <li><a href="About.html">About Us</a></li>
-        <li><a href="Contact.html">Contact</a></li>
-    </ul>
-</nav>
+</div>
+
+        <ul class="menu">
+    <li><a href="{{ url_for('index') }}">Home</a></li>
+    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('invest') }}">Education</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('invest') }}">How to Invest</a>
+            <a href="{{ url_for('terms') }}">Investing terms</a>
+        </div>
+    </li>
+    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('investments') }}">Investments</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('equities') }}">Equities</a>
+            <a href="{{ url_for('bonds') }}">Bonds</a>
+        </div>
+    </li>
+    <!-- Removed routes below:
+    <li><a href="{{ url_for('about') }}">About Us</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <a href="{{ url_for('funds') }}">Funds</a>
+    <a href="{{ url_for('estate') }}">Real Estate</a>
+    -->
+</ul>
+
+    </nav>
 
     <div class="container">
         <div class="sidebar">
@@ -103,26 +139,45 @@
     </table>
 
     <h2>Bonds</h2>
-    <table>
-        <tr>
-            <th>Issuer</th>
-            <th>Auction Date</th>
-            <th>Interest Rate</th>
-        </tr>
-        <tr>
-            <td>Central Bank of Eswatini</td>
-            <td>20 September 2024</td>
-            <td>10%</td>
-        </tr>
-        <tr>
-            <td>Nkonyeni Precast</td>
-            <td>18 September 2024</td>
-            <td>Prime + 1.5%</td>
-        </tr>
-    </table>
+<table style="width: 100%; border-collapse: collapse;">
+  <tr style="background-color: #f0f0f0;">
+    <th style="padding: 8px; border: 1px solid #ccc;">Issuer</th>
+    <th style="padding: 8px; border: 1px solid #ccc;">Auction Date</th>
+    <th style="padding: 8px; border: 1px solid #ccc;">Interest Rate</th>
+  </tr>
+  {% for bond in bonds %}
+  <tr style="border-bottom: 1px solid #ccc;">
+    <td style="padding: 8px;">{{ bond.name }}</td>
+    <td style="padding: 8px;">{{ bond.auction_date }}</td>
+    <td style="padding: 8px;">{{ bond.rate }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+
+
+
+<marquee class="marquee" behavior="scroll" direction="left">
+  {% for company in companies %}
+    {{ company.name }}: {{ company.share_price }}{% if not loop.last %} | {% endif %}
+  {% endfor %}
+</marquee>
+
+
+<div class="marquee-container">
+  <div class="marquee-label">Bonds</div>
+  <marquee class="marquee" behavior="scroll" direction="left">
+    {% for bond in bonds %}
+      {{ bond.name }}: Interest Rate - {{ bond.rate }}{% if not loop.last %} | {% endif %}
+    {% endfor %}
+  </marquee>
 </div>
-        <div class="main-content">
+
+
+
     <div class="news-updates">
+	
     <button class="slider-nav prev">❮</button>
     <h2 class="news-title">News Updates</h2>
     <button class="slider-nav next">❯</button>
@@ -153,47 +208,50 @@
 
 
     </div>
- 
-
+    
     <!-- Copyright Section -->
-    <footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
+<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
     <!-- First Footer Bar -->
     <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
-        <a href="#"><img src="images/f.png" alt="Facebook" style="margin: 0 10px;"></a>
-        <a href="#"><img src="images/e.png" alt="Email" style="margin: 0 10px;"></a>
-        <a href="#"><img src="images/x.png" alt="Twitter" style="margin: 0 10px;"></a>
-		<a href="#"><img src="images/a.png" alt="Address" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
     </div>
     
     <!-- Second Footer Layer -->
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399 ;">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
         <!-- Left Section: Logo and Company Name -->
         <div style="display: flex; align-items: center;">
-            <img src="images/log1.WEBP" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
             <div>
-                <h3 style="margin: 0;">Eswatini Market Insights Ally </h3>
-                <p style="margin: 0;">(EMIA)</p>
+                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
+                <p style="margin: 0;">(EIH)</p>
             </div>
         </div>
         
         <!-- Right Section: Menu -->
         <div>
-            <a href="index.html" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
-            <a href="News.html" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
-            <a href="Investments.html" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
-            <a href="Education.html" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
-            <a href="FAQ.html" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
-            <a href="About.html" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
-            <a href="Contact.html" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
+            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
+            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
+            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
+            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <!--
+            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
+            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+			-->
         </div>
     </div>
     
     <!-- Third Footer Layer -->
     <div style="text-align: center; padding: 20px; background-color: #002266;">
-        <p>&copy; 2024 Eswatini Market Insights Ally (EMIA). All rights reserved.</p>
+        <p>&copy; 2024 Eswatini Investor Hub. All rights reserved.</p>
     </div>
 </footer>
 
+
+<script src="{{ url_for('static', filename='script.js') }}" defer></script>
 
 </body>
 </html>

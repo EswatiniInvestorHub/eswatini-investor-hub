@@ -18,28 +18,31 @@
     </div>
 </div>
         <ul class="menu">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('news') }}">News and Updates</a></li>
-            <li class="dropdown">
-                <a href="{{ url_for('invest') }}">Education</a>
-                <div class="dropdown-content">
-                    <a href="{{ url_for('invest') }}">How to Invest</a>
-                    <a href="{{ url_for('terms') }}">Investing terms</a>
-                </div>
-            </li>
-            <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-            <li class="dropdown">
-                <a href="{{ url_for('investments') }}">Investments</a>
-                <div class="dropdown-content">
-                    <a href="{{ url_for('equities') }}">Equities</a>
-                    <a href="{{ url_for('bonds') }}">Bonds</a>
-                    <a href="{{ url_for('funds') }}">Funds</a>
-                    <a href="{{ url_for('estate') }}">Real Estate</a>
-                </div>
-            </li>
-            <li><a href="{{ url_for('about') }}">About Us</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
-        </ul>
+    <li><a href="{{ url_for('index') }}">Home</a></li>
+    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('invest') }}">Education</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('invest') }}">How to Invest</a>
+            <a href="{{ url_for('terms') }}">Investing terms</a>
+        </div>
+    </li>
+    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('investments') }}">Investments</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('equities') }}">Equities</a>
+            <a href="{{ url_for('bonds') }}">Bonds</a>
+        </div>
+    </li>
+    <!-- Removed routes below:
+    <li><a href="{{ url_for('about') }}">About Us</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <a href="{{ url_for('funds') }}">Funds</a>
+    <a href="{{ url_for('estate') }}">Real Estate</a>
+    -->
+</ul>
+
     </nav>
  
  
@@ -79,8 +82,10 @@
             <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
             <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
             <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+			<!--
             <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
             <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+			-->
         </div>
     </div>
     
