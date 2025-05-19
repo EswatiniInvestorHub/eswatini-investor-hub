@@ -10,7 +10,7 @@
 <body>
     <nav>
         <div class="logo">
-            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
         </div>
 		<div class="header-banner">
     <div class="scrolling-text">
@@ -54,20 +54,20 @@
 
         <!-- Bond 1: Central Bank of Eswatini -->
         <div class="bond-block">
-            <h3>{{ bonds[0].name }}</h3>
+            <h3>{{ bonds[1].name }}</h3>
             <img src="{{ url_for('static', filename='images/logo/gov.jpg') }}" alt="Government Bonds">
             <img src="{{ url_for('static', filename='images/logo/ebc.jpg') }}" alt="EBC">
-            <p><strong>Interest Rate:</strong> {{ bonds[0].rate }}</p>
-            <p><strong>Auction Date:</strong> {{ bonds[0].auction_date }}</p>
+            <p><strong>Interest Rate:</strong> {{ bonds[1].rate }}</p>
+            <p><strong>Auction Date:</strong> {{ bonds[1].auction_date }}</p>
             <button class="details-btn">View More Details</button>
         </div>
 
         <!-- Bond 2: Nkonyeni Precast -->
         <div class="bond-block">
-            <h3>{{ bonds[1].name }}</h3>
+            <h3>{{ bonds[0].name }}</h3>
             <img src="{{ url_for('static', filename='images/logo/npc1.jpg') }}" alt="NPC 100">
-            <p><strong>Interest Rate:</strong> {{ bonds[1].rate }}</p>
-            <p><strong>Auction Date:</strong> {{ bonds[1].auction_date }}</p>
+            <p><strong>Interest Rate:</strong> {{ bonds[0].rate }}</p>
+            <p><strong>Auction Date:</strong> {{ bonds[0].auction_date }}</p>
             <button class="details-btn">View More Details</button>
         </div>
 
@@ -96,7 +96,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
         <!-- Left Section: Logo and Company Name -->
         <div style="display: flex; align-items: center;">
-            <img src="{{ url_for('static', filename='images/log1.WEBP') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
             <div>
                 <h3 style="margin: 0;">Eswatini Investor Hub</h3>
                 <p style="margin: 0;">(EIH)</p>

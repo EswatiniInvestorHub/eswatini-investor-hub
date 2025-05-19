@@ -979,3 +979,84 @@ body {
 
 
 
+
+
+
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .sidebar,
+  .main-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu {
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu li {
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
+  }
+
+  .menu a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .logo img {
+    height: 40px;
+  }
+
+  .news-updates,
+  .how-to-invest {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .slider-nav {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .marquee-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .marquee-label {
+    margin-bottom: 5px;
+  }
+
+  .header-banner {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .news-slide {
+    padding: 10px;
+  }
+
+  h1, h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+
