@@ -343,9 +343,16 @@ def equities():
 @app.route('/bonds')
 def bonds():
     json_path = os.path.join(app.root_path, 'static', 'Bonds.json')
-    with open(json_path) as f:
-        bond_data = json.load(f)
-    return render_template('Bonds.html', bonds=bond_data)
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            bonds = json.load(f)
+        print(f"✅ Loaded {len(bonds)} bonds.")
+    except Exception as e:
+        print(f"❌ Failed to load Bonds.json: {e}")
+        bonds = []
+
+    return render_template('Bonds.html', bonds=bonds)
+
 
 @app.route('/funds')
 def funds():
