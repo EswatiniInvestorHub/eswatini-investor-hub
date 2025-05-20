@@ -1,4 +1,4 @@
-function createHistogram(priceHistoryData) {
+function createLineChart(priceHistoryData) {
     const ctx = document.getElementById("share-price-chart").getContext("2d");
 
     // Format data for the chart
@@ -10,35 +10,44 @@ function createHistogram(priceHistoryData) {
         window.sharePriceChart.destroy();
     }
 
-    // Create a new histogram
-    window.sharePriceChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Share Price (E)',
-                data: prices,
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Date'
-                    }
+    // Create a new line chart
+    window.chartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Share Price',
+            data: prices,
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0, 0, 255, 0.2)',
+            fill: true,
+            tension: 0.5  // More curved line
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Date'
                 },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Price (E)'
-                    },
-                    beginAtZero: false
+                ticks: {
+                    autoSkip: true,
+                    maxTicksLimit: 7,
+                    maxRotation: 45,
+                    minRotation: 30
+                }
+            },
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Price (E)'
                 }
             }
         }
-    });
+    }
+});
+
 }

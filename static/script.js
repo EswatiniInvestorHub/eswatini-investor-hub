@@ -105,39 +105,80 @@ async function showCompanyDetails(companyId) {
 
             // Destroy previous chart instance if it exists
             const ctx = document.getElementById("share-price-chart").getContext("2d");
-            if (window.chartInstance) {
-                window.chartInstance.destroy();
-            }
-            window.chartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Share Price',
-                        data: prices,
-                        borderColor: 'blue',
-                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Date'
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Price (E)'
-                            }
-                        }
-                    }
-                }
-            });
+
+if (window.chartInstance) {
+    window.chartInstance.destroy();
+}
+
+window.chartInstance = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: labels,  // x-axis: dates
+    datasets: [{
+      label: 'Share Price',
+      data: prices,
+      borderColor: 'blue',
+      backgroundColor: 'transparent',
+      borderWidth: 2,
+      tension: 0.4,         // Smooth curve
+      pointRadius: 0,       // Hide points
+      pointHoverRadius: 5   // Show dot on hover
+    }]
+  },
+  options: {
+    responsive: true,
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    plugins: {
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: function(context) {
+            return `Price: E${context.parsed.y}`;
+          }
+        }
+      },
+      legend: {
+        display: false
+      }
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Date'
+        },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 6,
+          maxRotation: 45,
+          minRotation: 30
+        },
+        grid: {
+          display: true,
+          color: '#e0e0e0'
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Price (E)'
+        },
+        grid: {
+          display: true,
+          color: '#e0e0e0'
+        }
+      }
+    }
+  }
+});
+
+
+
+
         }
     } catch (error) {
         console.error("Error fetching company details:", error);

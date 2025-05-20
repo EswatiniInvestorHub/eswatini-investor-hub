@@ -9,8 +9,8 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-MAIN_JSON_PATH = 'C:/Users/Ndosi/Desktop/Ntando/New/Hub/static/main.json'
-BONDS_JSON_PATH = 'C:/Users/Ndosi/Desktop/Ntando/New/Hub/static/Bonds.json'
+MAIN_JSON_PATH = 'C:/Users/Ndosi/Desktop/Ntando/Hub/static/main.json'
+BONDS_JSON_PATH = 'C:/Users/Ndosi/Desktop/Ntando/Hub/static/Bonds.json'
 
 def load_data():
     with open(MAIN_JSON_PATH, 'r', encoding='utf-8') as f:
