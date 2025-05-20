@@ -21,9 +21,16 @@ function prevSlide() {
     showSlide(currentIndex);
 }
 
-// Event listeners for navigation buttons
-document.querySelector('.slider-nav.next').addEventListener('click', nextSlide);
-document.querySelector('.slider-nav.prev').addEventListener('click', prevSlide);
+const nextBtn = document.querySelector('.slider-nav.next');
+if (nextBtn) {
+  nextBtn.addEventListener('click', nextSlide);
+}
+
+const prevBtn = document.querySelector('.slider-nav.prev');
+if (prevBtn) {
+  prevBtn.addEventListener('click', prevSlide);
+}
+
 
 // Show the initial slide
 showSlide(currentIndex);
