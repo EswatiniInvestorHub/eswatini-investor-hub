@@ -345,7 +345,7 @@ def bonds():
     json_path = os.path.join(app.root_path, 'static', 'Bonds.json')
     with open(json_path) as f:
         bond_data = json.load(f)
-    return render_template('bonds.html', bonds=bond_data)
+    return render_template('Bonds.html', bonds=bond_data)
 
 @app.route('/funds')
 def funds():
