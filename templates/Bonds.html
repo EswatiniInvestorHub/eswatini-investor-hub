@@ -8,7 +8,42 @@
 	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 
+<style>
+#bond-modal {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
 
+#bond-modal h2 {
+  font-size: 22px;
+  color: #003399;
+  margin-bottom: 10px;
+}
+
+#bond-modal p {
+  font-size: 16px;
+  margin: 6px 0;
+}
+
+.bond-details-extra h4 {
+  font-size: 18px;
+  color: #003366;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.bond-details-extra p {
+  font-size: 15px;
+}
+
+.bond-details-extra strong {
+  font-weight: 600;
+  color: #222;
+}
+
+
+</style>
 
 
 
@@ -58,20 +93,19 @@
     <div class="bond-grid">
 
         <!-- Bond 1 -->
-        <div class="bond-block" data-index="1">
-  <h3>{{ bonds[1].name }}</h3>
-  <img src="{{ url_for('static', filename='images/logo/ebc.jpg') }}" alt="EBC">
-  <p><strong>Interest Rate:</strong> {{ bonds[1].rate }}</p>
-  <p><strong>Auction Date:</strong> {{ bonds[1].auction_date }}</p>
-  <button class="view-btn">View More Details</button>
-</div>
-
-        <!-- Bond 2 -->
-        <div class="bond-block" data-index="0">
+<div class="bond-block" data-index="0">
   <h3>{{ bonds[0].name }}</h3>
   <img src="{{ url_for('static', filename='images/logo/npc1.jpg') }}" alt="NPC 100">
   <p><strong>Interest Rate:</strong> {{ bonds[0].rate }}</p>
   <p><strong>Auction Date:</strong> {{ bonds[0].auction_date }}</p>
+  <button class="view-btn">View More Details</button>
+</div>
+
+<div class="bond-block" data-index="1">
+  <h3>{{ bonds[1].name }}</h3>
+  <img src="{{ url_for('static', filename='images/logo/ebc.jpg') }}" alt="EBC">
+  <p><strong>Interest Rate:</strong> {{ bonds[1].rate }}</p>
+  <p><strong>Auction Date:</strong> {{ bonds[1].auction_date }}</p>
   <button class="view-btn">View More Details</button>
 </div>
 
@@ -132,12 +166,41 @@
 </body>
 
 <!-- Bond Modal -->
-<div id="bond-modal" class="modal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:white; padding:20px; z-index:1000; border-radius:8px; width:80%; max-width:500px; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
-  <span onclick="document.getElementById('bond-modal').style.display='none'" style="float:right; cursor:pointer;">&times;</span>
-  <h2 id="bond-title">Bond Name</h2>
+<!-- Bond Modal -->
+<div id="bond-modal" class="modal" style="
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+">
+
+  <span onclick="document.getElementById('bond-modal').style.display='none'" 
+        style="float:right; cursor:pointer; font-size: 24px; font-weight: bold; color: #444;">&times;</span>
+
+  <h2 id="bond-title" style="margin-top: 0; font-size: 24px;">Bond Name</h2>
   <p id="bond-rate">Rate</p>
-  <p id="bond-auction-date">Date</p>
+  <p id="bond-auction-date">Auction Date</p>
+
+  <div class="bond-details-extra">
+    <h4 style="margin-top: 20px; font-size: 18px; color: #003366;">Investment Insights</h4>
+    <p><strong>Issuer:</strong> <span id="bond-issuer"></span></p>
+    <p><strong>Why Invest:</strong> <span id="bond-benefits"></span></p>
+    <p><strong>Suitable For:</strong> <span id="bond-suitability"></span></p>
+    <p><strong>Risks:</strong> <span id="bond-risks"></span></p>
+  </div>
 </div>
+
+
 
 
 
@@ -146,24 +209,39 @@
   document.addEventListener("DOMContentLoaded", () => {
     const bonds = {{ bonds | tojson | safe }};
 
-    const modal = document.getElementById('bond-modal');
-    const titleEl = document.getElementById('bond-title');
-    const rateEl = document.getElementById('bond-rate');
-    const dateEl = document.getElementById('bond-auction-date');
-
     const viewButtons = document.querySelectorAll('.view-btn');
-
     viewButtons.forEach((btn, i) => {
       btn.addEventListener('click', () => {
         const bond = bonds[i];
-        titleEl.textContent = bond.name;
-        rateEl.textContent = `Rate: ${bond.rate}`;
-        dateEl.textContent = `Auction Date: ${bond.auction_date}`;
-        modal.style.display = 'block';
+
+        // Extra investment info based on index
+        let issuer = "", benefits = "", suitability = "", risks = "";
+        if (i === 0) {
+          issuer = "Nkonyeni Precast is a private infrastructure company specializing in concrete products.";
+          benefits = "Higher potential returns than government bonds, supports infrastructure growth.";
+          suitability = "Moderate to growth-focused investors.";
+          risks = "Moderate risk due to corporate performance and liquidity.";
+        } else if (i === 1) {
+          issuer = "Central Bank of Eswatini regulates currency and ensures economic stability.";
+          benefits = "State-backed, low-risk, predictable interest.";
+          suitability = "Ideal for risk-averse and long-term investors.";
+          risks = "Minimal, but inflation and interest rate changes may apply.";
+        }
+
+        document.getElementById("bond-title").innerText = bond.name;
+        document.getElementById("bond-rate").innerText = "Rate: " + bond.rate;
+        document.getElementById("bond-auction-date").innerText = "Auction Date: " + bond.auction_date;
+        document.getElementById("bond-issuer").innerText = issuer;
+        document.getElementById("bond-benefits").innerText = benefits;
+        document.getElementById("bond-suitability").innerText = suitability;
+        document.getElementById("bond-risks").innerText = risks;
+        document.getElementById("bond-modal").style.display = "block";
       });
     });
   });
 </script>
+
+
 
 
 
