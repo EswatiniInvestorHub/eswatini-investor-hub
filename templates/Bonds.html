@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
+
+
+
+
+
 <body>
     <nav>
         <div class="logo">
@@ -52,24 +57,23 @@
     <h1>Bonds Dashboard</h1>
     <div class="bond-grid">
 
-        <!-- Bond 1: Central Bank of Eswatini -->
-        <div class="bond-block">
-            <h3>{{ bonds[1].name }}</h3>
-            <img src="{{ url_for('static', filename='images/logo/gov.jpg') }}" alt="Government Bonds">
-            <img src="{{ url_for('static', filename='images/logo/ebc.jpg') }}" alt="EBC">
-            <p><strong>Interest Rate:</strong> {{ bonds[1].rate }}</p>
-            <p><strong>Auction Date:</strong> {{ bonds[1].auction_date }}</p>
-            <button class="details-btn">View More Details</button>
-        </div>
+        <!-- Bond 1 -->
+        <div class="bond-block" data-index="1">
+  <h3>{{ bonds[1].name }}</h3>
+  <img src="{{ url_for('static', filename='images/logo/ebc.jpg') }}" alt="EBC">
+  <p><strong>Interest Rate:</strong> {{ bonds[1].rate }}</p>
+  <p><strong>Auction Date:</strong> {{ bonds[1].auction_date }}</p>
+  <button class="view-btn">View More Details</button>
+</div>
 
-        <!-- Bond 2: Nkonyeni Precast -->
-        <div class="bond-block">
-            <h3>{{ bonds[0].name }}</h3>
-            <img src="{{ url_for('static', filename='images/logo/npc1.jpg') }}" alt="NPC 100">
-            <p><strong>Interest Rate:</strong> {{ bonds[0].rate }}</p>
-            <p><strong>Auction Date:</strong> {{ bonds[0].auction_date }}</p>
-            <button class="details-btn">View More Details</button>
-        </div>
+        <!-- Bond 2 -->
+        <div class="bond-block" data-index="0">
+  <h3>{{ bonds[0].name }}</h3>
+  <img src="{{ url_for('static', filename='images/logo/npc1.jpg') }}" alt="NPC 100">
+  <p><strong>Interest Rate:</strong> {{ bonds[0].rate }}</p>
+  <p><strong>Auction Date:</strong> {{ bonds[0].auction_date }}</p>
+  <button class="view-btn">View More Details</button>
+</div>
 
     </div>
 </div>
@@ -126,4 +130,42 @@
 
 
 </body>
+
+<!-- Bond Modal -->
+<div id="bond-modal" class="modal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:white; padding:20px; z-index:1000; border-radius:8px; width:80%; max-width:500px; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
+  <span onclick="document.getElementById('bond-modal').style.display='none'" style="float:right; cursor:pointer;">&times;</span>
+  <h2 id="bond-title">Bond Name</h2>
+  <p id="bond-rate">Rate</p>
+  <p id="bond-auction-date">Date</p>
+</div>
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const bonds = {{ bonds | tojson | safe }};
+
+    const modal = document.getElementById('bond-modal');
+    const titleEl = document.getElementById('bond-title');
+    const rateEl = document.getElementById('bond-rate');
+    const dateEl = document.getElementById('bond-auction-date');
+
+    const viewButtons = document.querySelectorAll('.view-btn');
+
+    viewButtons.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        const bond = bonds[i];
+        titleEl.textContent = bond.name;
+        rateEl.textContent = `Rate: ${bond.rate}`;
+        dateEl.textContent = `Auction Date: ${bond.auction_date}`;
+        modal.style.display = 'block';
+      });
+    });
+  });
+</script>
+
+
+
+
 </html>
