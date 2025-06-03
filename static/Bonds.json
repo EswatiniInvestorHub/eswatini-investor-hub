@@ -1,0 +1,48 @@
+[
+  {
+    "id": "bond1",
+    "name": "Nkonyeni Precast",
+    "programme": "NPC 100",
+    "rate": "Prime Plus 1.5%",
+    "maturity_date": "05 April 2034",
+    "payment_frequency": "Annual",
+    "email": "transfersecretary@sng.gt.com",
+    "phone": "+26824057000",
+    "logos": [
+      "images/logo/npc1.jpg"
+    ],
+    "pdf": "documents/npc100.pdf",
+    "link": ""
+  },
+  {
+    "id": "bond2",
+    "name": "Nkonyeni Precast",
+    "programme": "NPC 102",
+    "rate": "Prime Plus 1%",
+    "maturity_date": "02 January 2030",
+    "payment_frequency": "Annual",
+    "email": "transfersecretary@sng.gt.com",
+    "phone": "+26824057000",
+    "logos": [
+      "images/logo/npc1.jpg"
+    ],
+    "pdf": "documents/npc102.pdf",
+    "link": ""
+  },
+  {
+    "id": "bond3",
+    "name": "Government Bond",
+    "programme": "SGIFB008",
+    "rate": "11.5%",
+    "maturity_date": "30 May 2032",
+    "payment_frequency": "Semi Annual",
+    "email": "cbe_domestic_market@centralbank.org.sz",
+    "phone": "",
+    "logos": [
+      "images/logo/gov.jpg",
+      "images/logo/ebc.jpg"
+    ],
+    "pdf": "documents/government_bond.pdf",
+    "link": "https://lnkd.in/dZZiwPnp"
+  }
+]

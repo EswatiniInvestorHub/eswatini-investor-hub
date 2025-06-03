@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit {{ company.name }}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background-color: #f4f7f9;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #002266;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background: #fff;
+      padding: 30px;
+      max-width: 700px;
+      margin: 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .event-group {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    h3 {
+      margin-top: 40px;
+      color: #004499;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    button[type="submit"] {
+      background-color: #004499;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 30px;
+      display: block;
+      width: 100%;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #003377;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    a {
+      color: #004499;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Edit {{ company.name }}</h1>
+
+  <form method="POST">
+    <label for="about">About</label>
+    <textarea name="about" id="about" rows="5">{{ company.about }}</textarea>
+
+    <h3>Upcoming Events</h3>
+    <div id="events-container">
+      {% for event in company.events %}
+        <div class="event-group">
+          <label>Title</label>
+          <input type="text" name="event_title" value="{{ event.title }}">
+          <label>Date</label>
+          <input type="text" name="event_date" value="{{ event.date }}">
+          <label>Link</label>
+          <input type="text" name="event_link" value="{{ event.link }}">
+        </div>
+      {% endfor %}
+
+      <!-- Blank entry for a new event -->
+      <div class="event-group">
+        <label>Title</label>
+        <input type="text" name="event_title">
+        <label>Date</label>
+        <input type="text" name="event_date">
+        <label>Link</label>
+        <input type="text" name="event_link">
+      </div>
+    </div>
+
+    <button type="submit">Save Changes</button>
+  </form>
+
+  <p><a href="{{ url_for('admin') }}">← Back to Admin Panel</a></p>
+
+</body>
+</html>

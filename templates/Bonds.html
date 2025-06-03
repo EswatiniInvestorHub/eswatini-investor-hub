@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Hub Eswatini</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+
+<style>
+#bond-modal {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+#bond-modal h2 {
+  font-size: 22px;
+  color: #003399;
+  margin-bottom: 10px;
+}
+
+#bond-modal p {
+  font-size: 16px;
+  margin: 6px 0;
+}
+
+.bond-details-extra h4 {
+  font-size: 18px;
+  color: #003366;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.bond-details-extra p {
+  font-size: 15px;
+}
+
+.bond-details-extra strong {
+  font-weight: 600;
+  color: #222;
+}
+
+
+</style>
+
+
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+        </div>
+		<div class="header-banner">
+    <div class="scrolling-text">
+        Eswatini Investor Hub
+    </div>
+</div>
+        <ul class="menu">
+    <li><a href="{{ url_for('index') }}">Home</a></li>
+    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('invest') }}">Education</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('invest') }}">How to Invest</a>
+            <a href="{{ url_for('terms') }}">Investing terms</a>
+        </div>
+    </li>
+    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+    <li class="dropdown">
+        <a href="{{ url_for('investments') }}">Investments</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('equities') }}">Equities</a>
+            <a href="{{ url_for('bonds') }}">Bonds</a>
+        </div>
+    </li>
+    <!-- Removed routes below:
+    <li><a href="{{ url_for('about') }}">About Us</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <a href="{{ url_for('funds') }}">Funds</a>
+    <a href="{{ url_for('estate') }}">Real Estate</a>
+    -->
+</ul>
+
+    </nav>
+ 
+ 
+ 
+ 
+ <div class="bonds-dashboard">
+  <h1>Bonds Dashboard</h1>
+  <div class="bond-flex-container">
+
+    {% for bond in bonds %}
+    <div class="bond-card">
+      <div class="bond-logos">
+        {% for logo in bond.logos %}
+        <img src="{{ url_for('static', filename=logo) }}" alt="Bond Logo">
+        {% endfor %}
+      </div>
+      <h3>{{ bond.name }}</h3>
+      <p><strong>Programme:</strong> {{ bond.programme }}</p>
+      <p><strong>Interest Rate:</strong> {{ bond.rate }}</p>
+      <p><strong>Maturity Date:</strong> {{ bond.maturity_date }}</p>
+      <p><strong>Interest Payment:</strong> {{ bond.payment_frequency }}</p>
+      <p><strong>Email:</strong> <a href="mailto:{{ bond.email }}">{{ bond.email }}</a></p>
+      {% if bond.phone %}
+      <p><strong>Phone:</strong> <a href="tel:{{ bond.phone }}">{{ bond.phone }}</a></p>
+      {% endif %}
+	  {% if bond.link %}
+  <p><a href="{{ bond.link }}" target="_blank">More Info</a></p>
+{% endif %}
+
+      <a class="bond-button" href="{{ url_for('static', filename=bond.pdf) }}" target="_blank">View Bond Details</a>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+    <!-- Copyright Section -->
+<!-- Copyright Section -->
+<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
+    <!-- First Footer Bar -->
+    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
+        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
+        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
+    </div>
+    
+    <!-- Second Footer Layer -->
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
+        <!-- Left Section: Logo and Company Name -->
+        <div style="display: flex; align-items: center;">
+            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
+            <div>
+                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
+                <p style="margin: 0;">(EIH)</p>
+            </div>
+        </div>
+        
+        <!-- Right Section: Menu -->
+        <div>
+            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
+            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
+            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
+            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
+            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
+            <!--
+            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
+            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
+			-->
+        </div>
+    </div>
+    
+    <!-- Third Footer Layer -->
+    <div style="text-align: center; padding: 20px; background-color: #002266;">
+        <p>&copy; 2025 Eswatini Investor Hub. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+</body>
+
+<!-- Bond Modal -->
+<!-- Bond Modal -->
+<div id="bond-modal" class="modal" style="
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+">
+
+  <span onclick="document.getElementById('bond-modal').style.display='none'" 
+        style="float:right; cursor:pointer; font-size: 24px; font-weight: bold; color: #444;">&times;</span>
+
+  <h2 id="bond-title" style="margin-top: 0; font-size: 24px;">Bond Name</h2>
+  <p id="bond-rate">Rate</p>
+  <p id="bond-auction-date">Auction Date</p>
+
+  <div class="bond-details-extra">
+    <h4 style="margin-top: 20px; font-size: 18px; color: #003366;">Investment Insights</h4>
+    <p><strong>Issuer:</strong> <span id="bond-issuer"></span></p>
+    <p><strong>Why Invest:</strong> <span id="bond-benefits"></span></p>
+    <p><strong>Suitable For:</strong> <span id="bond-suitability"></span></p>
+    <p><strong>Risks:</strong> <span id="bond-risks"></span></p>
+  </div>
+</div>
+
+
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const bonds = {{ bonds | tojson | safe }};
+
+    const viewButtons = document.querySelectorAll('.view-btn');
+    viewButtons.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        const bond = bonds[i];
+
+        // Extra investment info based on index
+        let issuer = "", benefits = "", suitability = "", risks = "";
+        if (i === 0) {
+          issuer = "Nkonyeni Precast is a private infrastructure company specializing in concrete products.";
+          benefits = "Higher potential returns than government bonds, supports infrastructure growth.";
+          suitability = "Moderate to growth-focused investors.";
+          risks = "Moderate risk due to corporate performance and liquidity.";
+        } else if (i === 1) {
+          issuer = "Central Bank of Eswatini regulates currency and ensures economic stability.";
+          benefits = "State-backed, low-risk, predictable interest.";
+          suitability = "Ideal for risk-averse and long-term investors.";
+          risks = "Minimal, but inflation and interest rate changes may apply.";
+        }
+
+        document.getElementById("bond-title").innerText = bond.name;
+        document.getElementById("bond-rate").innerText = "Rate: " + bond.rate;
+        document.getElementById("bond-auction-date").innerText = "Auction Date: " + bond.auction_date;
+        document.getElementById("bond-issuer").innerText = issuer;
+        document.getElementById("bond-benefits").innerText = benefits;
+        document.getElementById("bond-suitability").innerText = suitability;
+        document.getElementById("bond-risks").innerText = risks;
+        document.getElementById("bond-modal").style.display = "block";
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+</html>

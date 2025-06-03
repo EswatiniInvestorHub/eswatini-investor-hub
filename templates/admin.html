@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    h1, h2 {
+      color: #343a40;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .bond-ticker {
+      background-color: #e9ecef;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+
+    .bond-item {
+      display: inline-block;
+      margin-right: 40px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    hr {
+      margin: 30px 0;
+    }
+
+    form.inline-form {
+      display: inline;
+    }
+
+    .document-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .document-link:hover {
+      text-decoration: underline;
+    }
+	
+	.company-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.company-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.company-name {
+  font-weight: 600;
+}
+
+.edit-button {
+  text-decoration: none;
+  background-color: #007bff;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.filter-bar input, .filter-bar button {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.news-item {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.news-item h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #003366;
+}
+
+.news-item small {
+  color: #777;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #999;
+}
+
+.logout-btn {
+  float: right;
+  background-color: #dc3545; /* Bootstrap red */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+
+  </style>
+  
+  
+
+  
+</head>
+<body>
+
+  <h1>Admin Control Panel</h1>
+
+  <!-- Bonds Display -->
+  <div class="section">
+    <h2>Bond Market Overview</h2>
+    <div class="bond-ticker">
+      <span class="bond-item">Ensure the information entered is correct before submitting.</span>
+      <span class="bond-item">Double-check all fields to avoid errors and maintain accurate system records.</span>
+    </div>
+  </div>
+  
+  <a href="{{ url_for('logout') }}" class="logout-btn">🔒 Logout</a>
+
+  
+ <div class="section">
+  <h2>Edit Companies</h2>
+  <ul class="company-list">
+    {% for company in companies %}
+      <li class="company-item">
+        <span class="company-name">{{ company.name }}</span>
+        <a href="{{ url_for('edit_company', company_id=company.id) }}" class="edit-button">
+          Edit About & Events
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+
+
+
+
+  <!-- Update Share Price -->
+  <div class="section">
+    <h2>Update Share Price</h2>
+    <form action="{{ url_for('update_price') }}" method="post">
+      <label>Select Company</label>
+      <select name="company_id" required>
+        {% for company in companies %}
+          <option value="{{ company.id }}">{{ company.name }}</option>
+        {% endfor %}
+      </select>
+      <label>New Share Price</label>
+      <input type="number" step="0.01" name="price" required>
+      <button type="submit">Update Price</button>
+    </form>
+  </div>
+
+<div class="section">
+  <h2>News Management</h2>
+
+  <!-- Add News Form -->
+  <form action="{{ url_for('add_news') }}" method="post">
+    <h3>Add News Item</h3>
+    <label>Select Company</label>
+    <select name="company_id" required>
+      {% for company in companies %}
+        <option value="{{ company.id }}">{{ company.name }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Title</label>
+    <input type="text" name="title" required>
+
+    <label>Date</label>
+    <input type="date" name="date" required>
+
+    <label>Content</label>
+    <textarea name="content" rows="4" required></textarea>
+
+    <label>Link (optional)</label>
+    <input type="url" name="link">
+
+    <button type="submit">➕ Add News</button>
+  </form>
+
+  <hr>
+
+  <!-- Existing News Items -->
+  
+  <div class="section">
+  <h3>Manage Existing News</h3>
+
+  <!-- Filters -->
+  <div class="filter-bar">
+    <input type="text" id="search-input" placeholder="🔍 Search news…" />
+    <input type="date" id="start-date" />
+    <span>to</span>
+    <input type="date" id="end-date" />
+    <button id="clear-filters">Clear</button>
+  </div>
+
+  <!-- News Results -->
+  <div id="news-results" class="news-list"></div>
+
+  <!-- Pagination -->
+  <div id="pagination" class="pagination"></div>
+</div>
+
+
+
+
+  <!-- Manage External Bonds -->
+  <div class="section">
+  <h2>Manage External Bonds</h2>
+  <form action="{{ url_for('add_external_bond') }}" method="post" enctype="multipart/form-data">
+    <label>Bond Name</label>
+    <input type="text" name="name" required>
+
+    <label>Programme</label>
+    <input type="text" name="programme" required>
+
+    <label>Interest Rate</label>
+    <input type="text" name="rate" required>
+
+    <label>Maturity Date</label>
+    <input type="text" name="maturity_date" placeholder="e.g. 30 May 2032" required>
+
+    <label>Interest Payment</label>
+    <input type="text" name="payment_frequency" required>
+
+    <label>Contact Email</label>
+    <input type="email" name="email" required>
+
+    <label>Contact Phone (optional)</label>
+    <input type="text" name="phone">
+
+    <label>Logos (upload 1 or 2)</label>
+    <input type="file" name="logos" accept="image/*" multiple>
+
+    <label>PDF File</label>
+    <input type="file" name="pdf" accept=".pdf" required>
+	
+	<label>Optional Link (e.g. external site)</label>
+<input type="url" name="link">
+
+    <button type="submit">Add Bond</button>
+  </form>
+
+  <h3>Existing Bonds</h3>
+  <ul>
+    {% for bond in bonds %}
+      <li>
+        <strong>{{ bond.name }}</strong> – {{ bond.rate }} – {{ bond.programme }}
+        <form action="{{ url_for('delete_external_bond') }}" method="post" class="inline-form">
+          <input type="hidden" name="bond_id" value="{{ bond.id }}">
+          <button type="submit" onclick="return confirm('Delete bond {{ bond.name }}?')">Delete</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+
+  <!-- Document Upload -->
+  <div class="section">
+    <h2>Manage Documents</h2>
+    <form action="{{ url_for('upload_document') }}" method="post" enctype="multipart/form-data">
+      <label>Description</label>
+      <input type="text" name="description" required>
+      <label>Release Date</label>
+      <input type="date" name="release_date" required>
+      <label>Select File</label>
+      <input type="file" name="file" accept=".pdf" required>
+      <button type="submit">Upload</button>
+    </form>
+
+    <hr>
+
+    <h2>Uploaded Documents</h2>
+    {% if documents %}
+      <ul>
+        {% for doc in documents %}
+          <li>
+            <strong>{{ doc.description }}</strong> ({{ doc.release_date }}) –
+            <a class="document-link" href="{{ doc.file_link }}" target="_blank">Download</a>
+            <form action="{{ url_for('delete_document') }}" method="post" class="inline-form">
+              <input type="hidden" name="file_link" value="{{ doc.file_link }}">
+              <button type="submit" onclick="return confirm('Delete this document?')">Delete</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No documents found.</p>
+    {% endif %}
+  </div>
+  
+  <a href="{{ url_for('logout') }}" class="logout-btn">🔒 Logout</a>
+
+
+
+<script>
+  let currentPage = 1;
+  const itemsPerPage = 2;
+  let filteredNews = [];
+
+  // Fetch all news from the server
+  async function fetchNews() {
+    try {
+      const response = await fetch("/api/admin_news");
+      const data = await response.json();
+      filteredNews = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      renderNews();
+    } catch (error) {
+      document.getElementById("news-results").innerHTML = "<p>Error loading news.</p>";
+    }
+  }
+
+  function renderNews() {
+    const container = document.getElementById("news-results");
+    const pagination = document.getElementById("pagination");
+    container.innerHTML = '';
+    pagination.innerHTML = '';
+
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const pageItems = filteredNews.slice(start, end);
+
+    pageItems.forEach(news => {
+      const div = document.createElement("div");
+      div.className = "news-item";
+      div.innerHTML = `
+        <h4>${news.title}</h4>
+        <small>${news.date}</small>
+        <p>${news.content}</p>
+        <form method="post" action="/delete_news" style="display:inline;">
+          <input type="hidden" name="news_id" value="${news.id}">
+          <input type="hidden" name="company_id" value="${news.company_id}">
+          <button type="submit" onclick="return confirm('Delete this news?')">🗑️ Delete</button>
+        </form>
+        <form method="get" action="/edit_news/${news.company_id}/${news.id}" style="display:inline;">
+          <button type="submit">✏️ Edit</button>
+        </form>
+      `;
+      container.appendChild(div);
+    });
+
+    const totalPages = Math.ceil(filteredNews.length / itemsPerPage);
+    if (totalPages > 1) {
+      const prevBtn = document.createElement('button');
+      prevBtn.textContent = 'Prev';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = () => { currentPage--; renderNews(); };
+      pagination.appendChild(prevBtn);
+
+      const nextBtn = document.createElement('button');
+      nextBtn.textContent = 'Next';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = () => { currentPage++; renderNews(); };
+      pagination.appendChild(nextBtn);
+    }
+  }
+
+  function applyFilters() {
+    const query = document.getElementById("search-input").value.toLowerCase();
+    const startDate = new Date(document.getElementById("start-date").value || '1900-01-01');
+    const endDate = new Date(document.getElementById("end-date").value || '3000-01-01');
+
+    filteredNews = filteredNews.filter(news =>
+      (news.title.toLowerCase().includes(query) || news.content.toLowerCase().includes(query)) &&
+      new Date(news.date) >= startDate && new Date(news.date) <= endDate
+    );
+
+    currentPage = 1;
+    renderNews();
+  }
+
+  document.getElementById("search-input").addEventListener("input", applyFilters);
+  document.getElementById("start-date").addEventListener("change", applyFilters);
+  document.getElementById("end-date").addEventListener("change", applyFilters);
+  document.getElementById("clear-filters").addEventListener("click", () => {
+    document.getElementById("search-input").value = '';
+    document.getElementById("start-date").value = '';
+    document.getElementById("end-date").value = '';
+    fetchNews();
+  });
+
+  // Load news when page loads
+  fetchNews();
+</script>
+
+</body>
+</html>

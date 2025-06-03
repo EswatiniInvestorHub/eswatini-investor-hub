@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Investor Hub Eswatini – News & Updates</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+  <!--  Inline styles for demo; move to styles.css for production  -->
+  <style>
+    :root {
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-color: #333;
+      --heading-color: #002266;
+      --nav-bg: #002266;
+      --nav-hover: #004080;
+      --button-bg: #004080;
+      --button-active: #003366;
+      --footer-bg: #002266;
+      --footer-mid-bg: #003399;
+    }
+    body.dark {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --text-color: #d0d0d0;
+      --heading-color: #8ab4f8;
+      --nav-bg: #0d0d0d;
+      --nav-hover: #1f1f1f;
+      --button-bg: #1f1f1f;
+      --button-active: #333;
+      --footer-bg: #0d0d0d;
+      --footer-mid-bg: #1f1f1f;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ---------- NAV ---------- */
+    nav {
+      background-color: var(--nav-bg);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .header-banner .scrolling-text {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      animation: scrollText 12s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes scrollText { 0% { transform: translateX(100%);} 100% { transform: translateX(-100%);} }
+    .menu { list-style: none; display: flex; gap: 20px; }
+    .menu li { position: relative; }
+    .menu a {
+      color: white; text-decoration: none; font-weight: 500;
+      padding: 8px 14px; transition: background 0.3s;
+    }
+    .menu a:hover { background-color: var(--nav-hover); border-radius: 6px; }
+    .dropdown-content {
+      display: none; position: absolute; background-color: var(--nav-hover);
+      border-radius: 6px; top: 100%; left: 0; z-index: 100;
+    }
+    .dropdown:hover .dropdown-content { display: block; }
+    .dropdown-content a { display: block; padding: 10px; }
+
+    /* Theme Toggle */
+    #theme-toggle {
+      background: none; border: 2px solid #fff; color: #fff;
+      border-radius: 50%; width: 36px; height: 36px; cursor: pointer;
+      font-size: 18px; display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s, transform 0.3s;
+    }
+    #theme-toggle:hover { background: rgba(255,255,255,0.2); transform: rotate(20deg); }
+
+    /* ---------- FILTERS ---------- */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      justify-content: center; margin-bottom: 30px;
+    }
+    .filter-bar input, .filter-bar select, .filter-bar button {
+      padding: 10px 14px; border: 1px solid #ccc; border-radius: 6px;
+      font-size: 14px; background: #fff; color: #333;
+    }
+    .filter-bar button {
+      background: var(--button-bg); color: #fff; border: none;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .filter-bar button:hover { background: var(--button-active); }
+
+    /* ---------- NEWS ---------- */
+    .news-page { max-width: 950px; margin: 60px auto; padding: 0 20px; }
+    .news-page h1 { text-align: center; color: var(--heading-color); font-size: 36px; margin-bottom: 40px; }
+    .news-item {
+      background: var(--card-bg); border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      padding: 30px; margin-bottom: 35px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .news-item:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+    .news-title { font-size: 24px; color: var(--heading-color); margin-bottom: 10px; font-weight: 600; }
+    .news-date { font-size: 14px; color: #777; margin-bottom: 20px; }
+    .news-content p {
+  font-size: 17px;
+  color: var(--text-color);
+  line-height: 1.7;
+  overflow: visible;
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
+}
+
+.clamp-4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.7;
+  max-height: calc(1.7em * 4); /* Optional fallback */
+}
+
+
+    /* ---------- PAGINATION ---------- */
+    .pagination { text-align: center; margin-top: 40px; }
+    .pagination a {
+      display: inline-block; margin: 0 6px; padding: 10px 16px;
+      background-color: var(--button-bg); color: #fff; border-radius: 6px; font-weight: 500;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .pagination a:hover { background-color: var(--button-active); }
+    .pagination a.active { background-color: var(--heading-color); font-weight: bold; }
+
+    /* ---------- FOOTER ---------- */
+    footer { background-color: var(--footer-bg); color: white; font-family: Arial, sans-serif; }
+    footer a { color: white; text-decoration: none; margin: 0 15px; }
+    footer img { width: 30px; height: 30px; }
+    .footer-top, .footer-middle, .footer-bottom { padding: 20px; }
+    .footer-top { display: flex; justify-content: center; gap: 20px; }
+    .footer-middle { background-color: var(--footer-mid-bg);
+      display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; }
+    .footer-bottom { text-align: center; background-color: var(--footer-bg); }
+
+  </style>
+</head>
+<body>
+  <!-- ---------- NAV ---------- -->
+  <nav>
+    <div class="logo">
+      <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Logo" />
+    </div>
+
+    <div class="header-banner"><div class="scrolling-text">Eswatini Investor Hub</div></div>
+
+    <ul class="menu">
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('news') }}">News</a></li>
+      <li class="dropdown">
+        <a href="#">Education</a>
+        <div class="dropdown-content">
+          <a href="{{ url_for('invest') }}">How to Invest</a>
+          <a href="{{ url_for('terms') }}">Investing Terms</a>
+        </div>
+      </li>
+      <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+      <li class="dropdown">
+        <a href="#">Investments</a>
+        <div class="dropdown-content">
+          <a href="{{ url_for('equities') }}">Equities</a>
+          <a href="{{ url_for('bonds') }}">Bonds</a>
+        </div>
+      </li>
+    </ul>
+    <button id="theme-toggle" title="Toggle dark mode">🌙</button>
+  </nav>
+
+  <!-- ---------- MAIN ---------- -->
+  <section class="news-page">
+  <h1 style="text-align: center; color: #003366; margin-bottom: 20px;">Latest News</h1>
+
+  <!-- Filters -->
+  <div class="filter-bar" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+    <input type="text" id="search-input" placeholder="🔍 Search articles…" style="flex: 1;" />
+    <select id="category-filter">
+      <option value="">All Categories</option>
+      <!-- Add more categories here if needed -->
+    </select>
+    <input type="date" id="start-date" />
+    <span style="font-weight: bold; color: #555;">to</span>
+    <input type="date" id="end-date" />
+    <button id="clear-filters">Clear</button>
+  </div>
+
+  <!-- Articles container -->
+  <div id="news-articles" class="news-articles-container" style="display: flex; flex-direction: column; gap: 20px;"></div>
+
+  <!-- Pagination placeholder -->
+  <div class="pagination" style="margin-top: 20px;"></div>
+</section>
+
+  <!-- ---------- FOOTER ---------- -->
+  <footer>
+    <div class="footer-top">
+      <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" /></a>
+      <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" /></a>
+      <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" /></a>
+      <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" /></a>
+    </div>
+    <div class="footer-middle">
+      <div style="display:flex; align-items:center;">
+        <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Logo" style="width:50px;height:50px;border-radius:30%;" />
+        <div style="margin-left:15px;">
+          <h3 style="margin:0;">Eswatini Investor Hub</h3>
+          <p style="margin:0;">(EIH)</p>
+        </div>
+      </div>
+      <div>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('news') }}">News</a>
+        <a href="{{ url_for('investments') }}">Investments</a>
+        <a href="{{ url_for('invest') }}">Education</a>
+        <a href="{{ url_for('faq') }}">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Eswatini Investor Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ---------- SCRIPTS ---------- -->
+  <script>
+  /** THEME TOGGLE **/
+  const themeToggle = document.getElementById('theme-toggle');
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'dark') document.body.classList.add('dark');
+
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  });
+
+  /** NEWS DATA & PAGINATION **/
+  let currentPage = 1;
+  const itemsPerPage = 7;
+  let newsData = [];
+  let filteredData = [];
+
+  const searchInput = document.getElementById('search-input');
+  const categoryFilter = document.getElementById('category-filter');
+  const startDateInput = document.getElementById('start-date');
+  const endDateInput = document.getElementById('end-date');
+  const clearBtn = document.getElementById('clear-filters');
+
+  /** Format Content **/
+  function formatContent(text) {
+    if (!text) return '';
+    
+    // Replace double newlines with paragraph tags, and single newlines with <br>
+    const paragraphs = text.trim().split(/\n{2,}/).map(p =>
+      `<p>${p.replace(/\n/g, '<br>')}</p>`
+    );
+    return paragraphs.join('');
+  }
+
+  /** Display News **/
+  function displayNews(data, page) {
+    const container = document.getElementById('news-articles');
+    container.innerHTML = '';
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const paginatedItems = data.slice(start, end);
+
+    paginatedItems.forEach(item => {
+      const div = document.createElement('div');
+      div.classList.add('news-item');
+      div.style.border = '1px solid #ccc';
+      div.style.padding = '15px';
+      div.style.borderRadius = '6px';
+      div.style.backgroundColor = '#f9f9f9';
+
+      div.innerHTML = `
+        <h3 style="margin-top: 0; color: #003399;">${item.title}</h3>
+        <p><strong>${item.date}</strong></p>
+        <div class="news-content" style="white-space: normal;">${formatContent(item.content)}</div>
+        ${item.link ? `<a href="${item.link}" target="_blank" style="color: #007bff;">Read More</a>` : ''}
+        ${item.doc ? `<div style="margin-top: 10px;"><a href="${item.doc}" target="_blank" style="text-decoration: underline; color: green;">📄 Download Related Document</a></div>` : ''}
+      `;
+      container.appendChild(div);
+    });
+
+    updatePagination(data.length, page);
+  }
+
+  /** Pagination **/
+  function updatePagination(totalItems, currentPage) {
+    const pagination = document.querySelector('.pagination');
+    pagination.innerHTML = '';
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    if (currentPage > 1) addPageLink('« Prev', currentPage - 1);
+    for (let i = 1; i <= totalPages; i++) addPageLink(i, i, i === currentPage);
+    if (currentPage < totalPages) addPageLink('Next »', currentPage + 1);
+
+    function addPageLink(text, page, active = false) {
+      const link = document.createElement('a');
+      link.href = '#';
+      link.textContent = text;
+      if (active) link.className = 'active';
+      link.onclick = e => {
+  e.preventDefault();
+  currentPage = page;
+  displayNews(filteredData, currentPage);
+  
+  // Scroll to top of news section
+  document.querySelector('.news-page').scrollIntoView({
+    behavior: 'smooth'
+  });
+};
+
+      pagination.appendChild(link);
+    }
+  }
+
+  /** Filters **/
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase();
+    const category = categoryFilter.value;
+    const startDate = startDateInput.value ? new Date(startDateInput.value) : null;
+    const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
+
+    filteredData = newsData.filter(item => {
+      const matchesQuery =
+        item.title.toLowerCase().includes(query) ||
+        item.content.toLowerCase().includes(query);
+      const matchesCat = !category || item.category === category;
+      const itemDate = new Date(item.date);
+      const afterStart = !startDate || itemDate >= startDate;
+      const beforeEnd = !endDate || itemDate <= endDate;
+      return matchesQuery && matchesCat && afterStart && beforeEnd;
+    });
+
+    displayNews(filteredData, 1);
+  }
+
+  // Clear filters
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    categoryFilter.value = '';
+    startDateInput.value = '';
+    endDateInput.value = '';
+    applyFilters();
+  });
+
+  // Attach listeners
+  [searchInput, categoryFilter, startDateInput, endDateInput].forEach(el =>
+    el.addEventListener('input', applyFilters)
+  );
+
+  // Load news
+  fetch('/api/news')
+    .then(res => res.json())
+    .then(data => {
+      newsData = data;
+      filteredData = data;
+      displayNews(data, 1);
+    })
+    .catch(err => {
+      console.error("Failed to fetch news:", err);
+      document.getElementById('news-articles').innerHTML = '<p style="color: red;">Error loading news.</p>';
+    });
+</script>
+
+</body>
+</html>
