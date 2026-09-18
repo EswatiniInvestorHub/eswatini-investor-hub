@@ -96,7 +96,7 @@
     <div class="bond-card">
       <div class="bond-logos">
         {% for logo in bond.logos %}
-        <img src="{{ url_for('static', filename=logo) }}" alt="Bond Logo">
+        <img src="{{ logo if logo.startswith("http") else url_for('static', filename=logo) }}" alt="Bond Logo">
         {% endfor %}
       </div>
       <h3>{{ bond.name }}</h3>
@@ -112,7 +112,7 @@
   <p><a href="{{ bond.link }}" target="_blank">More Info</a></p>
 {% endif %}
 
-      <a class="bond-button" href="{{ url_for('static', filename=bond.pdf) }}" target="_blank">View Bond Details</a>
+      <a class="bond-button" href="{{ bond.pdf if bond.pdf.startswith("http") else url_for('static', filename=bond.pdf) }}" target="_blank">View Bond Details</a>
     </div>
     {% endfor %}
 
