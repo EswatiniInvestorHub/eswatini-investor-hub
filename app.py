@@ -4,6 +4,7 @@ import sqlite3
 import os
 import uuid
 import json
+import re
 from functools import wraps
 from werkzeug.utils import secure_filename
 
@@ -46,8 +47,63 @@ os.makedirs(BOND_UPLOAD_DIR, exist_ok=True)
 # DATABASE HELPERS
 # ============================================================
 
+DATABASE_URL = os.environ.get("DATABASE_URL", "").strip()
+USE_POSTGRES = DATABASE_URL.startswith("postgresql://") or DATABASE_URL.startswith("postgres://")
+
+if USE_POSTGRES:
+    import psycopg2
+    from psycopg2.extras import RealDictCursor
+
+
+class PostgresConnection:
+    """Small compatibility wrapper so the existing SQLite-style queries work on PostgreSQL."""
+    def __init__(self, dsn):
+        self._conn = psycopg2.connect(dsn)
+
+    def cursor(self):
+        return self._conn.cursor(cursor_factory=RealDictCursor)
+
+    def execute(self, sql, params=()):
+        cur = self.cursor()
+        cur.execute(_pg_sql(sql), params)
+        return cur
+
+    def executemany(self, sql, seq_of_params):
+        cur = self.cursor()
+        cur.executemany(_pg_sql(sql), seq_of_params)
+        return cur
+
+    def commit(self):
+        self._conn.commit()
+
+    def rollback(self):
+        self._conn.rollback()
+
+    def close(self):
+        self._conn.close()
+
+
+def _pg_sql(sql):
+    """Translate the few SQLite-specific SQL forms used by this application."""
+    text = sql.strip()
+
+    if text.upper().startswith("PRAGMA FOREIGN_KEYS"):
+        return "SELECT 1"
+
+    text = re.sub(r"^INSERT\s+OR\s+IGNORE\s+INTO", "INSERT INTO", text, flags=re.IGNORECASE)
+    if text != sql.strip() and not re.search(r"ON\s+CONFLICT", text, flags=re.IGNORECASE):
+        text = text.rstrip().rstrip(";") + " ON CONFLICT DO NOTHING"
+
+    # SQLite uses ? placeholders; psycopg2 uses %s.
+    text = text.replace("?", "%s")
+    return text
+
+
 def get_db_connection():
-    """Open a SQLite connection with dictionary-like rows."""
+    """Open the configured database: PostgreSQL on Render, SQLite locally."""
+    if USE_POSTGRES:
+        return PostgresConnection(DATABASE_URL)
+
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
@@ -56,10 +112,16 @@ def get_db_connection():
 
 def table_exists(conn, table_name):
     """Return True if a table exists."""
-    row = conn.execute(
-        "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
-        (table_name,)
-    ).fetchone()
+    if USE_POSTGRES:
+        row = conn.execute(
+            "SELECT table_name AS name FROM information_schema.tables WHERE table_schema='public' AND table_name=?",
+            (table_name,)
+        ).fetchone()
+    else:
+        row = conn.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+            (table_name,)
+        ).fetchone()
     return row is not None
 
 
@@ -68,12 +130,19 @@ def column_exists(conn, table_name, column_name):
     if not table_exists(conn, table_name):
         return False
 
+    if USE_POSTGRES:
+        row = conn.execute(
+            """SELECT column_name AS name
+               FROM information_schema.columns
+              WHERE table_schema='public' AND table_name=? AND column_name=?""",
+            (table_name, column_name)
+        ).fetchone()
+        return row is not None
+
     columns = conn.execute(
         f'PRAGMA table_info("{table_name}")'
     ).fetchall()
-
     return any(column["name"] == column_name for column in columns)
-
 
 def ensure_database():
     """
@@ -86,6 +155,83 @@ def ensure_database():
 
     conn = get_db_connection()
     cur = conn.cursor()
+
+    # PostgreSQL does not support SQLite's AUTOINCREMENT keyword.
+    # Keep the original SQL for local SQLite and translate this one schema line for Render.
+    if USE_POSTGRES:
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS companies (
+                id TEXT PRIMARY KEY,
+                name TEXT NOT NULL,
+                share_price REAL,
+                market_cap INTEGER,
+                stock_code TEXT,
+                listed_instruments TEXT,
+                website TEXT,
+                about TEXT,
+                logo TEXT,
+                ticker TEXT,
+                total_issued_shares INTEGER
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS price_history (
+                id SERIAL PRIMARY KEY,
+                company_id TEXT NOT NULL,
+                date TEXT NOT NULL,
+                price REAL NOT NULL,
+                FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS news (
+                id TEXT PRIMARY KEY, company_id TEXT, title TEXT NOT NULL,
+                date TEXT, date_iso TEXT, content TEXT, link TEXT, doc TEXT,
+                FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS events (
+                id SERIAL PRIMARY KEY, company_id TEXT, title TEXT NOT NULL,
+                date TEXT, date_iso TEXT, link TEXT,
+                FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS bonds (
+                id TEXT PRIMARY KEY, company_id TEXT, name TEXT, value REAL,
+                interest_rate REAL, maturity_date TEXT, description TEXT,
+                FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id TEXT PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL, created_at TEXT
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS external_bonds (
+                id TEXT PRIMARY KEY, name TEXT NOT NULL, programme TEXT, rate TEXT,
+                maturity_date TEXT, payment_frequency TEXT, email TEXT, phone TEXT,
+                logos TEXT, pdf TEXT, link TEXT, auction_date TEXT
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS documents (
+                id TEXT PRIMARY KEY, description TEXT NOT NULL, release_date TEXT, file_link TEXT NOT NULL
+            )
+        """)
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS questions (
+                id TEXT PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL, question TEXT NOT NULL, created_at TEXT NOT NULL
+            )
+        """)
+        cur.execute("""CREATE INDEX IF NOT EXISTS idx_price_history_company_date ON price_history(company_id, date)""")
+        cur.execute("""CREATE INDEX IF NOT EXISTS idx_news_company_date ON news(company_id, date_iso)""")
+        cur.execute("""CREATE INDEX IF NOT EXISTS idx_events_company_date ON events(company_id, date_iso)""")
+        conn.commit()
+        conn.close()
+        return
 
     cur.execute("""
         CREATE TABLE IF NOT EXISTS companies (
