@@ -1620,14 +1620,21 @@ def submit_question():
 
 @app.route("/news")
 def news():
-    # Pass real database news where possible.
     data = load_data()
-    return render_template(
-        "News.html",
-        news=data["news"],
-        companies=data["companies"]
+
+    news_items = data["news"]
+
+    # Sort newest → oldest
+    news_items.sort(
+        key=lambda x: x.get("date_iso") or "0000-00-00",
+        reverse=True
     )
 
+    return render_template(
+        "News.html",
+        news=news_items,
+        companies=data["companies"]
+    )
 
 @app.route("/education")
 def education():

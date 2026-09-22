@@ -1,297 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investor Hub Eswatini</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='styles3.css') }}">
-	
-	
-	
-{% set price = {} %}
-{% for c in companies %}
-  {% set _ = price.update({ c.id: c.share_price }) %}
-{% endfor %}
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Equities | Eswatini Investor Hub</title>
 <style>
-.modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    width: 90%;
-    max-width: 1000px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    border-radius: 8px;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.modal-content {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.left-section,
-.right-section {
-    flex: 1 1 45%;
-    padding: 10px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.centered-title {
-    text-align: center;
-    width: 100%;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-}
-
-.box {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    flex: 1;
-}
-
-.box h3 {
-    margin-top: 0;
-    font-size: 1.2em;
-}
-
-/* Make chart bigger */
-#share-price-chart {
-    width: 100% !important;
-    height: 500px !important;
-}
-
-.chart-box {
-    flex: 1 1 100%;
-}
-
-/* Responsive for small screens */
-@media (max-width: 768px) {
-    .left-section, .right-section {
-        width: 100%;
-        flex: 1 1 100%;
-    }
-}
+:root{--bg:#061426;--panel:#0c2138;--panel2:#102b47;--line:#1d4668;--text:#f5f9ff;--muted:#8fa8bd;--cyan:#20b8ff;--blue:#197cff;--green:#24d889;--red:#ff5b68;--amber:#ffc857}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#0c3155 0,transparent 30%),linear-gradient(#061426,#071a2d);color:var(--text);font:14px Inter,Segoe UI,Arial,sans-serif}a{text-decoration:none;color:inherit}.wrap{width:min(1480px,calc(100% - 36px));margin:auto}.top{height:4px;background:linear-gradient(90deg,var(--blue),var(--cyan),#8be8ff,var(--blue))}.header{background:#051323;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}.head{min-height:76px;display:flex;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:12px;min-width:280px}.brand img{width:46px;height:46px;object-fit:contain;background:white;border-radius:10px;padding:3px}.brand b{font-size:18px}.brand b span{color:var(--cyan)}.sub{color:var(--muted);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}.search{flex:1;max-width:570px;position:relative}.search input{width:100%;height:42px;background:#0b2743;border:1px solid #2c587c;border-radius:9px;color:#fff;padding:0 42px 0 15px;outline:0}.search input:focus{border-color:var(--cyan)}.search span{position:absolute;right:15px;top:10px;color:var(--cyan);font-size:18px}.online{margin-left:auto;color:#a7bbcc;font-size:10px;text-transform:uppercase}.dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;margin-right:7px}.nav{background:#071a2e;border-top:1px solid #102d46}.navin{display:flex;overflow:auto}.nav a{padding:13px 19px;color:#b4c5d5;font-size:11px;font-weight:800;text-transform:uppercase;white-space:nowrap}.nav a:hover,.nav .active{color:#fff;background:#103655;box-shadow:inset 0 -3px var(--cyan)}.ticker{background:#061221;border-bottom:1px solid #183852}.tickerin{display:flex;min-height:39px;align-items:center;overflow:hidden}.label{padding:13px 17px;background:linear-gradient(90deg,#0c82df,#17b8ff);font-size:10px;font-weight:900;white-space:nowrap}.ticks{display:flex;white-space:nowrap}.tick{padding:0 18px;color:#9eb3c7;font-size:10px;border-right:1px solid #18344d}.tick b{color:#fff;margin-left:5px}.green{color:var(--green)!important}.hero{margin-top:20px;padding:27px 30px;border:1px solid #24547b;border-radius:14px;background:radial-gradient(circle at 80% 30%,rgba(32,184,255,.2),transparent 30%),linear-gradient(120deg,#08223d,#0b2d50,#08223b);box-shadow:0 14px 40px #0004;display:flex;justify-content:space-between;gap:30px}.eyebrow{color:#58d0ff;font-size:10px;font-weight:900;letter-spacing:1.7px;text-transform:uppercase}.hero h1{margin:7px 0;font-size:32px}.hero p{margin:0;color:#a9bfd1;max-width:720px;line-height:1.55;font-size:12px}.date{text-align:right;color:#8da8bd;font-size:9px;text-transform:uppercase}.date strong{display:block;color:#fff;font-size:20px;margin-top:5px}.toolbar{margin:14px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid #285372;background:#0c2742;color:#a8bfd1;border-radius:7px;padding:8px 12px;font-size:10px;font-weight:800;cursor:pointer}.filter.active,.filter:hover{background:#123e60;color:#fff;border-color:#39baf5}.count{color:#7893a8;font-size:10px}.section,.card{background:#081b2f;border:1px solid #1e4566;border-radius:12px;overflow:hidden;box-shadow:0 10px 28px #0002}.sectionhead,.cardhead{padding:14px 17px;border-bottom:1px solid #1b405f;display:flex;justify-content:space-between;align-items:center}.title{display:flex;gap:11px;align-items:center}.bar{width:4px;height:27px;border-radius:4px;background:linear-gradient(var(--cyan),var(--blue))}.title h2,.card h3{margin:0;font-size:15px}.title p,.cardhead p{margin:4px 0 0;color:#7892a8;font-size:9px}.tablewrap{overflow-x:auto}.table{width:100%;min-width:1060px;border-collapse:collapse}.table th{padding:12px 13px;background:#071a2d;color:#7e99ae;border-bottom:1px solid #1c405d;font-size:9px;text-transform:uppercase;letter-spacing:.8px;text-align:right}.table th:first-child,.table td:first-child{text-align:left}.table td{padding:14px 13px;border-bottom:1px solid #183a55;text-align:right;font-size:11px;vertical-align:middle}.table tr:hover{background:#1f699a12}.company{display:flex;align-items:center;gap:11px;min-width:285px}.mark{width:35px;height:35px;display:grid;place-items:center;border-radius:8px;background:linear-gradient(145deg,#104a72,#0b2945);border:1px solid #27658d;color:#dff7ff;font-size:9px;font-weight:900}.name{font-weight:900;color:#f4f8fc}.code{display:block;color:#718ba1;font-size:9px;margin-top:3px}.price{font-size:14px;font-weight:900}.change{display:inline-flex;justify-content:center;min-width:68px;padding:5px 7px;border-radius:6px;font-size:9px;font-weight:900}.up{color:var(--green);background:#24d88912;border:1px solid #24d88938}.down{color:var(--red);background:#ff5b6812;border:1px solid #ff5b6838}.flat{color:#9aafc1;background:#11283e;border:1px solid #244660}.spark{width:125px;height:35px}.profile{display:inline-flex;padding:7px 11px;border:1px solid #2874a4;border-radius:6px;color:#bdeaff;background:#197cff12;font-size:9px;font-weight:900;text-transform:uppercase}.profile:hover{color:#fff;background:linear-gradient(90deg,#1478db,#16b5f7)}.summary{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.mover{padding:11px 14px;display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;border-bottom:1px solid #183a55}.rank{width:25px;height:25px;display:grid;place-items:center;border-radius:7px;background:#12304a;color:#a9bfd0;font-size:9px;font-weight:900}.mover-code{font-weight:900;font-size:10px}.mover-name{display:block;color:#7892a8;font-size:9px;margin-top:2px}.mover-change{font-size:11px;font-weight:900}.empty{padding:18px;color:#637e93;font-size:10px}.footer{margin-top:24px;border-top:1px solid #1d405e;background:#04101e}.foot{min-height:100px;display:flex;align-items:center;justify-content:space-between;gap:20px}.foottext{color:#6f899f;font-size:9px}.foottext strong{display:block;color:#dbeaf5;font-size:12px;margin-bottom:3px}.links{display:flex;gap:18px;flex-wrap:wrap}.links a{color:#8299ab;font-size:9px;font-weight:800;text-transform:uppercase}@media(max-width:900px){.online{display:none}.hero{flex-direction:column}.date{text-align:left}.summary{grid-template-columns:1fr}}@media(max-width:700px){.wrap{width:calc(100% - 20px)}.head{padding:10px 0;flex-wrap:wrap}.brand{min-width:0;flex:1}.search{order:3;flex-basis:100%;max-width:none}.foot{align-items:flex-start;flex-direction:column;padding:20px 0}}
 </style>
-
-
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-        </div>
-			<div class="header-banner">
-    <div class="scrolling-text">
-        Eswatini Investor Hub
-    </div>
+<div class="top"></div>
+<header class="header">
+<div class="wrap head">
+<a class="brand" href="{{ url_for('index') }}"><img src="{{ url_for('static',filename='images/log1.webp') }}" alt="Eswatini Investor Hub"><div><b>ESWATINI <span>INVESTOR HUB</span></b><div class="sub">Markets · Insights · Opportunities</div></div></a>
+<div class="search"><input id="search" placeholder="Search companies or tickers..."><span>⌕</span></div>
+<div class="online"><span class="dot"></span>Market information portal</div>
 </div>
+<nav class="nav"><div class="wrap navin">
+<a href="{{ url_for('index') }}">Home</a><a class="active" href="{{ url_for('equities') }}">Equities</a><a href="{{ url_for('bonds') }}">Bonds</a><a href="{{ url_for('news') }}">News</a><a href="{{ url_for('investments') }}">Investments</a><a href="{{ url_for('invest') }}">Education</a><a href="{{ url_for('faq') }}">FAQ</a>
+</div></nav>
+</header>
+<div class="ticker"><div class="wrap tickerin"><div class="label">EQUITY MARKET</div><div class="ticks"><div class="tick">LISTED COMPANIES <b>{{ companies|length }}</b></div><div class="tick">HORIZONS <b>1D · 1M · 1Y</b></div><div class="tick">DATA <b class="green">● AVAILABLE</b></div></div></div></div>
 
+<main class="wrap">
+<section class="hero"><div><div class="eyebrow">Listed securities</div><h1>Equity Market</h1><p>Explore Eswatini listed companies, latest available prices, historical performance and company profiles.</p></div><div class="date">Latest available data<strong id="latestDate">—</strong></div></section>
 
-        <ul class="menu">
-    <li><a href="{{ url_for('index') }}">Home</a></li>
-    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('invest') }}">Education</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('invest') }}">How to Invest</a>
-            <a href="{{ url_for('terms') }}">Investing terms</a>
-        </div>
-    </li>
-    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('investments') }}">Investments</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('equities') }}">Equities</a>
-            <a href="{{ url_for('bonds') }}">Bonds</a>
-        </div>
-    </li>
-    <!-- Removed routes below:
-    <li><a href="{{ url_for('about') }}">About Us</a></li>
-    <li><a href="{{ url_for('contact') }}">Contact</a></li>
-    <a href="{{ url_for('funds') }}">Funds</a>
-    <a href="{{ url_for('estate') }}">Real Estate</a>
-    -->
-</ul>
+<div class="toolbar"><div class="filters"><button class="filter active" data-f="all">All Companies</button><button class="filter" data-f="up">Positive 1Y</button><button class="filter" data-f="down">Negative 1Y</button><button class="filter" data-f="flat">Unchanged 1Y</button></div><div class="count"><span id="count">{{ companies|length }}</span> listed companies</div></div>
 
-    </nav>
- 
- 
- 
- 
-<div class="equities-dashboard">
-<div class="marquee-container">
-        <marquee class="marquee" behavior="scroll" direction="left">
-  {% for company in companies %}
-    {{ company.name }}: {{ company.share_price }}{% if not loop.last %} | {% endif %}
-  {% endfor %}
-</marquee>
-    </div>
-    <h1>Equities Dashboard</h1>
-<div class="company-grid">
+<section class="section">
+<div class="sectionhead"><div class="title"><span class="bar"></span><div><h2>Listed Equities</h2><p>Performance calculated from the historical prices available in the database.</p></div></div></div>
+<div class="tablewrap"><table class="table"><thead><tr><th>Company</th><th>Ticker</th><th>Last</th><th>1D</th><th>1M</th><th>1Y</th><th>1Y Trend</th><th>Profile</th></tr></thead><tbody>
+{% for company in companies %}
+<tr class="row" data-name="{{ company.name|lower }}" data-ticker="{{ (company.ticker or '')|lower }}" data-history='{{ company.price_history.data|tojson|safe }}'>
+<td><a href="{{ url_for('company_detail',company_id=company.id) }}"><div class="company"><span class="mark">{{ (company.ticker or company.name)[:3]|upper }}</span><span><span class="name">{{ company.name }}</span><span class="code">{{ company.stock_code or 'Listed security' }}</span></span></div></a></td>
+<td class="ticker">{{ company.ticker or '—' }}</td><td class="price">—</td><td class="d1"><span class="change flat">—</span></td><td class="m1"><span class="change flat">—</span></td><td class="y1"><span class="change flat">—</span></td><td><svg class="spark" viewBox="0 0 125 35" preserveAspectRatio="none"></svg></td><td><a class="profile" href="{{ url_for('company_detail',company_id=company.id) }}">Profile ↗</a></td>
+</tr>
+{% endfor %}
+</tbody></table><div id="none" class="empty" style="display:none;text-align:center">No companies match your search.</div></div>
+</section>
 
-  <div class="company-block">
-    <img src="{{ url_for('static', filename='images/logo/ned.png') }}" alt="Nedbank Logo" />
-    <div class="price-tag">Share Price: {{ price['company1'] }}</div>
-    <a href="{{ url_for('company_detail', company_id='company1') }}">
-      <button class="details-btn">View Details</button>
-    </a>
-  </div>
-
-  <div class="company-block">
-    <img src="{{ url_for('static', filename='images/logo/swap.jpg') }}" alt="SWAPROP Logo" />
-    <div class="price-tag">Share Price: {{ price['company2'] }}</div>
-    <a href="{{ url_for('company_detail', company_id='company2') }}">
-      <button class="details-btn">View Details</button>
-    </a>
-  </div>
-
-  <div class="company-block">
-    <img src="{{ url_for('static', filename='images/logo/sbc.jpg') }}" alt="SBC Logo" />
-    <div class="price-tag">Share Price: {{ price['company3'] }}</div>
-    <a href="{{ url_for('company_detail', company_id='company3') }}">
-      <button class="details-btn">View Details</button>
-    </a>
-  </div>
-
-  <div class="company-block">
-    <img src="{{ url_for('static', filename='images/logo/res.jpg') }}" alt="RES Logo" />
-    <div class="price-tag">Share Price: {{ price['company4'] }}</div>
-    <a href="{{ url_for('company_detail', company_id='company4') }}">
-      <button class="details-btn">View Details</button>
-    </a>
-  </div>
-
-  <div class="company-block">
-    <img src="{{ url_for('static', filename='images/logo/npc.jpg') }}" alt="NPC Logo" />
-    <div class="price-tag">Share Price: {{ price['company5'] }}</div>
-    <a href="{{ url_for('company_detail', company_id='company5') }}">
-      <button class="details-btn">View Details</button>
-    </a>
-  </div>
-
-  <div class="company-block">
-    <img src="{{ url_for('static', filename='images/logo/inala.jpg') }}" alt="Inala Logo" />
-    <div class="price-tag">Share Price: {{ price['company6'] }}</div>
-    <a href="{{ url_for('company_detail', company_id='company6') }}">
-      <button class="details-btn">View Details</button>
-    </a>
-  </div>
-
-  <div class="company-block">
-    <img src="{{ url_for('static', filename='images/logo/grey.jpg') }}" alt="Greystone Logo" />
-    <div class="price-tag">Share Price: {{ price['company7'] }}</div>
-    <a href="{{ url_for('company_detail', company_id='company7') }}">
-      <button class="details-btn">View Details</button>
-    </a>
-  </div>
-
-  <div class="company-block">
-    <img src="{{ url_for('static', filename='images/logo/fnb.jpg') }}" alt="FNB Logo" />
-    <div class="price-tag">Share Price: {{ price['company8'] }}</div>
-    <a href="{{ url_for('company_detail', company_id='company8') }}">
-      <button class="details-btn">View Details</button>
-    </a>
-  </div>
-
-  <div class="company-block">
-    <img src="{{ url_for('static', filename='images/logo/sel.jpeg') }}" alt="SEL Logo" />
-    <div class="price-tag">Share Price: {{ price['company9'] }}</div>
-    <a href="{{ url_for('company_detail', company_id='company9') }}">
-      <button class="details-btn">View Details</button>
-    </a>
-  </div>
-
+<div class="summary">
+<section class="card"><div class="cardhead"><div><h3 style="color:var(--green)">Positive 1Y Movement</h3><p>Companies with positive one-year change</p></div></div><div id="positive"></div></section>
+<section class="card"><div class="cardhead"><div><h3 style="color:var(--red)">Negative 1Y Movement</h3><p>Companies with negative one-year change</p></div></div><div id="negative"></div></section>
 </div>
+</main>
 
+<footer class="footer"><div class="wrap foot"><div class="foottext"><strong>ESWATINI INVESTOR HUB</strong>Market information, investment education and opportunities for Eswatini.</div><div class="links"><a href="{{ url_for('index') }}">Home</a><a href="{{ url_for('bonds') }}">Bonds</a><a href="{{ url_for('news') }}">News</a><a href="{{ url_for('investments') }}">Investments</a><a href="{{ url_for('faq') }}">FAQ</a></div></div></footer>
 
-
-
-</div>
-
-
-
-
-
-
-
- 
- 
- 
-
-    <!-- Copyright Section -->
- <!-- Copyright Section -->
-<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
-    <!-- First Footer Bar -->
-    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
-        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
-    </div>
-    
-    <!-- Second Footer Layer -->
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
-        <!-- Left Section: Logo and Company Name -->
-        <div style="display: flex; align-items: center;">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-            <div>
-                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
-                <p style="margin: 0;">(EIH)</p>
-            </div>
-        </div>
-        
-        <!-- Right Section: Menu -->
-        <div>
-            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
-            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
-            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
-            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
-            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
-            <!--
-            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
-            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
-			-->
-        </div>
-    </div>
-    
-    <!-- Third Footer Layer -->
-    <div style="text-align: center; padding: 20px; background-color: #002266;">
-        <p>&copy; 2025 Eswatini Investor Hub. All rights reserved.</p>
-    </div>
-</footer>
-
-<script src="{{ url_for('static', filename='script.js') }}" defer></script>
-<!--- <script src="{{ url_for('static', filename='chart.js') }}" defer></script> --->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
+<script>
+(function(){
+const rows=[...document.querySelectorAll('.row')],results=[];
+function hist(r){try{return JSON.parse(r.dataset.history||'[]').map(x=>({date:String(x.date).slice(0,10),price:Number(x.price)})).filter(x=>x.date&&Number.isFinite(x.price)).sort((a,b)=>a.date.localeCompare(b.date))}catch(e){return[]}}
+function before(h,t){let x=null;for(const p of h){if(p.date<=t)x=p;else break}return x}
+function pct(a,b){return b&&Number.isFinite(a)&&Number.isFinite(b)?(a-b)/b*100:null}
+function badge(v){let s=document.createElement('span');s.className='change '+(v===null||Math.abs(v)<1e-8?'flat':v>0?'up':'down');s.textContent=v===null?'—':Math.abs(v)<1e-8?'UNCH':(v>0?'▲ +':'▼ ')+Math.abs(v).toFixed(2)+'%';return s}
+function spark(svg,h,ch){if(h.length<2)return;let last=new Date(h.at(-1).date+'T00:00:00'),y=new Date(last);y.setDate(y.getDate()-365);let p=h.filter(x=>new Date(x.date+'T00:00:00')>=y);if(p.length<2)p=h.slice(-20);let a=p.map(x=>x.price),mn=Math.min(...a),mx=Math.max(...a);if(mn===mx){mn--;mx++}let pts=p.map((x,i)=>(2+i/(p.length-1)*121)+','+(33-(x.price-mn)/(mx-mn)*31)).join(' '),ns='http://www.w3.org/2000/svg',l=document.createElementNS(ns,'polyline');l.setAttribute('points',pts);l.setAttribute('fill','none');l.setAttribute('stroke',ch>0?'#24d889':ch<0?'#ff5b68':'#39a8e8');l.setAttribute('stroke-width','2');l.setAttribute('stroke-linecap','round');svg.appendChild(l)}
+rows.forEach(r=>{let h=hist(r);if(!h.length)return;let last=h.at(-1),prev=h.at(-2),d=new Date(last.date+'T00:00:00'),m=new Date(d),y=new Date(d);m.setDate(m.getDate()-30);y.setDate(y.getDate()-365);let mp=before(h,m.toISOString().slice(0,10)),yp=before(h,y.toISOString().slice(0,10)),d1=prev?pct(last.price,prev.price):null,m1=mp?pct(last.price,mp.price):null,y1=yp?pct(last.price,yp.price):null;r.querySelector('.price').textContent='E'+last.price.toFixed(2);r.querySelector('.d1').replaceChildren(badge(d1));r.querySelector('.m1').replaceChildren(badge(m1));r.querySelector('.y1').replaceChildren(badge(y1));spark(r.querySelector('.spark'),h,y1);r.dataset.change=y1===null?'':y1;results.push({r,ticker:r.querySelector('.ticker').textContent.trim(),name:r.dataset.name,change:y1})});
+let ds=results.flatMap(x=>{let h=hist(x.r);return h.length?[h.at(-1).date]:[]}).sort();if(ds.length){let d=new Date(ds.at(-1)+'T00:00:00');document.getElementById('latestDate').textContent=d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}
+function render(id,list){let e=document.getElementById(id),v=list.filter(x=>x.change!==null&&Math.abs(x.change)>1e-8).sort((a,b)=>Math.abs(b.change)-Math.abs(a.change)).slice(0,5);e.innerHTML=v.length?v.map((x,i)=>'<div class="mover"><span class="rank">'+(i+1)+'</span><div><div class="mover-code">'+x.ticker+'</div><span class="mover-name">'+x.name+'</span></div><span class="mover-change '+(x.change>0?'up':'down')+'">'+(x.change>0?'▲ +':'▼ ')+Math.abs(x.change).toFixed(2)+'%</span></div>').join(''):'<div class="empty">No material movement available.</div>'}
+render('positive',results.filter(x=>x.change>0));render('negative',results.filter(x=>x.change<0));
+function apply(){let q=document.getElementById('search').value.toLowerCase().trim(),f=document.querySelector('.filter.active')?.dataset.f||'all',n=0;results.forEach(x=>{let c=x.change,okq=!q||x.name.includes(q)||x.ticker.toLowerCase().includes(q),okf=f==='all'||f==='up'&&c>0||f==='down'&&c<0||f==='flat'&&(c===null||Math.abs(c)<1e-8);x.r.style.display=okq&&okf?'':'none';if(okq&&okf)n++});document.getElementById('count').textContent=n;document.getElementById('none').style.display=n?'none':'block'}
+document.getElementById('search').addEventListener('input',apply);document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');apply()}))
+})();
+</script>
 </body>
 </html>
