@@ -1,135 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investor Hub Eswatini</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
-</head>
-<body>
-    <nav>
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-        </div>
-        <div class="header-banner">
-    <div class="scrolling-text">
-        Eswatini Investor Hub
-    </div>
-</div>
-        <ul class="menu">
-    <li><a href="{{ url_for('index') }}">Home</a></li>
-    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('invest') }}">Education</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('invest') }}">How to Invest</a>
-            <a href="{{ url_for('terms') }}">Investing terms</a>
-        </div>
-    </li>
-    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('investments') }}">Investments</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('equities') }}">Equities</a>
-            <a href="{{ url_for('bonds') }}">Bonds</a>
-        </div>
-    </li>
-    <!-- Removed routes below:
-    <li><a href="{{ url_for('about') }}">About Us</a></li>
-    <li><a href="{{ url_for('contact') }}">Contact</a></li>
-    <a href="{{ url_for('funds') }}">Funds</a>
-    <a href="{{ url_for('estate') }}">Real Estate</a>
-    -->
-</ul>
-
-    </nav>
- 
- 
- 
- 
- <div class="investments-dashboard">
-    <h1>Explore Our Investment Opportunities</h1>
-
-    <div class="investment-grid">
-        <!-- Equities -->
-        <div class="investment-block">
-            <h2>Equities</h2>
-            <p>Invest in stocks of leading companies. Track performance and download annual reports.</p>
-            <a href="{{ url_for('equities') }}" class="invest-btn">Explore Equities</a>
-        </div>
-
-        <!-- Bonds -->
-        <div class="investment-block">
-            <h2>Bonds</h2>
-            <p>Fixed income opportunities with government and corporate bonds.</p>
-            <a href="{{ url_for('bonds') }}" class="invest-btn">Explore Bonds</a>
-        </div>
-
-        <!-- Funds 
-        <div class="investment-block">
-            <h2>Funds</h2>
-            <p>Diversified portfolios to help you reach your financial goals.</p>
-            <a href="{{ url_for('funds') }}" class="invest-btn">Explore Funds</a>
-        </div>
-
-        <!-- Real Estate 
-        <div class="investment-block">
-            <h2>Real Estate</h2>
-            <p>Invest in real estate properties for long-term growth and stability.</p>
-            <a href="{{ url_for('estate') }}" class="invest-btn">Explore Real Estate</a>
-        </div>
-		-->
-    </div>
-</div>
-
- 
- 
- 
-
-    <!-- Copyright Section -->
-    <!-- Copyright Section -->
-<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
-    <!-- First Footer Bar -->
-    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
-        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
-    </div>
-    
-    <!-- Second Footer Layer -->
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
-        <!-- Left Section: Logo and Company Name -->
-        <div style="display: flex; align-items: center;">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-            <div>
-                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
-                <p style="margin: 0;">(EIH)</p>
-            </div>
-        </div>
-        
-        <!-- Right Section: Menu -->
-        <div>
-            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
-            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
-            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
-            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
-            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
-            <!--
-            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
-            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
-			-->
-        </div>
-    </div>
-    
-    <!-- Third Footer Layer -->
-    <div style="text-align: center; padding: 20px; background-color: #002266;">
-        <p>&copy; 2025 Eswatini Investor Hub. All rights reserved.</p>
-    </div>
-</footer>
-
-
-
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investments | Eswatini Investor Hub</title>
+<style>
+:root{--bg:#f4f8fc;--white:#fff;--navy:#061426;--blue:#197cff;--cyan:#20b8ff;--text:#10263b;--muted:#6d8498;--line:#dce8f2;--shadow:0 10px 30px rgba(16,52,82,.09)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,Segoe UI,Arial,sans-serif}a{text-decoration:none;color:inherit}.wrap{width:min(1450px,calc(100% - 36px));margin:auto}.top{height:4px;background:linear-gradient(90deg,var(--blue),var(--cyan),#8be8ff,var(--blue))}
+.header{background:#061426;color:#fff;box-shadow:0 5px 20px #06142622;position:sticky;top:0;z-index:20}.head{min-height:76px;display:flex;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:12px;min-width:280px}.brand img{width:46px;height:46px;background:#fff;border-radius:10px;padding:3px;object-fit:contain}.brand b{font-size:18px}.brand b span{color:var(--cyan)}.sub{color:#91a9bc;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;margin-top:4px}.search{flex:1;max-width:570px}.search input{width:100%;height:42px;background:#0b2743;border:1px solid #2c587c;border-radius:9px;color:#fff;padding:0 15px;outline:0}.status{margin-left:auto;color:#9eb3c7;font-size:10px;text-transform:uppercase}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#24d889;margin-right:7px}
+.nav{background:#071a2e;border-top:1px solid #102d46}.navin{display:flex;overflow:auto}.nav a{padding:13px 19px;color:#b4c5d5;font-size:11px;font-weight:800;text-transform:uppercase;white-space:nowrap}.nav a:hover,.nav a.active{color:#fff;background:#103655;box-shadow:inset 0 -3px var(--cyan)}
+.ticker{background:#fff;border-bottom:1px solid var(--line)}.tickerin{display:flex;align-items:center;min-height:40px;overflow:auto}.label{background:linear-gradient(90deg,#0c82df,#17b8ff);color:#fff;padding:13px 17px;font-size:10px;font-weight:900;white-space:nowrap}.tick{padding:0 18px;color:#71879a;font-size:10px;border-right:1px solid var(--line);white-space:nowrap}.tick b{color:#17344c}
+.hero{margin-top:22px;padding:36px 34px;border-radius:15px;background:linear-gradient(120deg,#061a30,#0b3155 62%,#0c4269);color:#fff;display:flex;justify-content:space-between;gap:30px;box-shadow:var(--shadow)}.eyebrow{font-size:9px;letter-spacing:1.8px;font-weight:900;color:#58d0ff;text-transform:uppercase}.hero h1{font-size:36px;margin:7px 0}.hero p{color:#b7cad9;max-width:720px;line-height:1.7;margin:0;font-size:12px}.hero-side{display:flex;gap:12px;align-items:center}.hero-stat{background:#ffffff12;border:1px solid #ffffff20;border-radius:12px;padding:16px 20px;min-width:125px}.hero-stat span{display:block;color:#9fb5c7;font-size:9px;text-transform:uppercase}.hero-stat strong{display:block;font-size:25px;margin-top:5px}
+.section,.panel{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.section{margin-top:16px}.sectionhead{padding:20px 22px;border-bottom:1px solid var(--line)}.sectionhead h2{font-size:18px;margin:0 0 4px}.sectionhead p{font-size:10px;color:var(--muted);margin:0}.options{padding:16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.option{border:1px solid #d9e6ef;border-radius:13px;padding:22px;background:linear-gradient(145deg,#fff,#f8fbfd);position:relative;overflow:hidden;transition:.2s}.option:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(20,70,110,.12)}.option:before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,#1685dc,#24c2ff)}.icon{width:48px;height:48px;border-radius:11px;background:#eaf6fd;border:1px solid #cfe6f3;display:flex;align-items:center;justify-content:center;color:#0878bd;font-size:22px;font-weight:900}.option h3{font-size:19px;margin:16px 0 7px}.option p{font-size:11px;color:var(--muted);line-height:1.7;margin:0 0 17px}.btn{display:inline-block;padding:10px 14px;border-radius:7px;background:#0b75c9;color:#fff;font-size:9px;font-weight:900;text-transform:uppercase}.btn.alt{background:#fff;color:#176b9c;border:1px solid #cbdce8;margin-left:7px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px}.metric{padding:17px;border:1px solid #e0eaf1;border-radius:10px;background:#fbfdff}.metric span{display:block;color:#8196a6;font-size:8px;text-transform:uppercase;font-weight:900}.metric b{display:block;font-size:24px;margin-top:6px;color:#153a55}
+.lower{display:grid;grid-template-columns:1.35fr .8fr;gap:16px;margin-top:16px}.panelhead{padding:18px;border-bottom:1px solid var(--line)}.panelhead h3{margin:0 0 4px;font-size:15px}.panelhead p{margin:0;color:var(--muted);font-size:9px}.list{padding:7px 18px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #edf2f6}.row:last-child{border-bottom:0}.rowmain b{display:block;font-size:11px}.rowmain span{display:block;color:#8195a5;font-size:9px;margin-top:3px}.link{font-size:9px;color:#0878bd;font-weight:900;white-space:nowrap}.info{margin:16px;padding:14px;border-radius:9px;background:#f0f8fd;color:#6d8498;font-size:9px;line-height:1.7}.side-links{padding:0 18px 15px}.side-link{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #edf2f6;font-size:10px}.side-link:last-child{border-bottom:0}.side-link b{color:#176b9c}.footer{margin-top:35px;background:#061426;color:#8fa7ba;padding:30px 0}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot strong{color:#fff}.foot p{font-size:9px;line-height:1.6;margin:7px 0 0}
+@media(max-width:900px){.hero{flex-direction:column}.hero-side{align-self:flex-start}.lower{grid-template-columns:1fr}.options{grid-template-columns:1fr}}@media(max-width:650px){.wrap{width:min(100% - 22px,1450px)}.head{flex-wrap:wrap;padding:12px 0}.brand{min-width:0}.search{order:3;flex-basis:100%;max-width:none}.status{display:none}.hero{padding:25px}.hero h1{font-size:29px}.hero-side{width:100%}.hero-stat{flex:1;min-width:0}.metrics{grid-template-columns:1fr}.option{padding:18px}.btn.alt{margin-left:0;margin-top:7px}}
+</style></head><body>
+<div class="top"></div><header class="header"><div class="wrap head">
+<a class="brand" href="{{ url_for('index') }}"><img src="{{ url_for('static',filename='images/log1.webp') }}" alt="Eswatini Investor Hub"><div><b>Eswatini <span>Investor Hub</span></b><div class="sub">Market information & investor resources</div></div></a>
+<div class="search"><input id="search" type="search" placeholder="Search investment information..."></div><div class="status"><span class="dot"></span>Market information</div>
+</div><nav class="nav"><div class="wrap navin"><a href="{{ url_for('index') }}">Home</a><a href="{{ url_for('news') }}">News</a><a href="{{ url_for('equities') }}">Equities</a><a href="{{ url_for('bonds') }}">Bonds</a><a href="{{ url_for('investments') }}" class="active">Investments</a><a href="{{ url_for('invest') }}">Education</a><a href="{{ url_for('faq') }}">FAQ</a></div></nav></header>
+<div class="ticker"><div class="wrap tickerin"><div class="label">INVESTMENT MARKET</div><div class="tick"><b>{{ companies|length }}</b> listed companies</div><div class="tick"><b>{{ bonds|length }}</b> bond records</div><div class="tick">Equities · Fixed Income · Resources</div></div></div>
+<main class="wrap">
+<section class="hero"><div><div class="eyebrow">Investor Marketplace</div><h1>Investment Opportunities</h1><p>Explore the investment information available through the Eswatini Investor Hub. Review listed equities, fixed-income instruments and supporting market resources in one place.</p></div><div class="hero-side"><div class="hero-stat"><span>Equities</span><strong>{{ companies|length }}</strong></div><div class="hero-stat"><span>Bonds</span><strong>{{ bonds|length }}</strong></div></div></section>
+<section class="section"><div class="sectionhead"><h2>Explore Investment Markets</h2><p>Choose a market to review its available information and instruments.</p></div><div class="options">
+<div class="option"><div class="icon">↗</div><h3>Equities</h3><p>Explore listed companies, available share prices, historical price information and individual company profiles.</p><a class="btn" href="{{ url_for('equities') }}">Explore Equities →</a><a class="btn alt" href="{{ url_for('news') }}">Market News</a></div>
+<div class="option"><div class="icon">₿</div><h3>Bonds</h3><p>Review available government and corporate fixed-income instruments, including rates, maturity dates, payment frequency and documents.</p><a class="btn" href="{{ url_for('bonds') }}">Explore Bonds →</a><a class="btn alt" href="{{ url_for('invest') }}">Learn More</a></div>
+</div></section>
+<section class="section"><div class="sectionhead"><h2>Market Snapshot</h2><p>A quick view of the investment information currently available in the hub.</p></div><div class="metrics"><div class="metric"><span>Listed Companies</span><b>{{ companies|length }}</b></div><div class="metric"><span>Bond Instruments</span><b>{{ bonds|length }}</b></div><div class="metric"><span>Market Sections</span><b>2</b></div></div></section>
+<div class="lower"><section class="panel"><div class="panelhead"><h3>Listed Companies</h3><p>Companies available through the Investor Hub equity section.</p></div><div class="list">
+{% for company in companies[:8] %}<div class="row"><div class="rowmain"><b>{{ company.name }}</b><span>{{ company.ticker or 'Listed company' }}</span></div><a class="link" href="{{ url_for('company_detail',company_id=company.id) }}">View profile →</a></div>{% else %}<div class="info">No listed company information is currently available.</div>{% endfor %}
+</div></section>
+<aside class="panel"><div class="panelhead"><h3>Investor Resources</h3><p>Continue exploring the platform.</p></div><div class="info">Use the market pages to review the information available for each instrument. Supporting documents and linked sources should be reviewed for full terms.</div><div class="side-links"><div class="side-link"><span>Latest News</span><b><a href="{{ url_for('news') }}">Read updates →</a></b></div><div class="side-link"><span>Investor Education</span><b><a href="{{ url_for('invest') }}">Learn →</a></b></div><div class="side-link"><span>FAQ</span><b><a href="{{ url_for('faq') }}">Questions →</a></b></div></div></aside></div>
+</main><footer class="footer"><div class="wrap foot"><div><strong>Eswatini Investor Hub</strong><p>Market information and investor resources for Eswatini.</p></div><div><p>Information displayed is based on data available in the Investor Hub database.</p></div></div></footer>
+<script>document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('.row').forEach(r=>r.style.display=!q||r.innerText.toLowerCase().includes(q)?'':'none')});</script>
+</body></html>

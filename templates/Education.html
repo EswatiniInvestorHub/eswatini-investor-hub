@@ -1,101 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investor Hub Eswatini</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investor Education | Eswatini Investor Hub</title>
+<style>
+:root{--bg:#f4f8fc;--white:#fff;--navy:#061426;--navy2:#0b2743;--blue:#197cff;--cyan:#20b8ff;--text:#10263b;--muted:#6d8498;--line:#dce8f2;--shadow:0 10px 30px rgba(16,52,82,.09)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,Segoe UI,Arial,sans-serif}a{text-decoration:none;color:inherit}.wrap{width:min(1450px,calc(100% - 36px));margin:auto}
+.top{height:4px;background:linear-gradient(90deg,var(--blue),var(--cyan),#8be8ff,var(--blue))}
+.header{background:#061426;color:#fff;box-shadow:0 5px 20px #06142622;position:sticky;top:0;z-index:20}.head{min-height:76px;display:flex;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:12px;min-width:280px}.brand img{width:46px;height:46px;background:#fff;border-radius:10px;padding:3px;object-fit:contain}.brand b{font-size:18px}.brand b span{color:var(--cyan)}.sub{color:#91a9bc;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;margin-top:4px}.search{flex:1;max-width:570px}.search input{width:100%;height:42px;background:#0b2743;border:1px solid #2c587c;border-radius:9px;color:#fff;padding:0 15px;outline:0}.search input:focus{border-color:var(--cyan)}.status{margin-left:auto;color:#9eb3c7;font-size:10px;text-transform:uppercase}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#24d889;margin-right:7px}
+.nav{background:#071a2e;border-top:1px solid #102d46}.navin{display:flex;overflow:auto}.nav a{padding:13px 19px;color:#b4c5d5;font-size:11px;font-weight:800;text-transform:uppercase;white-space:nowrap}.nav a:hover,.nav a.active{color:#fff;background:#103655;box-shadow:inset 0 -3px var(--cyan)}
+.ticker{background:#fff;border-bottom:1px solid var(--line)}.tickerin{display:flex;align-items:center;min-height:40px;overflow:auto}.label{background:linear-gradient(90deg,#0c82df,#17b8ff);color:#fff;padding:13px 17px;font-size:10px;font-weight:900;white-space:nowrap}.tick{padding:0 18px;color:#71879a;font-size:10px;border-right:1px solid var(--line);white-space:nowrap}.tick b{color:#17344c}
+.hero{margin-top:22px;padding:36px 34px;border-radius:15px;background:linear-gradient(120deg,#061a30,#0b3155 62%,#0c4269);color:#fff;display:flex;justify-content:space-between;gap:30px;box-shadow:var(--shadow)}.eyebrow{font-size:9px;letter-spacing:1.8px;font-weight:900;color:#58d0ff;text-transform:uppercase}.hero h1{font-size:36px;margin:7px 0}.hero p{color:#b7cad9;max-width:760px;line-height:1.7;margin:0;font-size:12px}.hero-side{display:flex;gap:12px;align-items:center}.hero-stat{background:#ffffff12;border:1px solid #ffffff20;border-radius:12px;padding:16px 20px;min-width:125px}.hero-stat span{display:block;color:#9fb5c7;font-size:9px;text-transform:uppercase}.hero-stat strong{display:block;font-size:22px;margin-top:5px}
+.section{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.sectionhead{padding:20px 22px;border-bottom:1px solid var(--line)}.sectionhead h2{font-size:18px;margin:0 0 4px}.sectionhead p{font-size:10px;color:var(--muted);margin:0}
+.contents{display:grid;grid-template-columns:250px 1fr;min-height:500px}.toc{border-right:1px solid var(--line);padding:16px;background:#f8fbfd}.toc button{width:100%;text-align:left;border:1px solid transparent;background:transparent;padding:13px 14px;border-radius:8px;color:#587186;font-size:10px;font-weight:900;cursor:pointer;margin-bottom:5px}.toc button:hover,.toc button.active{background:#e9f6fd;border-color:#cbe7f4;color:#0878bd}.toc .small{font-size:8px;color:#94a7b5;text-transform:uppercase;letter-spacing:1px;padding:12px 14px 7px}
+.lesson{padding:24px 28px}.lesson-tab{display:none}.lesson-tab.active{display:block}.lesson h2{font-size:25px;margin:0 0 8px;color:#092b48}.lesson .lead{font-size:12px;color:var(--muted);line-height:1.8;margin:0 0 20px}.lesson-image{width:min(700px,100%);max-height:430px;object-fit:contain;display:block;margin:0 auto 9px;border-radius:10px;border:1px solid var(--line);background:#f7fafc}.caption{text-align:center;font-size:9px;color:#8a9cab;font-style:italic;margin:0 0 22px}.text-card{padding:17px;border:1px solid #e0eaf1;border-radius:10px;background:#fbfdff;margin-top:14px}.text-card h3{font-size:13px;margin:0 0 8px}.text-card p,.text-card li{font-size:11px;line-height:1.75;color:#536d80}.text-card ol{padding-left:20px;margin-bottom:0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.step{padding:15px;border:1px solid #dce8f0;border-radius:9px}.step-num{font-size:9px;color:#0878bd;font-weight:900;letter-spacing:1px}.step h4{margin:6px 0;font-size:12px}.step p{margin:0;color:var(--muted);font-size:9px;line-height:1.6}
+.resources{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:16px}.resource{border:1px solid #d9e6ef;border-radius:12px;padding:20px;background:linear-gradient(145deg,#fff,#f8fbfd)}.resource h3{margin:0 0 7px;font-size:16px}.resource p{margin:0 0 14px;color:var(--muted);font-size:10px;line-height:1.7}.btn{display:inline-block;padding:10px 14px;border-radius:7px;background:#0b75c9;color:#fff;font-size:9px;font-weight:900;text-transform:uppercase}.btn.alt{background:#fff;color:#176b9c;border:1px solid #cbdce8;margin-left:6px}
+.footer{margin-top:35px;background:#061426;color:#8fa7ba;padding:30px 0}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot strong{color:#fff}.foot p{font-size:9px;line-height:1.6;margin:7px 0 0}
+@media(max-width:850px){.contents{grid-template-columns:1fr}.toc{border-right:0;border-bottom:1px solid var(--line);display:flex;overflow:auto;gap:5px}.toc button{min-width:170px}.toc .small{display:none}.steps{grid-template-columns:1fr}.resources{grid-template-columns:1fr}.hero{flex-direction:column}.hero-side{align-self:flex-start}}
+@media(max-width:650px){.wrap{width:min(100% - 22px,1450px)}.head{flex-wrap:wrap;padding:12px 0}.brand{min-width:0}.search{order:3;flex-basis:100%;max-width:none}.status{display:none}.hero{padding:25px}.hero h1{font-size:29px}.hero-side{width:100%}.hero-stat{flex:1;min-width:0}.lesson{padding:20px 16px}.btn.alt{margin-left:0;margin-top:7px}}
+</style>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-        </div>
-<div class="header-banner">
-    <div class="scrolling-text">
-        Eswatini Investor Hub
-    </div>
+<div class="top"></div>
+<header class="header"><div class="wrap head">
+<a class="brand" href="{{ url_for('index') }}"><img src="{{ url_for('static',filename='images/log1.webp') }}" alt="Eswatini Investor Hub"><div><b>Eswatini <span>Investor Hub</span></b><div class="sub">Market information & investor resources</div></div></a>
+<div class="search"><input id="search" type="search" placeholder="Search investor education..."></div><div class="status"><span class="dot"></span>Investor resources</div>
+</div><nav class="nav"><div class="wrap navin">
+<a href="{{ url_for('index') }}">Home</a><a href="{{ url_for('news') }}">News</a><a href="{{ url_for('equities') }}">Equities</a><a href="{{ url_for('bonds') }}">Bonds</a><a href="{{ url_for('investments') }}">Investments</a><a href="{{ url_for('invest') }}" class="active">Education</a><a href="{{ url_for('faq') }}">FAQ</a>
+</div></nav></header>
+
+<div class="ticker"><div class="wrap tickerin"><div class="label">INVESTOR EDUCATION</div><div class="tick"><b>4</b> learning topics</div><div class="tick">Capital markets · Investing · Securities</div><div class="tick">Learn before you invest</div></div></div>
+
+<main class="wrap">
+<section class="hero">
+<div><div class="eyebrow">Investor Learning Centre</div><h1>How to Invest</h1><p>Learn how Eswatini's capital market is structured, how individuals and companies can approach investing, and the role of transfer secretaries in the securities market.</p></div>
+<div class="hero-side"><div class="hero-stat"><span>Topics</span><strong>04</strong></div><div class="hero-stat"><span>Guide</span><strong>Learn</strong></div></div>
+</section>
+
+<section class="section">
+<div class="sectionhead"><h2>Investor Learning Guide</h2><p>Select a topic to read the available educational material.</p></div>
+<div class="contents">
+<aside class="toc">
+<div class="small">Learning topics</div>
+<button class="tab-btn active" data-tab="structure">01 · Capital Market</button>
+<button class="tab-btn" data-tab="individuals">02 · Individuals</button>
+<button class="tab-btn" data-tab="companies">03 · Companies</button>
+<button class="tab-btn" data-tab="secretaries">04 · Transfer Secretaries</button>
+</aside>
+
+<div class="lesson">
+<article class="lesson-tab active" id="structure">
+<h2>Eswatini Capital Market Structure</h2>
+<p class="lead">Understanding the people and institutions involved in the capital market is an important starting point for investors.</p>
+<img class="lesson-image" src="{{ url_for('static',filename='images/Pic1.jpg') }}" alt="Eswatini Capital Market Structure">
+<p class="caption">Figure 1: Eswatini Capital Market Structure</p>
+<div class="text-card">
+<h3>What does a stockbroker do?</h3>
+<p>A stockbroker is a financial professional who facilitates the buying and selling of securities, such as stocks, bonds, and other financial instruments, on behalf of clients. Their primary role is to connect investors with the stock market.</p>
+<ol><li><strong>Executing Trades:</strong> Stockbrokers act as intermediaries between buyers and sellers in the stock market. They execute buy or sell orders for their clients, either on stock exchanges or over-the-counter markets.</li><li><strong>Compliance and Regulations:</strong> Stockbrokers must ensure that all trades and investment advice comply with financial regulations and ethical standards. They are typically licensed and regulated by financial authorities.</li></ol>
+<p>Overall, stockbrokers play a crucial role in helping individuals and institutions navigate financial markets, make informed investment decisions, and achieve their financial goals.</p>
 </div>
-        <ul class="menu">
-    <li><a href="{{ url_for('index') }}">Home</a></li>
-    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('invest') }}">Education</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('invest') }}">How to Invest</a>
-            <a href="{{ url_for('terms') }}">Investing terms</a>
-        </div>
-    </li>
-    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('investments') }}">Investments</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('equities') }}">Equities</a>
-            <a href="{{ url_for('bonds') }}">Bonds</a>
-        </div>
-    </li>
-    <!-- Removed routes below:
-    <li><a href="{{ url_for('about') }}">About Us</a></li>
-    <li><a href="{{ url_for('contact') }}">Contact</a></li>
-    <a href="{{ url_for('funds') }}">Funds</a>
-    <a href="{{ url_for('estate') }}">Real Estate</a>
-    -->
-</ul>
+</article>
 
-    </nav>
- 
- 
- 
- 
- 
- 
- 
- 
+<article class="lesson-tab" id="individuals">
+<h2>How to Invest: For Individuals</h2>
+<p class="lead">Individual investing involves learning about financial markets, choosing a stockbroker, and understanding the risks and rewards of different investment options.</p>
+<img class="lesson-image" src="{{ url_for('static',filename='images/Pic2.jpg') }}" alt="Investing for Individuals">
+<p class="caption">Figure 2: How to Invest for Individuals</p>
+<div class="steps"><div class="step"><div class="step-num">STEP 01</div><h4>Learn</h4><p>Understand financial markets and the investment options available to you.</p></div><div class="step"><div class="step-num">STEP 02</div><h4>Choose</h4><p>Choose a stockbroker and understand how investment orders are handled.</p></div><div class="step"><div class="step-num">STEP 03</div><h4>Understand Risk</h4><p>Consider the risks and potential rewards associated with different investments.</p></div></div>
+</article>
 
-    <!-- Copyright Section -->
-<!-- Copyright Section -->
-<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
-    <!-- First Footer Bar -->
-    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
-        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
-    </div>
-    
-    <!-- Second Footer Layer -->
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
-        <!-- Left Section: Logo and Company Name -->
-        <div style="display: flex; align-items: center;">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-            <div>
-                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
-                <p style="margin: 0;">(EIH)</p>
-            </div>
-        </div>
-        
-        <!-- Right Section: Menu -->
-        <div>
-            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
-            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
-            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
-            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
-            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
-			<!--
-            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
-            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
-			-->
-        </div>
-    </div>
-    
-    <!-- Third Footer Layer -->
-    <div style="text-align: center; padding: 20px; background-color: #002266;">
-        <p>&copy; 2025 Eswatini Investor Hub. All rights reserved.</p>
-    </div>
-</footer>
+<article class="lesson-tab" id="companies">
+<h2>How to Invest: For Companies</h2>
+<p class="lead">Companies can invest in various ways to diversify their assets, enhance profitability, and ensure financial stability for long-term growth.</p>
+<img class="lesson-image" src="{{ url_for('static',filename='images/Pic3.jpg') }}" alt="Investing for Companies">
+<p class="caption">Figure 3: How to Invest for Companies</p>
+<div class="text-card"><h3>Corporate investing</h3><p>Corporate investment decisions can involve allocating resources across different investment opportunities with the aim of diversification, profitability and long-term financial stability.</p></div>
+</article>
 
+<article class="lesson-tab" id="secretaries">
+<h2>Transfer Secretaries</h2>
+<p class="lead">Transfer Secretaries, also known as registrars, play a vital role in capital markets by acting as intermediaries between companies that issue securities and the investors who hold them.</p>
+<img class="lesson-image" style="max-width:400px" src="{{ url_for('static',filename='images/Pic4.WEBP') }}" alt="Transfer Secretaries">
+<p class="caption">Figure 4: Transfer Secretaries' Role</p>
+<div class="text-card"><h3>Key responsibilities</h3><ol><li><strong>Maintaining Shareholder Records:</strong> Transfer secretaries maintain a register of a company's shareholders or bondholders, tracking who owns what amount of securities at any given time.</li><li><strong>Dividend and Interest Payments:</strong> Transfer secretaries ensure timely and accurate payments of dividends or interest to shareholders and bondholders.</li><li><strong>Handling Corporate Actions:</strong> Transfer secretaries administer corporate actions like stock splits, mergers, and proxy voting.</li></ol></div>
+</article>
+</div>
+</div>
+</section>
 
+<section class="section">
+<div class="sectionhead"><h2>More Learning Resources</h2><p>Continue building your understanding of the investment market.</p></div>
+<div class="resources">
+<div class="resource"><h3>Investing Terminology</h3><p>Review key investment terms and concepts used when discussing assets, markets and securities.</p><a class="btn" href="{{ url_for('terms') }}">View Terms →</a></div>
+<div class="resource"><h3>Investment Markets</h3><p>Explore the available equities and bond information on the Investor Hub.</p><a class="btn" href="{{ url_for('investments') }}">Explore Markets →</a></div>
+</div>
+</section>
+</main>
 
+<footer class="footer"><div class="wrap foot"><div><strong>Eswatini Investor Hub</strong><p>Market information and investor education resources for Eswatini.</p></div><div><p>Educational material is provided as general information. Review relevant official documents and professional advice where appropriate.</p></div></div></footer>
+
+<script>
+const buttons=document.querySelectorAll('.tab-btn'),tabs=document.querySelectorAll('.lesson-tab');
+buttons.forEach(btn=>btn.addEventListener('click',()=>{
+ buttons.forEach(b=>b.classList.remove('active'));tabs.forEach(t=>t.classList.remove('active'));
+ btn.classList.add('active');document.getElementById(btn.dataset.tab).classList.add('active');
+}));
+const search=document.getElementById('search');
+search.addEventListener('input',()=>{
+ const q=search.value.trim().toLowerCase();
+ tabs.forEach(t=>{t.style.display=(!q||t.innerText.toLowerCase().includes(q))?'':'none'});
+});
+</script>
 </body>
 </html>

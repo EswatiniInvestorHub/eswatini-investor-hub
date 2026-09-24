@@ -1,393 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FAQ – Investor Hub Eswatini</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f6f9;
-      color: #333;
-    }
-
-    nav {
-      background-color: #002266;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-    }
-
-    .logo img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-    }
-
-    .scrolling-text {
-      font-size: 22px;
-      font-weight: bold;
-      animation: scrollText 10s linear infinite;
-      white-space: nowrap;
-    }
-
-    @keyframes scrollText {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    .menu {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-
-    .menu a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 8px 14px;
-    }
-
-    .menu a:hover {
-      background-color: #004080;
-      border-radius: 5px;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #003399;
-      border-radius: 6px;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .faq-content {
-      max-width: 900px;
-      margin: 60px auto;
-      background: #fff;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-
-    .faq-content h1 {
-      text-align: center;
-      color: #003366;
-      margin-bottom: 40px;
-    }
-
-    .faq-section {
-      margin-bottom: 30px;
-    }
-
-    .faq-section h2 {
-      color: #002244;
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .faq-section p, .faq-section ul {
-      line-height: 1.7;
-      font-size: 16px;
-    }
-
-    .documents-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    .documents-table th, .documents-table td {
-      border: 1px solid #ccc;
-      padding: 12px;
-      text-align: left;
-    }
-
-    .documents-table th {
-      background-color: #003366;
-      color: white;
-    }
-
-    .faq-ask-question {
-      max-width: 900px;
-      margin: 40px auto;
-      background: #f0f4f8;
-      padding: 30px;
-      border-radius: 10px;
-    }
-
-    .faq-ask-question h2 {
-      color: #003366;
-      margin-bottom: 10px;
-    }
-
-    .faq-ask-question form label {
-      font-weight: bold;
-    }
-
-    .faq-ask-question input, .faq-ask-question textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-    }
-
-    .faq-ask-question button {
-      background-color: #003366;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .faq-ask-question button:hover {
-      background-color: #002244;
-    }
-
-    footer {
-      background-color: #002266;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-
-    footer a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .footer-middle {
-      background-color: #003399;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-      flex-wrap: wrap;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      background-color: #002266;
-      padding: 20px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAQ | Eswatini Investor Hub</title>
+<style>
+:root{--bg:#f4f8fc;--white:#fff;--navy:#061426;--blue:#197cff;--cyan:#20b8ff;--text:#10263b;--muted:#6d8498;--line:#dce8f2;--shadow:0 10px 30px rgba(16,52,82,.09)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,Segoe UI,Arial,sans-serif}a{text-decoration:none;color:inherit}.wrap{width:min(1450px,calc(100% - 36px));margin:auto}
+.top{height:4px;background:linear-gradient(90deg,var(--blue),var(--cyan),#8be8ff,var(--blue))}
+.header{background:#061426;color:#fff;box-shadow:0 5px 20px #06142622;position:sticky;top:0;z-index:20}.head{min-height:76px;display:flex;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:12px;min-width:280px}.brand img{width:46px;height:46px;background:#fff;border-radius:10px;padding:3px;object-fit:contain}.brand b{font-size:18px}.brand b span{color:var(--cyan)}.sub{color:#91a9bc;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;margin-top:4px}.search{flex:1;max-width:570px}.search input{width:100%;height:42px;background:#0b2743;border:1px solid #2c587c;border-radius:9px;color:#fff;padding:0 15px;outline:0}.search input:focus{border-color:var(--cyan)}.status{margin-left:auto;color:#9eb3c7;font-size:10px;text-transform:uppercase}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#24d889;margin-right:7px}
+.nav{background:#071a2e;border-top:1px solid #102d46}.navin{display:flex;overflow:auto}.nav a{padding:13px 19px;color:#b4c5d5;font-size:11px;font-weight:800;text-transform:uppercase;white-space:nowrap}.nav a:hover,.nav a.active{color:#fff;background:#103655;box-shadow:inset 0 -3px var(--cyan)}
+.ticker{background:#fff;border-bottom:1px solid var(--line)}.tickerin{display:flex;align-items:center;min-height:40px;overflow:auto}.label{background:linear-gradient(90deg,#0c82df,#17b8ff);color:#fff;padding:13px 17px;font-size:10px;font-weight:900;white-space:nowrap}.tick{padding:0 18px;color:#71879a;font-size:10px;border-right:1px solid var(--line);white-space:nowrap}.tick b{color:#17344c}
+.hero{margin-top:22px;padding:36px 34px;border-radius:15px;background:linear-gradient(120deg,#061a30,#0b3155 62%,#0c4269);color:#fff;display:flex;justify-content:space-between;gap:30px;box-shadow:var(--shadow)}.eyebrow{font-size:9px;letter-spacing:1.8px;font-weight:900;color:#58d0ff;text-transform:uppercase}.hero h1{font-size:36px;margin:7px 0}.hero p{color:#b7cad9;max-width:750px;line-height:1.7;margin:0;font-size:12px}.hero-side{display:flex;gap:12px;align-items:center}.hero-stat{background:#ffffff12;border:1px solid #ffffff20;border-radius:12px;padding:16px 20px;min-width:125px}.hero-stat span{display:block;color:#9fb5c7;font-size:9px;text-transform:uppercase}.hero-stat strong{display:block;font-size:24px;margin-top:5px}
+.main{display:grid;grid-template-columns:1fr 330px;gap:16px;margin-top:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.panelhead{padding:20px 22px;border-bottom:1px solid var(--line)}.panelhead h2{font-size:18px;margin:0 0 4px}.panelhead p{font-size:10px;color:var(--muted);margin:0}.faq-list{padding:8px 18px 18px}.faq{border-bottom:1px solid #e8eff4}.faq:last-child{border-bottom:0}.question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 4px;background:none;border:0;text-align:left;cursor:pointer;color:#102f49;font-weight:900;font-size:12px}.qnum{color:#0b80c7;font-size:9px;margin-right:8px}.plus{width:24px;height:24px;border:1px solid #cfe0ea;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0878bd;font-size:16px;flex:none}.answer{display:none;padding:0 34px 18px 34px;color:#5a7183;font-size:11px;line-height:1.75}.faq.open .answer{display:block}.faq.open .plus{transform:rotate(45deg);background:#eaf7fd}.answer ul{margin:8px 0;padding-left:20px}.answer li{margin:4px 0}
+.side{padding:16px}.sidebox{border:1px solid #d9e6ef;border-radius:11px;padding:17px;margin-bottom:12px;background:linear-gradient(145deg,#fff,#f8fbfd)}.sidebox h3{margin:0 0 7px;font-size:14px}.sidebox p{margin:0;color:var(--muted);font-size:10px;line-height:1.7}.side-links{margin-top:12px}.side-link{display:flex;justify-content:space-between;border-bottom:1px solid #e7eef3;padding:12px 0;font-size:10px}.side-link:last-child{border-bottom:0}.side-link b{color:#0878bd}.docs{margin-top:16px}.table-wrap{overflow:auto;padding:16px}.docs table{width:100%;border-collapse:collapse;font-size:10px}.docs th{background:#071d34;color:#fff;text-align:left;padding:11px}.docs td{border-bottom:1px solid #e3ebf1;padding:11px;color:#566e80}.docs td a{color:#0878bd;font-weight:800}.ask{margin-top:16px;padding:20px 22px}.ask h2{margin:0 0 5px;font-size:18px}.ask>p{color:var(--muted);font-size:10px;margin:0 0 16px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:9px;font-weight:900;text-transform:uppercase;color:#5c7487;margin-bottom:6px}.field input,.field textarea{width:100%;border:1px solid #cfdfe9;border-radius:8px;padding:11px;font:11px inherit;outline:0;background:#fbfdff}.field input:focus,.field textarea:focus{border-color:#36b7ed}.full{grid-column:1/-1}.submit{margin-top:12px;border:0;border-radius:7px;background:#0b75c9;color:#fff;padding:11px 16px;font-size:9px;font-weight:900;text-transform:uppercase;cursor:pointer}.flash{margin:16px auto 0;width:min(1450px,calc(100% - 36px));padding:12px;border-radius:8px;background:#e4f7ee;border:1px solid #b9e6d0;color:#176344;font-size:10px}
+.footer{margin-top:35px;background:#061426;color:#8fa7ba;padding:30px 0}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot strong{color:#fff}.foot p{font-size:9px;line-height:1.6;margin:7px 0 0}
+@media(max-width:950px){.main{grid-template-columns:1fr}.side{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.sidebox{margin:0}.docs{grid-column:1/-1}.hero{flex-direction:column}.hero-side{align-self:flex-start}}
+@media(max-width:650px){.wrap{width:min(100% - 22px,1450px)}.head{flex-wrap:wrap;padding:12px 0}.brand{min-width:0}.search{order:3;flex-basis:100%;max-width:none}.status{display:none}.hero{padding:25px}.hero h1{font-size:29px}.hero-side{width:100%}.hero-stat{flex:1;min-width:0}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.side{display:block}.sidebox{margin-bottom:12px}.answer{padding-left:4px}.question{font-size:11px}}
+</style>
 </head>
-
 <body>
+<div class="top"></div>
+<header class="header"><div class="wrap head">
+<a class="brand" href="{{ url_for('index') }}"><img src="{{ url_for('static',filename='images/log1.webp') }}" alt="Eswatini Investor Hub"><div><b>Eswatini <span>Investor Hub</span></b><div class="sub">Market information & investor resources</div></div></a>
+<div class="search"><input id="search" type="search" placeholder="Search frequently asked questions..."></div><div class="status"><span class="dot"></span>Investor support</div>
+</div><nav class="nav"><div class="wrap navin"><a href="{{ url_for('index') }}">Home</a><a href="{{ url_for('news') }}">News</a><a href="{{ url_for('equities') }}">Equities</a><a href="{{ url_for('bonds') }}">Bonds</a><a href="{{ url_for('investments') }}">Investments</a><a href="{{ url_for('invest') }}">Education</a><a href="{{ url_for('faq') }}" class="active">FAQ</a></div></nav></header>
+
+<div class="ticker"><div class="wrap tickerin"><div class="label">INVESTOR SUPPORT</div><div class="tick"><b>9</b> common questions</div><div class="tick">Shares · Bonds · KYC · Tax</div><div class="tick">Need more help? Ask a question</div></div></div>
+
 {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div style="background: #d1ecf1; padding: 15px; border: 1px solid #bee5eb; color: #0c5460; margin: 20px 0; border-radius: 6px;">
-      {% for message in messages %}
-        {{ message }}
-      {% endfor %}
-    </div>
-  {% endif %}
+{% if messages %}<div class="flash">{% for message in messages %}{{ message }}{% endfor %}</div>{% endif %}
 {% endwith %}
 
+<main class="wrap">
+<section class="hero"><div><div class="eyebrow">Investor Support Centre</div><h1>Frequently Asked Questions</h1><p>Find answers to common questions about investing in Eswatini, including shares, bonds, stockbrokers, KYC requirements, taxes and share ownership.</p></div><div class="hero-side"><div class="hero-stat"><span>Questions</span><strong>09</strong></div><div class="hero-stat"><span>Support</span><strong>Ask</strong></div></div></section>
 
-  <!-- NAV -->
-  <nav>
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-        </div>
-<div class="header-banner">
-    <div class="scrolling-text">
-        Eswatini Investor Hub
-    </div>
-</div>
-        <ul class="menu">
-    <li><a href="{{ url_for('index') }}">Home</a></li>
-    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('invest') }}">Education</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('invest') }}">How to Invest</a>
-            <a href="{{ url_for('terms') }}">Investing terms</a>
-        </div>
-    </li>
-    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('investments') }}">Investments</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('equities') }}">Equities</a>
-            <a href="{{ url_for('bonds') }}">Bonds</a>
-        </div>
-    </li>
-    <!-- Removed routes below:
-    <li><a href="{{ url_for('about') }}">About Us</a></li>
-    <li><a href="{{ url_for('contact') }}">Contact</a></li>
-    <a href="{{ url_for('funds') }}">Funds</a>
-    <a href="{{ url_for('estate') }}">Real Estate</a>
-    -->
-</ul>
+<div class="main">
+<section class="panel">
+<div class="panelhead"><h2>Common Investor Questions</h2><p>Click a question to expand the answer.</p></div>
+<div class="faq-list">
 
-    </nav>
+<div class="faq"><button class="question"><span><span class="qnum">01</span>How do I buy shares in Eswatini?</span><span class="plus">+</span></button><div class="answer">Listed shares in Eswatini are purchased through local licensed stockbrokers. A stockbroker transacts on the stock exchange on your behalf. Investors can choose any licensed stockbroker in Eswatini. Regulated broker fees typically range between 1-2%.</div></div>
 
-  <!-- FAQ Body -->
-   <!-- FAQ Body Content -->
-<div class="faq-content">
-    <h1>FREQUENTLY ASKED QUESTIONS (FAQs)</h1>
-    <section class="faq-section">
-        <h2>1. How do I buy shares in Eswatini?</h2>
-        <p>Listed shares in Eswatini are purchased through local licensed stockbrokers. A stockbroker transacts on the stock exchange on your behalf. Investors can choose any licensed stockbroker in Eswatini. Regulated broker fees typically range between 1-2%.</p>
-    </section>
+<div class="faq"><button class="question"><span><span class="qnum">02</span>How safe are shares and bonds as investments?</span><span class="plus">+</span></button><div class="answer">Listed entities are approved by the Financial Services Regulatory Authority in Eswatini and the Eswatini Stock Exchange, which provides reasonable safety. These entities must meet high transparency standards to reduce the risk of failure from mismanagement. However, investors should consult financial advisors before making any investment decisions.</div></div>
 
-    <section class="faq-section">
-        <h2>2. How safe are shares and bonds as investments?</h2>
-        <p>Listed entities are approved by the Financial Services Regulatory Authority in Eswatini and the Eswatini Stock Exchange, which provides reasonable safety. These entities must meet high transparency standards to reduce the risk of failure from mismanagement. However, investors should consult financial advisors before making any investment decisions.</p>
-    </section>
+<div class="faq"><button class="question"><span><span class="qnum">03</span>What is a bond?</span><span class="plus">+</span></button><div class="answer">A bond is a fixed-income instrument. Essentially, an investor lends money to a company in exchange for interest payments, known as a coupon, over a specified period.</div></div>
 
-    <section class="faq-section">
-        <h2>3. What is a bond?</h2>
-        <p>A bond is a fixed-income instrument. Essentially, an investor lends money to a company in exchange for interest payments, known as a coupon, over a specified period.</p>
-    </section>
+<div class="faq"><button class="question"><span><span class="qnum">04</span>What are shares and how do they benefit investors?</span><span class="plus">+</span></button><div class="answer">Shares represent ownership in a company, entitling shareholders to dividend payouts and potential capital gains. Capital gain refers to buying a share at a lower price and selling it at a higher price to make a profit.</div></div>
 
-    <section class="faq-section">
-        <h2>4. What are shares and how do they benefit investors?</h2>
-        <p>Shares represent ownership in a company, entitling shareholders to dividend payouts and potential capital gains. Capital gain refers to buying a share at a lower price and selling it at a higher price to make a profit.</p>
-    </section>
+<div class="faq"><button class="question"><span><span class="qnum">05</span>What happens to my shares or bonds when I die?</span><span class="plus">+</span></button><div class="answer">When a shareholder dies, their shares become part of their estate. If the shareholder has a will, the executor will distribute the shares according to the instructions. If there is no will, the distribution follows intestate laws, overseen by the Master of the High Court.</div></div>
 
-    <section class="faq-section">
-        <h2>5. What happens to my shares or bonds when I die?</h2>
-        <p>When a shareholder dies, their shares become part of their estate. If the shareholder has a will, the executor will distribute the shares according to the instructions. If there is no will, the distribution follows intestate laws, overseen by the Master of the High Court.</p>
-    </section>
+<div class="faq"><button class="question"><span><span class="qnum">06</span>Do I get a share certificate when I buy shares?</span><span class="plus">+</span></button><div class="answer">As per Dematerialisation Notice No. 269 of 2022, listed companies no longer issue physical share certificates. Companies that listed before the legislation must dematerialize their shares. Share trading is now executed and stored electronically through the Automated Trading System. Proof of share ownership can be obtained from authorized brokers or transfer secretaries in the form of Shareholding statements.</div></div>
 
-    <section class="faq-section">
-        <h2>6. Do I get a share certificate when I buy shares?</h2>
-        <p>As per Dematerialisation Notice No. 269 of 2022, listed companies no longer issue physical share certificates. Companies that listed before the legislation must dematerialize their shares. Share trading is now executed and stored electronically through the Automated Trading System. Proof of share ownership can be obtained from authorized brokers or transfer secretaries in the form of Shareholding statements.</p>
-    </section>
+<div class="faq"><button class="question"><span><span class="qnum">07</span>How do I know which shares to buy?</span><span class="plus">+</span></button><div class="answer">Visit the Eswatini Stock Exchange website to identify listed entities of interest and their prices. Review the entity's financial statements and dividend history on their website. Consult a stockbroker for share availability and a financial advisor for proper guidance. Afterward, notify the stockbroker to assist in purchasing the shares.</div></div>
 
-    <section class="faq-section">
-        <h2>7. How do I know which shares to buy?</h2>
-        <p>Visit the Eswatini Stock Exchange website to identify listed entities of interest and their prices. Review the entity's financial statements and dividend history on their website. Consult a stockbroker for share availability and a financial advisor for proper guidance. Afterward, notify the stockbroker to assist in purchasing the shares.</p>
-    </section>
+<div class="faq"><button class="question"><span><span class="qnum">08</span>What KYC document is required to participate in the stock market?</span><span class="plus">+</span></button><div class="answer">For an individual (Resident), the following documents are required:<ul><li>Certified Identity Document</li><li>Proof of Residence</li><li>Proof of Banking Details</li><li>Proof of Source of Income</li></ul></div></div>
 
-    <section class="faq-section">
-        <h2>8. What KYC document is required to participate in the stock market?</h2>
-        <p>For an individual (Resident), the following documents are required:
-        <ul>
-            <li>Certified Identity Document</li>
-            <li>Proof of Residence</li>
-            <li>Proof of Banking Details</li>
-            <li>Proof of Source of Income</li>
-        </ul>
-        </p>
-    </section>
+<div class="faq"><button class="question"><span><span class="qnum">09</span>What are the tax implications on listed instrument investments?</span><span class="plus">+</span></button><div class="answer">For shares:<ul><li>Dividend income is subject to 10% withholding tax for local residents and 15% for non-residents.</li><li>Shares are subject to capital gains tax upon disposal.</li></ul>For bonds:<ul><li>Coupon interest is subject to 10% withholding tax for local residents and 15% for non-residents.</li></ul></div></div>
 
-    <section class="faq-section">
-        <h2>9. What are the tax implications on listed instrument investments?</h2>
-        <p>For shares:
-        <ul>
-            <li>Dividend income is subject to 10% withholding tax for local residents and 15% for non-residents.</li>
-            <li>Shares are subject to capital gains tax upon disposal.</li>
-        </ul>
-        For bonds:
-        <ul>
-            <li>Coupon interest is subject to 10% withholding tax for local residents and 15% for non-residents.</li>
-        </ul>
-        </p>
-    </section>
+</div></section>
 
-    <section class="educational-documents">
-    <h2>Educational Documents</h2>
-    <p>Click on the link to download:</p>
-    <table class="documents-table">
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Title</th>
-                <th>Release Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Legislation</td>
-                <td><a href="{{ url_for('static', filename='documents/FAQ.pdf') }}" target="_blank">Dematerialisation Notice No.269 of 2022</a></td>
-                <td>2022</td>
-            </tr>
-            <tr>
-                <td>How to trade in the ESE</td>
-                <td><a href="{{ url_for('static', filename='documents/FAQ.pdf') }}" target="_blank">Trade process</a></td>
-                <td>2023</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
+<aside class="panel side">
+<div class="sidebox"><h3>Quick Navigation</h3><p>Jump directly to the information you need.</p><div class="side-links"><div class="side-link"><span>Equities</span><b><a href="{{ url_for('equities') }}">Explore →</a></b></div><div class="side-link"><span>Bonds</span><b><a href="{{ url_for('bonds') }}">Explore →</a></b></div><div class="side-link"><span>Education</span><b><a href="{{ url_for('invest') }}">Learn →</a></b></div><div class="side-link"><span>Investments</span><b><a href="{{ url_for('investments') }}">View →</a></b></div></div></div>
+<div class="sidebox"><h3>Before You Invest</h3><p>Review the available market information and educational resources. Consider consulting an appropriate licensed professional for personal investment guidance.</p></div>
+</aside>
 </div>
 
+<section class="panel docs"><div class="panelhead"><h2>Educational Documents</h2><p>Reference documents available through the Investor Hub.</p></div><div class="table-wrap"><table><thead><tr><th>Description</th><th>Title</th><th>Release Date</th></tr></thead><tbody><tr><td>Legislation</td><td><a href="{{ url_for('static',filename='documents/FAQ.pdf') }}" target="_blank">Dematerialisation Notice No.269 of 2022</a></td><td>2022</td></tr><tr><td>How to trade in the ESE</td><td><a href="{{ url_for('static',filename='documents/FAQ.pdf') }}" target="_blank">Trade process</a></td><td>2023</td></tr></tbody></table></div></section>
 
-  <!-- Ask a Question -->
-  <section class="faq-ask-question">
-  <h2>Didn't find your question?</h2>
-  <p>We’re here to help. Submit your question and we’ll respond via email.</p>
+<section class="panel ask"><h2>Didn't find your question?</h2><p>We're here to help. Submit your question and we'll respond via email.</p><form action="{{ url_for('submit_question') }}" method="POST"><div class="formgrid"><div class="field"><label for="name">Your Name</label><input type="text" name="name" id="name" required></div><div class="field"><label for="email">Your Email</label><input type="email" name="email" id="email" required></div><div class="field full"><label for="question">Your Question</label><textarea name="question" id="question" rows="4" required></textarea></div></div><button class="submit" type="submit">Submit Question →</button></form></section>
+</main>
 
-  <form action="{{ url_for('submit_question') }}" method="POST">
-    <label for="name">Your Name</label>
-    <input type="text" name="name" id="name" required>
+<footer class="footer"><div class="wrap foot"><div><strong>Eswatini Investor Hub</strong><p>Market information, investment resources and investor support for Eswatini.</p></div><div><p>Information displayed is based on the material available through the Investor Hub.</p></div></div></footer>
 
-    <label for="email">Your Email</label>
-    <input type="email" name="email" id="email" required>
-
-    <label for="question">Your Question</label>
-    <textarea name="question" id="question" rows="4" required></textarea>
-
-    <button type="submit">✉️ Submit Question</button>
-  </form>
-</section>
-
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-top">
-      <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" /></a>
-      <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" /></a>
-      <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" /></a>
-      <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" /></a>
-    </div>
-
-    <div class="footer-middle">
-      <div style="display: flex; align-items: center;">
-        <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Logo" style="width: 50px; height: 50px; border-radius: 50%;" />
-        <div style="margin-left: 15px;">
-          <h3 style="margin: 0;">Eswatini Investor Hub</h3>
-          <p style="margin: 0;">(EIH)</p>
-        </div>
-      </div>
-      <div>
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('news') }}">News</a>
-        <a href="{{ url_for('investments') }}">Investments</a>
-        <a href="{{ url_for('invest') }}">Education</a>
-        <a href="{{ url_for('faq') }}">FAQ</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2025 Eswatini Investor Hub. All rights reserved.</p>
-    </div>
-  </footer>
-
+<script>
+const faqs=[...document.querySelectorAll('.faq')];
+faqs.forEach(f=>f.querySelector('.question').addEventListener('click',()=>{faqs.forEach(x=>{if(x!==f)x.classList.remove('open')});f.classList.toggle('open')}));
+document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();faqs.forEach(f=>{f.style.display=!q||f.innerText.toLowerCase().includes(q)?'':'none'})});
+</script>
 </body>
 </html>

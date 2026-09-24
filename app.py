@@ -569,7 +569,32 @@ def calculate_price_change(conn, company_id):
 
     return change, percent
 
+def get_external_bonds():
+    """Return bonds from the external_bonds table."""
+    conn = get_db_connection()
 
+    rows = conn.execute("""
+        SELECT id, name, programme, rate, maturity_date,
+               payment_frequency, email, phone, logos, pdf, link, auction_date
+        FROM external_bonds
+        ORDER BY id ASC
+    """).fetchall()
+
+    conn.close()
+
+    bonds = []
+
+    for row in rows:
+        bond = dict(row)
+
+        try:
+            bond["logos"] = json.loads(bond.get("logos") or "[]")
+        except (TypeError, json.JSONDecodeError):
+            bond["logos"] = []
+
+        bonds.append(bond)
+
+    return bonds
 # ============================================================
 # DATA LOADING
 # ============================================================
@@ -1663,7 +1688,7 @@ def investments():
     return render_template(
         "Investments.html",
         companies=data["companies"],
-        bonds=data["bonds"]
+        bonds=get_external_bonds()
     )
 
 

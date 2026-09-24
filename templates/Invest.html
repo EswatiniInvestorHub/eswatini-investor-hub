@@ -1,165 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investor Hub Eswatini</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Education | Eswatini Investor Hub</title>
+<style>
+:root{
+  --bg:#f4f8fc;--white:#fff;--navy:#061426;--navy2:#0b3155;
+  --blue:#0878bd;--cyan:#20b8ff;--text:#10263b;--muted:#6d8498;
+  --line:#dce8f2;--shadow:0 10px 30px rgba(16,52,82,.09)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,Segoe UI,Arial,sans-serif}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1450px,calc(100% - 36px));margin:auto}
+.top{height:4px;background:linear-gradient(90deg,#197cff,#20b8ff,#8be8ff,#197cff)}
+.header{background:var(--navy);color:#fff;box-shadow:0 5px 20px #06142622;position:sticky;top:0;z-index:20}
+.head{min-height:76px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;min-width:280px}
+.brand img{width:46px;height:46px;background:#fff;border-radius:10px;padding:3px;object-fit:contain}
+.brand b{font-size:18px}.brand b span{color:var(--cyan)}
+.sub{color:#91a9bc;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;margin-top:4px}
+.search{flex:1;max-width:570px}
+.search input{width:100%;height:42px;background:#0b2743;border:1px solid #2c587c;border-radius:9px;color:#fff;padding:0 15px;outline:0}
+.search input:focus{border-color:var(--cyan)}
+.status{margin-left:auto;color:#9eb3c7;font-size:10px;text-transform:uppercase}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#24d889;margin-right:7px}
+.nav{background:#071a2e;border-top:1px solid #102d46}
+.navin{display:flex;overflow:auto}
+.nav a{padding:13px 19px;color:#b4c5d5;font-size:11px;font-weight:800;text-transform:uppercase;white-space:nowrap}
+.nav a:hover,.nav a.active{color:#fff;background:#103655;box-shadow:inset 0 -3px var(--cyan)}
+.ticker{background:#fff;border-bottom:1px solid var(--line)}
+.tickerin{display:flex;align-items:center;min-height:40px;overflow:auto}
+.label{background:linear-gradient(90deg,#0c82df,#17b8ff);color:#fff;padding:13px 17px;font-size:10px;font-weight:900;white-space:nowrap}
+.tick{padding:0 18px;color:#71879a;font-size:10px;border-right:1px solid var(--line);white-space:nowrap}
+.tick b{color:#17344c}
+.hero{margin-top:22px;padding:36px 34px;border-radius:15px;background:linear-gradient(120deg,#061a30,#0b3155 62%,#0c4269);color:#fff;display:flex;justify-content:space-between;gap:30px;box-shadow:var(--shadow)}
+.eyebrow{font-size:9px;letter-spacing:1.8px;font-weight:900;color:#58d0ff;text-transform:uppercase}
+.hero h1{font-size:36px;margin:7px 0}
+.hero p{color:#b7cad9;max-width:780px;line-height:1.7;margin:0;font-size:12px}
+.hero-side{display:flex;gap:12px;align-items:center}
+.hero-stat{background:#ffffff12;border:1px solid #ffffff20;border-radius:12px;padding:16px 20px;min-width:125px}
+.hero-stat span{display:block;color:#9fb5c7;font-size:9px;text-transform:uppercase}
+.hero-stat strong{display:block;font-size:23px;margin-top:5px}
+.tabs{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:8px;display:flex;gap:7px}
+.tab{flex:1;border:0;background:#f4f8fc;color:#557083;padding:14px;border-radius:8px;font-weight:900;font-size:11px;text-transform:uppercase;cursor:pointer}
+.tab.active{background:#0b3155;color:#fff;box-shadow:inset 0 -3px var(--cyan)}
+.panel{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.panelhead{padding:20px 22px;border-bottom:1px solid var(--line)}
+.panelhead h2{font-size:19px;margin:0 0 4px}.panelhead p{font-size:10px;color:var(--muted);margin:0}
+.education-grid{display:grid;grid-template-columns:245px 1fr;min-height:500px}
+.side-nav{padding:15px;background:#f8fbfd;border-right:1px solid var(--line)}
+.side-nav .label2{font-size:8px;color:#94a7b5;text-transform:uppercase;letter-spacing:1px;padding:10px 12px 7px}
+.topic{width:100%;text-align:left;border:1px solid transparent;background:transparent;padding:12px;border-radius:8px;color:#587186;font-size:10px;font-weight:900;cursor:pointer;margin-bottom:5px}
+.topic:hover,.topic.active{background:#e9f6fd;border-color:#cbe7f4;color:#0878bd}
+.lesson{padding:25px 28px}.lesson-content{display:none}.lesson-content.active{display:block}
+.lesson h2{font-size:25px;margin:0 0 8px;color:#092b48}
+.lead{font-size:12px;color:var(--muted);line-height:1.8;margin:0 0 18px}
+.lesson-image{width:min(700px,100%);max-height:430px;object-fit:contain;display:block;margin:0 auto 9px;border-radius:10px;border:1px solid var(--line);background:#f7fafc}
+.caption{text-align:center;font-size:9px;color:#8a9cab;font-style:italic;margin:0 0 20px}
+.card{padding:17px;border:1px solid #e0eaf1;border-radius:10px;background:#fbfdff;margin-top:14px}
+.card h3{font-size:13px;margin:0 0 8px}.card p,.card li{font-size:11px;line-height:1.75;color:#536d80}
+.card ol,.card ul{padding-left:20px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.step{padding:15px;border:1px solid #dce8f0;border-radius:9px}.step-num{font-size:9px;color:#0878bd;font-weight:900;letter-spacing:1px}
+.step h4{margin:6px 0;font-size:12px}.step p{margin:0;color:var(--muted);font-size:9px;line-height:1.6}
+.terms-tools{padding:16px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center}
+.term-search{flex:1;height:40px;border:1px solid #cfdfe9;border-radius:8px;padding:0 13px;outline:0;background:#fbfdff}
+.term-count{font-size:9px;color:var(--muted);white-space:nowrap}
+.terms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px}
+.term{border:1px solid #dce8f0;border-radius:10px;padding:16px;background:linear-gradient(145deg,#fff,#f9fcfe)}
+.term h3{margin:0 0 7px;font-size:14px;color:#092f4c}.term p{margin:5px 0;font-size:10px;line-height:1.7;color:#5a7183}.term strong{color:#294a61}
+.resources{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px}
+.resource{border:1px solid #d9e6ef;border-radius:11px;padding:18px;background:linear-gradient(145deg,#fff,#f8fbfd)}
+.resource h3{margin:0 0 7px;font-size:14px}.resource p{margin:0 0 14px;color:var(--muted);font-size:10px;line-height:1.7}
+.btn{display:inline-block;padding:10px 13px;border-radius:7px;background:#0b75c9;color:#fff;font-size:9px;font-weight:900;text-transform:uppercase}
+.footer{margin-top:35px;background:#061426;color:#8fa7ba;padding:30px 0}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot strong{color:#fff}.foot p{font-size:9px;line-height:1.6;margin:7px 0 0}
+@media(max-width:850px){
+ .education-grid{grid-template-columns:1fr}.side-nav{border-right:0;border-bottom:1px solid var(--line);display:flex;overflow:auto;gap:5px}
+ .side-nav .label2{display:none}.topic{min-width:190px}.steps,.resources{grid-template-columns:1fr}.terms-grid{grid-template-columns:1fr}.hero{flex-direction:column}.hero-side{align-self:flex-start}
+}
+@media(max-width:650px){
+ .wrap{width:min(100% - 22px,1450px)}.head{flex-wrap:wrap;padding:12px 0}.brand{min-width:0}.search{order:3;flex-basis:100%;max-width:none}.status{display:none}
+ .hero{padding:25px}.hero h1{font-size:29px}.hero-side{width:100%}.hero-stat{flex:1;min-width:0}.lesson{padding:20px 16px}
+ .tabs{flex-direction:column}.terms-tools{flex-direction:column;align-items:stretch}.term-count{text-align:right}
+}
+</style>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-        </div>
-        <div class="header-banner">
-    <div class="scrolling-text">
-        Eswatini Investor Hub
-    </div>
+<div class="top"></div>
+<header class="header">
+<div class="wrap head">
+<a class="brand" href="{{ url_for('index') }}">
+<img src="{{ url_for('static',filename='images/log1.webp') }}" alt="Eswatini Investor Hub">
+<div><b>Eswatini <span>Investor Hub</span></b><div class="sub">Market information & investor resources</div></div>
+</a>
+<div class="search"><input id="globalSearch" type="search" placeholder="Search investor education..."></div>
+<div class="status"><span class="dot"></span>Investor education</div>
 </div>
-        <ul class="menu">
-    <li><a href="{{ url_for('index') }}">Home</a></li>
-    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('invest') }}">Education</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('invest') }}">How to Invest</a>
-            <a href="{{ url_for('terms') }}">Investing terms</a>
-        </div>
-    </li>
-    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('investments') }}">Investments</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('equities') }}">Equities</a>
-            <a href="{{ url_for('bonds') }}">Bonds</a>
-        </div>
-    </li>
-    <!-- Removed routes below:
-    <li><a href="{{ url_for('about') }}">About Us</a></li>
-    <li><a href="{{ url_for('contact') }}">Contact</a></li>
-    <a href="{{ url_for('funds') }}">Funds</a>
-    <a href="{{ url_for('estate') }}">Real Estate</a>
-    -->
-</ul>
+<nav class="nav"><div class="wrap navin">
+<a href="{{ url_for('index') }}">Home</a>
+<a href="{{ url_for('news') }}">News</a>
+<a href="{{ url_for('equities') }}">Equities</a>
+<a href="{{ url_for('bonds') }}">Bonds</a>
+<a href="{{ url_for('investments') }}">Investments</a>
+<a href="{{ url_for('invest') }}" class="active">Education</a>
+<a href="{{ url_for('faq') }}">FAQ</a>
+</div></nav>
+</header>
 
-    </nav>
- 
- 
- 
- 
- 
-<!-- Main Content Section -->
-<main class="main-content" style="padding: 40px; max-width: 1200px; margin: 0 auto; font-family: Arial, sans-serif; line-height: 1.6;">
+<div class="ticker"><div class="wrap tickerin">
+<div class="label">INVESTOR EDUCATION</div>
+<div class="tick"><b>4</b> learning topics</div>
+<div class="tick"><b>20</b> investment terms</div>
+<div class="tick">Learn · Understand · Invest</div>
+</div></div>
 
+<main class="wrap">
+<section class="hero">
+<div>
+<div class="eyebrow">Investor Learning Centre</div>
+<h1>Learn Before You Invest</h1>
+<p>Explore how the Eswatini capital market works, how individuals and companies can invest, the role of transfer secretaries, and the key terminology investors should understand.</p>
+</div>
+<div class="hero-side">
+<div class="hero-stat"><span>Learning topics</span><strong>04</strong></div>
+<div class="hero-stat"><span>Terms</span><strong>20</strong></div>
+</div>
+</section>
 
-	
-    
-    <div style="text-align: center;">
-  <h1 class="news-title" style="font-size: 36px; margin-bottom: 20px; color: #003399;">How to Invest</h1>
+<div class="tabs">
+<button class="tab active" data-section="howto">How to Invest</button>
+<button class="tab" data-section="terms">Investing Terminology</button>
 </div>
 
-    
-	
-    
+<section id="howto" class="panel education-panel">
+<div class="panelhead"><h2>How to Invest</h2><p>Learn the basic structure of the capital market and the roles of key participants.</p></div>
+<div class="education-grid">
+<aside class="side-nav">
+<div class="label2">Learning topics</div>
+<button class="topic active" data-topic="structure">01 · Capital Market Structure</button>
+<button class="topic" data-topic="individuals">02 · Individuals</button>
+<button class="topic" data-topic="companies">03 · Companies</button>
+<button class="topic" data-topic="secretaries">04 · Transfer Secretaries</button>
+</aside>
+<div class="lesson">
+<article class="lesson-content active" id="structure">
+<h2>Eswatini Capital Market Structure</h2>
+<p class="lead">A stockbroker is a financial professional who facilitates the buying and selling of securities, such as stocks, bonds, and other financial instruments, on behalf of clients.</p>
+<img class="lesson-image" src="{{ url_for('static',filename='images/Pic1.jpg') }}" alt="Eswatini Capital Market Structure">
+<p class="caption">Figure 1: Eswatini Capital Market Structure</p>
+<div class="card"><h3>What does a stockbroker do?</h3><ol>
+<li><strong>Executing Trades:</strong> Stockbrokers act as intermediaries between buyers and sellers in the stock market. They execute buy or sell orders for their clients, either on stock exchanges or over-the-counter markets.</li>
+<li><strong>Compliance and Regulations:</strong> Stockbrokers must ensure that all trades and investment advice comply with financial regulations and ethical standards. They are typically licensed and regulated by financial authorities.</li>
+</ol><p>Overall, stockbrokers play a crucial role in helping individuals and institutions navigate financial markets, make informed investment decisions, and achieve their financial goals.</p></div>
+</article>
 
-    <section style="margin-bottom: 50px;">
-        <h2 style="font-size: 28px; margin-bottom: 20px; color: #002266;">Eswatini Capital Market Structure</h2>
-        <img src="{{ url_for('static', filename='images/Pic1.jpg') }}" alt="Market Structure Image" style="width: 700px; height:auto; float: left; margin-right: 20px; border-radius: 8px;">
-        <p style="font-size: 18px; text-align: justify;">
-            A stockbroker is a financial professional who facilitates the buying and selling of securities, such as stocks, bonds, and other financial instruments, on behalf of clients. Their primary role is to connect investors with the stock market. Here are the key functions and responsibilities of a stockbroker:
-        </p>
-        <ol style="font-size: 18px; padding-left: 20px; text-align: justify;">
-            <li><strong>Executing Trades:</strong> Stockbrokers act as intermediaries between buyers and sellers in the stock market. They execute buy or sell orders for their clients, either on stock exchanges or over-the-counter markets.</li>
-            <li><strong>Compliance and Regulations:</strong> Stockbrokers must ensure that all trades and investment advice comply with financial regulations and ethical standards. They are typically licensed and regulated by financial authorities.</li>
-        </ol>
-        <p style="font-size: 18px; text-align: justify;">
-            Overall, stockbrokers play a crucial role in helping individuals and institutions navigate financial markets, make informed investment decisions, and achieve their financial goals.
-        </p>
-        <p style="text-align: center; font-style: italic; clear: both;">Figure 1: Eswatini Capital Market Structure</p>
-    </section>
+<article class="lesson-content" id="individuals">
+<h2>How to Invest: For Individuals</h2>
+<p class="lead">Investing for individuals involves learning about financial markets, choosing a stockbroker, and understanding the risks and rewards of different investment options.</p>
+<img class="lesson-image" src="{{ url_for('static',filename='images/Pic2.jpg') }}" alt="Investing for Individuals">
+<p class="caption">Figure 2: How to Invest for Individuals</p>
+<div class="steps">
+<div class="step"><div class="step-num">STEP 01</div><h4>Learn</h4><p>Learn about financial markets and the investment options available to you.</p></div>
+<div class="step"><div class="step-num">STEP 02</div><h4>Choose</h4><p>Choose a stockbroker and understand how investment orders are handled.</p></div>
+<div class="step"><div class="step-num">STEP 03</div><h4>Understand Risk</h4><p>Understand the risks and rewards of different investment options.</p></div>
+</div>
+</article>
 
-    <section style="margin-bottom: 50px;">
-        <h2 style="font-size: 28px; margin-bottom: 20px; color: #002266;">How to Invest: For Individuals</h2>
-        <img src="{{ url_for('static', filename='images/Pic2.jpg') }}" alt="Investing for Individuals" style="width: 700px; height:auto; float: left; margin-right: 20px; border-radius: 8px;">
-        <p style="font-size: 18px; text-align: justify;">
-            Investing for individuals involves learning about financial markets, choosing a stockbroker, and understanding the risks and rewards of different investment options.
-        </p>
-        <p style="text-align: center; font-style: italic; clear: both;">Figure 2: How to Invest for Individuals</p>
-    </section>
+<article class="lesson-content" id="companies">
+<h2>How to Invest: For Companies</h2>
+<p class="lead">Companies can invest in various ways to diversify their assets, enhance profitability, and ensure financial stability for long-term growth.</p>
+<img class="lesson-image" src="{{ url_for('static',filename='images/Pic3.jpg') }}" alt="Investing for Companies">
+<p class="caption">Figure 3: How to Invest for Companies</p>
+<div class="card"><h3>Corporate investing</h3><p>Companies can invest in various ways to diversify their assets, enhance profitability, and ensure financial stability for long-term growth.</p></div>
+</article>
 
-    <section style="margin-bottom: 50px;">
-        <h2 style="font-size: 28px; margin-bottom: 20px; color: #002266;">How to Invest: For Companies</h2>
-        <img src="{{ url_for('static', filename='images/Pic3.jpg') }}" alt="Investing for Companies" style="width: 700px; height:auto; float: left; margin-right: 20px; border-radius: 8px;">
-        <p style="font-size: 18px; text-align: justify;">
-            Companies can invest in various ways to diversify their assets, enhance profitability, and ensure financial stability for long-term growth.
-        </p>
-        <p style="text-align: center; font-style: italic; clear: both;">Figure 3: How to Invest for Companies</p>
-    </section>
+<article class="lesson-content" id="secretaries">
+<h2>Transfer Secretaries</h2>
+<p class="lead">Transfer Secretaries, also known as registrars, play a vital role in capital markets by acting as intermediaries between companies that issue securities and the investors who hold them.</p>
+<img class="lesson-image" style="max-width:400px" src="{{ url_for('static',filename='images/Pic4.WEBP') }}" alt="Transfer Secretaries">
+<p class="caption">Figure 4: Transfer Secretaries' Role</p>
+<div class="card"><h3>Key responsibilities</h3><ol>
+<li><strong>Maintaining Shareholder Records:</strong> Transfer secretaries maintain a register of a company’s shareholders or bondholders, tracking who owns what amount of securities at any given time.</li>
+<li><strong>Dividend and Interest Payments:</strong> Transfer secretaries ensure timely and accurate payments of dividends or interest to shareholders and bondholders.</li>
+<li><strong>Handling Corporate Actions:</strong> Transfer secretaries administer corporate actions like stock splits, mergers, and proxy voting.</li>
+</ol></div>
+</article>
+</div>
+</div>
+</section>
 
-    <section style="margin-bottom: 50px;">
-        <h2 style="font-size: 28px; margin-bottom: 20px; color: #002266;">Transfer Secretaries</h2>
-        <img src="{{ url_for('static', filename='images/Pic4.WEBP') }}" alt="Transfer Secretaries" style="width: 400px; height:auto; float: left; margin-right: 20px; border-radius: 8px;">
-        <p style="font-size: 18px; text-align: justify;">
-            Transfer Secretaries, also known as registrars, play a vital role in capital markets by acting as intermediaries between companies that issue securities and the investors who hold them. Their primary responsibilities revolve around managing the records of shareholders and ensuring the smooth administration of transactions related to securities.
-        </p>
-        <ol style="font-size: 18px; padding-left: 20px; text-align: justify;">
-            <li><strong>Maintaining Shareholder Records:</strong> Transfer secretaries maintain a register of a company’s shareholders or bondholders, tracking who owns what amount of securities at any given time.</li>
-            <li><strong>Dividend and Interest Payments:</strong> Transfer secretaries ensure timely and accurate payments of dividends or interest to shareholders and bondholders.</li>
-            <li><strong>Handling Corporate Actions:</strong> Transfer secretaries administer corporate actions like stock splits, mergers, and proxy voting.</li>
-        </ol>
-        <p style="text-align: center; font-style: italic; clear: both;">Figure 4: Transfer Secretaries' Role</p>
-    </section>
+<section id="terms" class="panel terms-panel" style="display:none">
+<div class="panelhead"><h2>Investing Terminology</h2><p>Understanding the basics is crucial to making sound investment decisions.</p></div>
+<div class="terms-tools">
+<input id="termSearch" class="term-search" type="search" placeholder="Search a term, definition or example...">
+<span class="term-count" id="termCount">20 terms</span>
+</div>
+<div class="terms-grid">
 
+<div class="term"><h3>01. Asset</h3><p><strong>What:</strong> Something valuable you own (resource), which can generate future economic benefits or increase in value over time.</p><p><strong>Example:</strong> A house is an asset because its value might increase over time.</p></div>
+<div class="term"><h3>02. Capital Gain</h3><p><strong>What:</strong> The profit made when you sell something (like a stock or house) for more than you paid for it.</p><p><strong>Example:</strong> If you buy stock for E50 and sell it for E70, you make E20 in capital gain.</p></div>
+<div class="term"><h3>03. Bond</h3><p><strong>What:</strong> A loan you give to a company or government that is repaid with interest.</p><p><strong>Example:</strong> Buying a government bond means lending money to the government, and they pay you interest over time.</p></div>
+<div class="term"><h3>04. Index Fund</h3><p><strong>What:</strong> A fund that lets you invest in multiple companies by following a stock market index.</p><p><strong>Example:</strong> Investing in an index fund means owning a small part of all the companies in that index.</p></div>
+<div class="term"><h3>05. Exchange-Traded Fund (ETF)</h3><p><strong>What:</strong> An ETF holds many investments (stocks or bonds) and is traded like a stock.</p><p><strong>Example:</strong> ETFs allow you to invest in a variety of assets and trade them like regular stocks.</p></div>
+<div class="term"><h3>06. Mutual Fund</h3><p><strong>What:</strong> A collection of investments managed by professionals, funded by money from many investors.</p><p><strong>Example:</strong> Investing in a mutual fund means your money is pooled with others to buy a range of investments.</p></div>
+<div class="term"><h3>07. Market Capitalization (Market Cap)</h3><p><strong>What:</strong> The total value of a company’s shares, calculated by multiplying stock price by total shares.</p><p><strong>Example:</strong> Companies like Apple have a market cap of over a trillion dollars, indicating large value.</p></div>
+<div class="term"><h3>08. Risk</h3><p><strong>What:</strong> The potential for losing your investment. In investing, risk often refers to the permanent loss of capital.</p><p><strong>Example:</strong> Investing E1,000 and selling for E400 means you’ve lost E600.</p></div>
+<div class="term"><h3>09. Return on Investment (ROI)</h3><p><strong>What:</strong> A percentage measure of the profit earned from an investment compared to the initial amount invested.</p><p><strong>Example:</strong> Investing E1,000 and earning E200 means a 20% ROI.</p></div>
+<div class="term"><h3>10. Compound Interest</h3><p><strong>What:</strong> Interest that accumulates on both the original investment and previously earned interest.</p><p><strong>Example:</strong> With compound interest, money grows faster the longer it's invested.</p></div>
+<div class="term"><h3>11. Liquidity</h3><p><strong>What:</strong> How quickly an asset can be converted into cash.</p><p><strong>Example:</strong> Stocks have high liquidity as they can be sold quickly, whereas houses take longer.</p></div>
+<div class="term"><h3>12. Bull Market</h3><p><strong>What:</strong> A market condition where prices of assets rise (> 20%) due to investor confidence.</p><p><strong>Example:</strong> In a bull market, investors buy stocks expecting prices to rise.</p></div>
+<div class="term"><h3>13. Bear Market</h3><p><strong>What:</strong> A market condition where prices of assets fall (> 20%), often due to economic downturn.</p><p><strong>Example:</strong> During a bear market, investors sell stocks to prevent further losses.</p></div>
+<div class="term"><h3>14. Dematerialisation</h3><p><strong>What:</strong> Converting physical certificates into electronic form, credited to your Depository account.</p></div>
+<div class="term"><h3>15. Initial Public Offering (IPO)</h3><p><strong>What:</strong> The first time a company sells its shares to the public.</p><p><strong>Example:</strong> Nkonyeni Pre-Cast Limited had its IPO in 2023, selling shares to the public for the first time.</p></div>
+<div class="term"><h3>16. Dividend Yield</h3><p><strong>What:</strong> A company’s annual dividend as a percentage of its stock price.</p><p><strong>Example:</strong> A stock priced at E50 that pays a E2 dividend has a yield of 4%.</p></div>
+<div class="term"><h3>17. Asset Allocation</h3><p><strong>What:</strong> Dividing your investments across various asset types to balance risk and return.</p><p><strong>Example:</strong> Allocating 60% to stocks and 40% to bonds for balanced growth and risk reduction.</p></div>
+<div class="term"><h3>18. Hedge Fund</h3><p><strong>What:</strong> A high-risk investment aiming to outperform traditional investments.</p><p><strong>Example:</strong> The Medallion Fund returned over 30% per year after fees.</p></div>
+<div class="term"><h3>19. Short Selling</h3><p><strong>What:</strong> Borrowing stock, selling it, and buying it back later at a lower price to make a profit.</p><p><strong>Example:</strong> Selling stock for E100 and repurchasing it for E80 yields a E20 profit.</p></div>
+<div class="term"><h3>20. Inflation</h3><p><strong>What:</strong> A general rise in prices over time, reducing the purchasing power of money.</p><p><strong>Example:</strong> At 5% inflation, an item that costs E100 today will cost E105 next year.</p></div>
+
+</div>
+</section>
+
+<section class="panel">
+<div class="panelhead"><h2>Explore More</h2><p>Continue from education into the live market information on the Investor Hub.</p></div>
+<div class="resources">
+<div class="resource"><h3>Equities</h3><p>Explore listed companies and their available market information.</p><a class="btn" href="{{ url_for('equities') }}">Explore Equities →</a></div>
+<div class="resource"><h3>Bonds</h3><p>Review fixed-income instruments available through the Investor Hub.</p><a class="btn" href="{{ url_for('bonds') }}">Explore Bonds →</a></div>
+<div class="resource"><h3>Investments</h3><p>View the complete investment marketplace and available instruments.</p><a class="btn" href="{{ url_for('investments') }}">View Investments →</a></div>
+</div>
+</section>
 </main>
 
+<footer class="footer"><div class="wrap foot">
+<div><strong>Eswatini Investor Hub</strong><p>Market information and investor education resources for Eswatini.</p></div>
+<div><p>Educational material is provided as general information. Review relevant official documents and professional advice where appropriate.</p></div>
+</div></footer>
 
- 
- 
-
-    <!-- Copyright Section -->
-    <!-- Copyright Section -->
-<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
-    <!-- First Footer Bar -->
-    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
-        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
-    </div>
-    
-    <!-- Second Footer Layer -->
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
-        <!-- Left Section: Logo and Company Name -->
-        <div style="display: flex; align-items: center;">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-            <div>
-                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
-                <p style="margin: 0;">(EIH)</p>
-            </div>
-        </div>
-        
-        <!-- Right Section: Menu -->
-        <div>
-            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
-            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
-            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
-            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
-            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
-            <!--
-            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
-            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
-			-->
-        </div>
-    </div>
-    
-    <!-- Third Footer Layer -->
-    <div style="text-align: center; padding: 20px; background-color: #002266;">
-        <p>&copy; 2025 Eswatini Investor Hub. All rights reserved.</p>
-    </div>
-</footer>
-
-
-
+<script>
+const tabs=document.querySelectorAll('.tab');
+const sections={howto:document.getElementById('howto'),terms:document.getElementById('terms')};
+tabs.forEach(t=>t.addEventListener('click',()=>{
+ tabs.forEach(x=>x.classList.remove('active'));t.classList.add('active');
+ Object.values(sections).forEach(s=>s.style.display='none');sections[t.dataset.section].style.display='block';
+ window.scrollTo({top:document.querySelector('.tabs').offsetTop-90,behavior:'smooth'});
+}));
+const topics=document.querySelectorAll('.topic'), lessons=document.querySelectorAll('.lesson-content');
+topics.forEach(b=>b.addEventListener('click',()=>{
+ topics.forEach(x=>x.classList.remove('active'));lessons.forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');document.getElementById(b.dataset.topic).classList.add('active');
+}));
+const termCards=[...document.querySelectorAll('.term')],termSearch=document.getElementById('termSearch'),termCount=document.getElementById('termCount');
+termSearch.addEventListener('input',()=>{
+ const q=termSearch.value.trim().toLowerCase();let n=0;
+ termCards.forEach(card=>{const show=!q||card.innerText.toLowerCase().includes(q);card.style.display=show?'':'none';if(show)n++});
+ termCount.textContent=n+' term'+(n===1?'':'s');
+});
+const globalSearch=document.getElementById('globalSearch');
+globalSearch.addEventListener('input',()=>{
+ const q=globalSearch.value.trim().toLowerCase();
+ if(!q)return;
+ const inTerms=[...document.querySelectorAll('.term')].some(x=>x.innerText.toLowerCase().includes(q));
+ if(inTerms){document.querySelector('[data-section="terms"]').click();termSearch.value=globalSearch.value;termSearch.dispatchEvent(new Event('input'))}
+});
+</script>
 </body>
 </html>

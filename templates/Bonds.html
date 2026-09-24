@@ -1,257 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investor Hub Eswatini</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-	<script src="{{ url_for('static', filename='script.js') }}" defer></script>
-</head>
-
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bonds | Eswatini Investor Hub</title>
 <style>
-#bond-modal {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
-}
-
-#bond-modal h2 {
-  font-size: 22px;
-  color: #003399;
-  margin-bottom: 10px;
-}
-
-#bond-modal p {
-  font-size: 16px;
-  margin: 6px 0;
-}
-
-.bond-details-extra h4 {
-  font-size: 18px;
-  color: #003366;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.bond-details-extra p {
-  font-size: 15px;
-}
-
-.bond-details-extra strong {
-  font-weight: 600;
-  color: #222;
-}
-
-
-</style>
-
-
-
-<body>
-    <nav>
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-        </div>
-		<div class="header-banner">
-    <div class="scrolling-text">
-        Eswatini Investor Hub
-    </div>
-</div>
-        <ul class="menu">
-    <li><a href="{{ url_for('index') }}">Home</a></li>
-    <li><a href="{{ url_for('news') }}">News and Updates</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('invest') }}">Education</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('invest') }}">How to Invest</a>
-            <a href="{{ url_for('terms') }}">Investing terms</a>
-        </div>
-    </li>
-    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
-    <li class="dropdown">
-        <a href="{{ url_for('investments') }}">Investments</a>
-        <div class="dropdown-content">
-            <a href="{{ url_for('equities') }}">Equities</a>
-            <a href="{{ url_for('bonds') }}">Bonds</a>
-        </div>
-    </li>
-    <!-- Removed routes below:
-    <li><a href="{{ url_for('about') }}">About Us</a></li>
-    <li><a href="{{ url_for('contact') }}">Contact</a></li>
-    <a href="{{ url_for('funds') }}">Funds</a>
-    <a href="{{ url_for('estate') }}">Real Estate</a>
-    -->
-</ul>
-
-    </nav>
- 
- 
- 
- 
- <div class="bonds-dashboard">
-  <h1>Bonds Dashboard</h1>
-  <div class="bond-flex-container">
-
-    {% for bond in bonds %}
-    <div class="bond-card">
-      <div class="bond-logos">
-        {% for logo in bond.logos %}
-        <img src="{{ logo if logo.startswith("http") else url_for('static', filename=logo) }}" alt="Bond Logo">
-        {% endfor %}
-      </div>
-      <h3>{{ bond.name }}</h3>
-      <p><strong>Programme:</strong> {{ bond.programme }}</p>
-      <p><strong>Interest Rate:</strong> {{ bond.rate }}</p>
-      <p><strong>Maturity Date:</strong> {{ bond.maturity_date }}</p>
-      <p><strong>Interest Payment:</strong> {{ bond.payment_frequency }}</p>
-      <p><strong>Email:</strong> <a href="mailto:{{ bond.email }}">{{ bond.email }}</a></p>
-      {% if bond.phone %}
-      <p><strong>Phone:</strong> <a href="tel:{{ bond.phone }}">{{ bond.phone }}</a></p>
-      {% endif %}
-	  {% if bond.link %}
-  <p><a href="{{ bond.link }}" target="_blank">More Info</a></p>
-{% endif %}
-
-      <a class="bond-button" href="{{ bond.pdf if bond.pdf.startswith("http") else url_for('static', filename=bond.pdf) }}" target="_blank">View Bond Details</a>
-    </div>
-    {% endfor %}
-
-  </div>
-</div>
-
-
-
- 
- 
- 
- 
- 
-
-    <!-- Copyright Section -->
-<!-- Copyright Section -->
-<footer style="background-color: #002266; color: white; padding: 20px; font-family: Arial, sans-serif;">
-    <!-- First Footer Bar -->
-    <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0;">
-        <a href="#"><img src="{{ url_for('static', filename='images/f.png') }}" alt="Facebook" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/e.png') }}" alt="Email" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/x.png') }}" alt="Twitter" style="margin: 0 10px;"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/a.png') }}" alt="Address" style="margin: 0 10px;"></a>
-    </div>
-    
-    <!-- Second Footer Layer -->
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color:#003399;">
-        <!-- Left Section: Logo and Company Name -->
-        <div style="display: flex; align-items: center;">
-            <img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Company Logo" style="width: 50px; height: 50px; margin-right: 20px; border-radius: 30%;">
-            <div>
-                <h3 style="margin: 0;">Eswatini Investor Hub</h3>
-                <p style="margin: 0;">(EIH)</p>
-            </div>
-        </div>
-        
-        <!-- Right Section: Menu -->
-        <div>
-            <a href="{{ url_for('index') }}" style="margin: 0 15px; color: white; text-decoration: none;">Home</a>
-            <a href="{{ url_for('news') }}" style="margin: 0 15px; color: white; text-decoration: none;">News and Updates</a>
-            <a href="{{ url_for('investments') }}" style="margin: 0 15px; color: white; text-decoration: none;">Investments</a>
-            <a href="{{ url_for('invest') }}" style="margin: 0 15px; color: white; text-decoration: none;">Education</a>
-            <a href="{{ url_for('faq') }}" style="margin: 0 15px; color: white; text-decoration: none;">FAQ</a>
-            <!--
-            <a href="{{ url_for('about') }}" style="margin: 0 15px; color: white; text-decoration: none;">About Us</a>
-            <a href="{{ url_for('contact') }}" style="margin: 0 15px; color: white; text-decoration: none;">Contact</a>
-			-->
-        </div>
-    </div>
-    
-    <!-- Third Footer Layer -->
-    <div style="text-align: center; padding: 20px; background-color: #002266;">
-        <p>&copy; 2025 Eswatini Investor Hub. All rights reserved.</p>
-    </div>
-</footer>
-
-
-
-</body>
-
-<!-- Bond Modal -->
-<!-- Bond Modal -->
-<div id="bond-modal" class="modal" style="
-  display: none;
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  padding: 20px;
-  z-index: 1000;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-">
-
-  <span onclick="document.getElementById('bond-modal').style.display='none'" 
-        style="float:right; cursor:pointer; font-size: 24px; font-weight: bold; color: #444;">&times;</span>
-
-  <h2 id="bond-title" style="margin-top: 0; font-size: 24px;">Bond Name</h2>
-  <p id="bond-rate">Rate</p>
-  <p id="bond-auction-date">Auction Date</p>
-
-  <div class="bond-details-extra">
-    <h4 style="margin-top: 20px; font-size: 18px; color: #003366;">Investment Insights</h4>
-    <p><strong>Issuer:</strong> <span id="bond-issuer"></span></p>
-    <p><strong>Why Invest:</strong> <span id="bond-benefits"></span></p>
-    <p><strong>Suitable For:</strong> <span id="bond-suitability"></span></p>
-    <p><strong>Risks:</strong> <span id="bond-risks"></span></p>
-  </div>
-</div>
-
-
-
-
-
-
+:root{--bg:#f4f8fc;--white:#fff;--navy:#061426;--navy2:#0b2743;--blue:#197cff;--cyan:#20b8ff;--text:#10263b;--muted:#6d8498;--line:#dce8f2;--shadow:0 10px 30px rgba(16,52,82,.09)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,Segoe UI,Arial,sans-serif}a{text-decoration:none;color:inherit}.wrap{width:min(1450px,calc(100% - 36px));margin:auto}.top{height:4px;background:linear-gradient(90deg,var(--blue),var(--cyan),#8be8ff,var(--blue))}
+.header{background:#061426;color:#fff;box-shadow:0 5px 20px #06142622;position:sticky;top:0;z-index:20}.head{min-height:76px;display:flex;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:12px;min-width:280px}.brand img{width:46px;height:46px;background:#fff;border-radius:10px;padding:3px;object-fit:contain}.brand b{font-size:18px}.brand b span{color:var(--cyan)}.sub{color:#91a9bc;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;margin-top:4px}.search{flex:1;max-width:570px}.search input{width:100%;height:42px;background:#0b2743;border:1px solid #2c587c;border-radius:9px;color:#fff;padding:0 15px;outline:0}.search input:focus{border-color:var(--cyan)}.status{margin-left:auto;color:#9eb3c7;font-size:10px;text-transform:uppercase}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#24d889;margin-right:7px}
+.nav{background:#071a2e;border-top:1px solid #102d46}.navin{display:flex;overflow:auto}.nav a{padding:13px 19px;color:#b4c5d5;font-size:11px;font-weight:800;text-transform:uppercase;white-space:nowrap}.nav a:hover,.nav a.active{color:#fff;background:#103655;box-shadow:inset 0 -3px var(--cyan)}
+.ticker{background:#fff;border-bottom:1px solid var(--line)}.tickerin{display:flex;align-items:center;min-height:40px;overflow:auto}.label{background:linear-gradient(90deg,#0c82df,#17b8ff);color:#fff;padding:13px 17px;font-size:10px;font-weight:900;white-space:nowrap}.tick{padding:0 18px;color:#71879a;font-size:10px;border-right:1px solid var(--line);white-space:nowrap}.tick b{color:#17344c}
+.hero{margin-top:22px;padding:34px;border-radius:15px;background:linear-gradient(120deg,#061a30,#0b3155 62%,#0c4269);color:#fff;display:flex;justify-content:space-between;gap:30px;box-shadow:var(--shadow)}.eyebrow{font-size:9px;letter-spacing:1.8px;font-weight:900;color:#58d0ff;text-transform:uppercase}.hero h1{font-size:36px;margin:7px 0}.hero p{color:#b7cad9;max-width:720px;line-height:1.7;margin:0;font-size:12px}.hero-side{display:flex;align-items:center;gap:12px}.hero-stat{background:#ffffff12;border:1px solid #ffffff20;border-radius:12px;padding:16px 20px;min-width:125px}.hero-stat span{display:block;color:#9fb5c7;font-size:9px;text-transform:uppercase}.hero-stat strong{display:block;font-size:25px;margin-top:5px}
+.toolbar{margin:18px 0;display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;align-items:center}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{border:1px solid #cbdbe7;background:#fff;color:#5f778a;padding:9px 13px;border-radius:7px;font-size:10px;font-weight:800;cursor:pointer}.filter:hover,.filter.active{background:#e8f6ff;color:#0878bd;border-color:#62c9f4}.result{font-size:10px;color:#7b91a3}
+.layout{display:grid;grid-template-columns:1.55fr .75fr;gap:16px}.section,.sidecard{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.sectionhead{padding:20px 22px;border-bottom:1px solid var(--line)}.sectionhead h2{font-size:18px;margin:0 0 4px}.sectionhead p{font-size:10px;color:var(--muted);margin:0}.bondgrid{padding:16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.bond{border:1px solid #d9e6ef;border-radius:12px;padding:18px;background:linear-gradient(145deg,#fff,#f8fbfd);transition:.2s;position:relative;overflow:hidden}.bond:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(20,70,110,.12);border-color:#a9cde3}.bond:before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(#1685dc,#24c2ff)}.bondtop{display:flex;gap:12px;align-items:center}.logo{width:48px;height:48px;border-radius:10px;background:#eef5fa;border:1px solid #d8e6ef;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}.logo img{max-width:90%;max-height:90%;object-fit:contain}.logo span{font-weight:900;color:#1c6d9c;font-size:11px}.bondname{font-size:16px;font-weight:900;margin:0}.programme{font-size:10px;color:#7890a2;margin-top:4px;text-transform:uppercase;letter-spacing:.7px}
+.ratebox{margin:17px 0;padding:14px;border-radius:10px;background:#061a30;color:#fff;display:flex;justify-content:space-between;align-items:center}.ratebox small{color:#9eb5c8;text-transform:uppercase;font-size:8px;font-weight:800}.rate{font-size:25px;font-weight:900;color:#55d1ff}.details{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:15px}.detail{padding:10px;border:1px solid #e0eaf1;border-radius:8px;background:#fbfdff}.detail span{display:block;color:#8296a6;font-size:8px;text-transform:uppercase;font-weight:800;margin-bottom:4px}.detail b{font-size:11px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:9px 12px;border-radius:7px;font-size:9px;font-weight:900;text-transform:uppercase;border:1px solid #cbdce8;background:#fff;color:#176b9c;cursor:pointer}.btn.primary{background:#0b75c9;border-color:#0b75c9;color:#fff}
+.sidecard{margin-bottom:16px}.sidehead{padding:18px 18px 14px;border-bottom:1px solid var(--line)}.sidehead h3{margin:0 0 4px;font-size:15px}.sidehead p{margin:0;color:var(--muted);font-size:9px;line-height:1.5}.statline{padding:14px 18px;border-bottom:1px solid #edf2f6;display:flex;justify-content:space-between;gap:10px;font-size:10px}.statline:last-child{border-bottom:0}.statline span{color:#7890a2}.statline b{color:#173c58}.info{margin:15px 18px;padding:13px;border-radius:9px;background:#f0f8fd;color:#6d8498;font-size:9px;line-height:1.6}.empty{padding:45px;text-align:center;color:var(--muted)}
+.footer{margin-top:35px;background:#061426;color:#8fa7ba;padding:30px 0}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot strong{color:#fff}.foot p{font-size:9px;line-height:1.6;margin:7px 0 0}
+.modal{display:none;position:fixed;inset:0;background:#061426aa;z-index:100;padding:25px;overflow:auto}.modalbox{width:min(620px,100%);margin:7vh auto;background:#fff;border-radius:14px;box-shadow:0 25px 70px #0005;overflow:hidden}.modalhead{background:#061a30;color:#fff;padding:20px 22px;display:flex;justify-content:space-between;gap:15px}.modalhead h2{margin:0;font-size:20px}.close{font-size:26px;cursor:pointer;color:#a8bfd0;line-height:1}.modalbody{padding:22px}.modalgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modalitem{padding:12px;border:1px solid #e0eaf1;border-radius:8px}.modalitem small{display:block;color:#8196a6;text-transform:uppercase;font-size:8px;font-weight:800}.modalitem b{display:block;margin-top:4px;font-size:11px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.hero{flex-direction:column}.hero-side{align-self:flex-start}.bondgrid{grid-template-columns:1fr}}@media(max-width:650px){.wrap{width:min(100% - 22px,1450px)}.head{flex-wrap:wrap;padding:12px 0}.brand{min-width:0}.search{order:3;flex-basis:100%;max-width:none}.status{display:none}.hero{padding:24px}.hero h1{font-size:29px}.hero-side{width:100%}.hero-stat{flex:1;min-width:0}.details,.modalgrid{grid-template-columns:1fr}.bondgrid{padding:10px}}
+</style></head><body>
+<div class="top"></div>
+<header class="header"><div class="wrap head">
+<a class="brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/log1.webp') }}" alt="Eswatini Investor Hub"><div><b>Eswatini <span>Investor Hub</span></b><div class="sub">Market information & investor resources</div></div></a>
+<div class="search"><input id="bondSearch" type="search" placeholder="Search bonds, issuers, programmes..."></div><div class="status"><span class="dot"></span>Market information</div>
+</div><nav class="nav"><div class="wrap navin">
+<a href="{{ url_for('index') }}">Home</a><a href="{{ url_for('news') }}">News</a><a href="{{ url_for('equities') }}">Equities</a><a href="{{ url_for('bonds') }}" class="active">Bonds</a><a href="{{ url_for('investments') }}">Investments</a><a href="{{ url_for('invest') }}">Education</a><a href="{{ url_for('faq') }}">FAQ</a>
+</div></nav></header>
+<div class="ticker"><div class="wrap tickerin"><div class="label">FIXED INCOME</div><div class="tick"><b>{{ bonds|length }}</b> instruments</div><div class="tick">Government & corporate debt</div><div class="tick">Rates, maturities & documents</div></div></div>
+<main class="wrap">
+<section class="hero"><div><div class="eyebrow">Fixed Income Market</div><h1>Bonds</h1><p>Explore available government and corporate bond information, including rates, programmes, maturity dates, payment frequency and supporting documents.</p></div><div class="hero-side"><div class="hero-stat"><span>Instruments</span><strong>{{ bonds|length }}</strong></div><div class="hero-stat"><span>Information</span><strong>Live</strong></div></div></section>
+<div class="toolbar"><div class="filters"><button class="filter active" data-filter="all">All Bonds</button><button class="filter" data-filter="government">Government</button><button class="filter" data-filter="corporate">Corporate</button></div><div class="result"><span id="count">{{ bonds|length }}</span> instruments shown</div></div>
+<div class="layout"><section class="section"><div class="sectionhead"><h2>Bond Market</h2><p>Available fixed-income instruments in the Investor Hub database.</p></div>
+<div class="bondgrid" id="bondGrid">
+{% for bond in bonds %}{% set isgov = 'government' in (bond.name or '').lower() %}
+<article class="bond" data-type="{{ 'government' if isgov else 'corporate' }}" data-search="{{ ((bond.name or '') ~ ' ' ~ (bond.programme or '') ~ ' ' ~ (bond.rate or '') ~ ' ' ~ (bond.maturity_date or ''))|lower }}">
+<div class="bondtop"><div class="logo">{% if bond.logos and bond.logos[0] %}{% set logo=bond.logos[0] %}<img src="{{ logo if logo.startswith('http') else url_for('static', filename=logo) }}" alt="">{% else %}<span>{{ (bond.name or 'Bond')[:4]|upper }}</span>{% endif %}</div><div><h3 class="bondname">{{ bond.name or 'Bond' }}</h3><div class="programme">{{ bond.programme or 'Fixed income instrument' }}</div></div></div>
+<div class="ratebox"><div><small>Interest / Coupon Rate</small></div><div class="rate">{{ bond.rate or 'N/A' }}</div></div>
+<div class="details"><div class="detail"><span>Maturity</span><b>{{ bond.maturity_date or 'Not provided' }}</b></div><div class="detail"><span>Payment</span><b>{{ bond.payment_frequency or 'Not provided' }}</b></div><div class="detail"><span>Auction Date</span><b>{{ bond.auction_date or 'Not provided' }}</b></div><div class="detail"><span>Issuer</span><b>{{ bond.name or 'Not provided' }}</b></div></div>
+<div class="actions"><button class="btn primary view-btn" type="button">View Details</button>{% if bond.pdf %}{% set pdf=bond.pdf %}<a class="btn" href="{{ pdf if pdf.startswith('http') else url_for('static', filename=pdf) }}" target="_blank" rel="noopener">PDF Document</a>{% endif %}{% if bond.link %}<a class="btn" href="{{ bond.link }}" target="_blank" rel="noopener">More Information</a>{% endif %}</div>
+</article>
+{% else %}<div class="empty">No bond information is currently available.</div>{% endfor %}
+</div><div id="noResults" class="empty" style="display:none">No bonds match your search or filter.</div></section>
+<aside>
+<div class="sidecard"><div class="sidehead"><h3>Bond Overview</h3><p>Key information available for the current instruments.</p></div><div class="statline"><span>Total instruments</span><b>{{ bonds|length }}</b></div><div class="statline"><span>Government</span><b id="govCount">0</b></div><div class="statline"><span>Corporate</span><b id="corpCount">0</b></div></div>
+<div class="sidecard"><div class="sidehead"><h3>What to Compare</h3><p>Use the information provided on each bond to understand its terms.</p></div><div class="info">Compare the stated rate, maturity date, payment frequency and issuer information. Review the supporting document or linked source for the full terms before making an investment decision.</div></div>
+<div class="sidecard"><div class="sidehead"><h3>Investor Hub</h3><p>Continue exploring market information.</p></div><div class="statline"><span>Equities</span><b><a href="{{ url_for('equities') }}">View market →</a></b></div><div class="statline"><span>Latest News</span><b><a href="{{ url_for('news') }}">Read updates →</a></b></div><div class="statline"><span>Investments</span><b><a href="{{ url_for('investments') }}">Explore →</a></b></div></div>
+</aside></div></main>
+<footer class="footer"><div class="wrap foot"><div><strong>Eswatini Investor Hub</strong><p>Market information and investor resources for Eswatini.</p></div><div><p>Information displayed is based on data available in the Investor Hub database.</p></div></div></footer>
+<div class="modal" id="bondModal"><div class="modalbox"><div class="modalhead"><h2 id="modalTitle">Bond Details</h2><span class="close" id="closeModal">&times;</span></div><div class="modalbody"><div class="modalgrid">
+<div class="modalitem"><small>Programme</small><b id="modalProgramme">—</b></div><div class="modalitem"><small>Rate</small><b id="modalRate">—</b></div><div class="modalitem"><small>Maturity</small><b id="modalMaturity">—</b></div><div class="modalitem"><small>Payment Frequency</small><b id="modalPayment">—</b></div><div class="modalitem"><small>Auction Date</small><b id="modalAuction">—</b></div><div class="modalitem"><small>Email</small><b id="modalEmail">—</b></div><div class="modalitem"><small>Phone</small><b id="modalPhone">—</b></div>
+</div></div></div></div>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const bonds = {{ bonds | tojson | safe }};
-
-    const viewButtons = document.querySelectorAll('.view-btn');
-    viewButtons.forEach((btn, i) => {
-      btn.addEventListener('click', () => {
-        const bond = bonds[i];
-
-        // Extra investment info based on index
-        let issuer = "", benefits = "", suitability = "", risks = "";
-        if (i === 0) {
-          issuer = "Nkonyeni Precast is a private infrastructure company specializing in concrete products.";
-          benefits = "Higher potential returns than government bonds, supports infrastructure growth.";
-          suitability = "Moderate to growth-focused investors.";
-          risks = "Moderate risk due to corporate performance and liquidity.";
-        } else if (i === 1) {
-          issuer = "Central Bank of Eswatini regulates currency and ensures economic stability.";
-          benefits = "State-backed, low-risk, predictable interest.";
-          suitability = "Ideal for risk-averse and long-term investors.";
-          risks = "Minimal, but inflation and interest rate changes may apply.";
-        }
-
-        document.getElementById("bond-title").innerText = bond.name;
-        document.getElementById("bond-rate").innerText = "Rate: " + bond.rate;
-        document.getElementById("bond-auction-date").innerText = "Auction Date: " + bond.auction_date;
-        document.getElementById("bond-issuer").innerText = issuer;
-        document.getElementById("bond-benefits").innerText = benefits;
-        document.getElementById("bond-suitability").innerText = suitability;
-        document.getElementById("bond-risks").innerText = risks;
-        document.getElementById("bond-modal").style.display = "block";
-      });
-    });
-  });
-</script>
-
-
-
-
-
-
-</html>
+const cards=[...document.querySelectorAll('.bond')],filters=[...document.querySelectorAll('.filter')],search=document.getElementById('bondSearch'),count=document.getElementById('count'),noResults=document.getElementById('noResults');let active='all';
+document.getElementById('govCount').textContent=cards.filter(c=>c.dataset.type==='government').length;document.getElementById('corpCount').textContent=cards.filter(c=>c.dataset.type==='corporate').length;
+function applyFilters(){const q=(search.value||'').trim().toLowerCase();let shown=0;cards.forEach(card=>{const show=(active==='all'||card.dataset.type===active)&&(!q||card.dataset.search.includes(q));card.style.display=show?'':'none';if(show)shown++});count.textContent=shown;noResults.style.display=shown?'none':'block'}
+filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(x=>x.classList.remove('active'));btn.classList.add('active');active=btn.dataset.filter;applyFilters()}));search.addEventListener('input',applyFilters);
+const bondData={{ bonds|tojson|safe }},modal=document.getElementById('bondModal');const closeModal=()=>modal.style.display='none';document.getElementById('closeModal').onclick=closeModal;modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.querySelectorAll('.view-btn').forEach((btn,i)=>btn.addEventListener('click',()=>{const b=bondData[i]||{};document.getElementById('modalTitle').textContent=b.name||'Bond Details';document.getElementById('modalProgramme').textContent=b.programme||'Not provided';document.getElementById('modalRate').textContent=b.rate||'Not provided';document.getElementById('modalMaturity').textContent=b.maturity_date||'Not provided';document.getElementById('modalPayment').textContent=b.payment_frequency||'Not provided';document.getElementById('modalAuction').textContent=b.auction_date||'Not provided';document.getElementById('modalEmail').textContent=b.email||'Not provided';document.getElementById('modalPhone').textContent=b.phone||'Not provided';modal.style.display='block'}));
+</script></body></html>
