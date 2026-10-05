@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Admin Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -37,6 +38,7 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 15px;
+      box-sizing: border-box;
     }
 
     button {
@@ -63,13 +65,34 @@
     }
   </style>
 </head>
+
 <body>
 
   <form class="login-container" method="POST">
+
+    <!-- CSRF protection -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
     <h2>🔒 Admin Login</h2>
-    <input type="text" name="username" placeholder="Username" required />
-    <input type="password" name="password" placeholder="Password" required />
+
+    <input
+      type="text"
+      name="username"
+      placeholder="Username"
+      required
+      autocomplete="username"
+    />
+
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      required
+      autocomplete="current-password"
+    />
+
     <button type="submit">Login</button>
+
   </form>
 
 </body>
