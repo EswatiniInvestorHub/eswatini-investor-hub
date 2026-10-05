@@ -7,25 +7,37 @@ import json
 import re
 from functools import wraps
 from werkzeug.utils import secure_filename
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 
-# ============================================================
-# CONFIGURATION
-# ============================================================
+csrf = CSRFProtect(app)
 
-# IMPORTANT:
-# Put a strong SECRET_KEY, ADMIN_USERNAME and ADMIN_PASSWORD
-# in Render Environment Variables for production.
-app.secret_key = os.environ.get("SECRET_KEY", "change-this-secret-key")
-app.permanent_session_lifetime = timedelta(minutes=20)
+app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
 
-ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "securepassword123")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# Keep the database outside the static/ folder.
-# On Render, set DB_PATH to a persistent-disk path if you use
-# a persistent disk. Locally, this defaults to instance/main.db.
+if not SECRET_KEY:
+    raise RuntimeError("SECRET_KEY environment variable is required")
+
+app.secret_key = SECRET_KEY
+
+ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
+
+if not ADMIN_USERNAME or not ADMIN_PASSWORD:
+    raise RuntimeError(
+        "ADMIN_USERNAME and ADMIN_PASSWORD environment variables are required"
+    )
+
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="Lax",
+    PERMANENT_SESSION_LIFETIME=timedelta(minutes=30),
+)
+
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DEFAULT_DB_DIR = os.path.join(BASE_DIR, "instance")
 os.makedirs(DEFAULT_DB_DIR, exist_ok=True)
